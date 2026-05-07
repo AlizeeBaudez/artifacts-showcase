@@ -1,0 +1,5 @@
+# Source files with real data — never push these
+Existing artifacts - copies/
+
+# macOS
+.DS_Store

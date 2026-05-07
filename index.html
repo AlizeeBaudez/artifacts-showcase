@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artifacts — Alizée Baudez</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #F6F0EA;
+      --white: #FFFFFF;
+      --burgundy: #7A2836;
+      --forest: #31473A;
+      --amber: #B07A32;
+      --charcoal: #2A2A2A;
+      --border: #DDD6CE;
+      --muted: #6B6560;
+      --bg: #F0EAE3;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--charcoal);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    .site-header {
+      background: var(--charcoal);
+      padding: 0 48px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .site-header-brand {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 15px;
+      color: var(--white);
+      letter-spacing: 0.01em;
+      text-decoration: none;
+    }
+    .site-header-meta {
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 72px 48px 48px;
+      max-width: 700px;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.5rem;
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--charcoal);
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 1.0625rem;
+      line-height: 1.65;
+      color: var(--muted);
+      max-width: 560px;
+    }
+
+    /* ── Filters ── */
+    .filters {
+      padding: 0 48px 40px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .filter-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-right: 4px;
+    }
+    .filter-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 6px 14px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter-btn:hover { border-color: var(--charcoal); color: var(--charcoal); }
+    .filter-btn.active {
+      background: var(--charcoal);
+      color: var(--white);
+      border-color: var(--charcoal);
+    }
+
+    /* ── Grid ── */
+    .grid {
+      padding: 0 48px 80px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--white);
+      border: 0.5px solid var(--border);
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      overflow: hidden;
+      text-align: left;
+      width: 100%;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(42,42,42,0.08);
+    }
+    .card-header {
+      padding: 18px 24px 14px;
+      border-bottom: 0.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card-date {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .card-category {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+    .card-body {
+      padding: 22px 24px 18px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .card-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.0625rem;
+      font-weight: 400;
+      line-height: 1.35;
+      color: var(--charcoal);
+    }
+    .card-desc {
+      font-size: 0.8125rem;
+      line-height: 1.6;
+      color: var(--muted);
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 2px;
+    }
+    .tag {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--cream);
+      border: 0.5px solid var(--border);
+      border-radius: 2px;
+      padding: 3px 7px;
+    }
+    .card-footer {
+      padding: 14px 24px;
+      border-top: 0.5px solid var(--border);
+    }
+    .card-cta {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--burgundy);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.15s;
+    }
+    .card:hover .card-cta { gap: 10px; }
+
+    /* ── Empty state ── */
+    .empty-state {
+      grid-column: 1 / -1;
+      padding: 100px 0;
+      text-align: center;
+    }
+    .empty-state strong {
+      display: block;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 8px;
+    }
+    .empty-state p {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(42,42,42,0.75);
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-bar {
+      background: var(--charcoal);
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      flex-shrink: 0;
+    }
+    .modal-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 14px;
+      color: var(--white);
+      font-weight: 400;
+    }
+    .modal-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .modal-open-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .modal-open-btn:hover { color: var(--white); }
+    .modal-close {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.15s;
+    }
+    .modal-close:hover { color: var(--white); }
+    .modal-iframe {
+      flex: 1;
+      width: 100%;
+      border: none;
+      background: var(--white);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .site-header { padding: 0 24px; }
+      .hero { padding: 48px 24px 36px; }
+      .hero h1 { font-size: 1.875rem; }
+      .filters { padding: 0 24px 28px; }
+      .grid { grid-template-columns: 1fr; padding: 0 24px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="https://alizeebaudez.com" class="site-header-brand">Alizée Baudez</a>
+  <span class="site-header-meta">Artifacts</span>
+</header>
+
+<section class="hero">
+  <p class="hero-eyebrow">Work in progress</p>
+  <h1>Things I built<br><em>with Claude</em></h1>
+  <p>A growing collection of tools, dashboards, and documents I made for myself — or because I was curious to see if it could be done. All data shown is illustrative.</p>
+</section>
+
+<div class="filters" id="filters">
+  <span class="filter-label">Filter</span>
+  <button class="filter-btn active" data-tag="all">All</button>
+</div>
+
+<div class="grid" id="grid">
+  <div class="empty-state">
+    <strong>Nothing published yet.</strong>
+    <p>Check back soon.</p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-bar">
+    <span class="modal-title" id="modal-title"></span>
+    <div class="modal-actions">
+      <a class="modal-open-btn" id="modal-open-btn" target="_blank" rel="noopener">Open in new tab ↗</a>
+      <button class="modal-close" id="modal-close">✕ Close</button>
+    </div>
+  </div>
+  <iframe class="modal-iframe" id="modal-iframe" title="Artifact preview" sandbox="allow-scripts allow-same-origin"></iframe>
+</div>
+
+<script>
+  const gridEl    = document.getElementById('grid');
+  const filtersEl = document.getElementById('filters');
+  const modal     = document.getElementById('modal');
+  const iframe    = document.getElementById('modal-iframe');
+  const titleEl   = document.getElementById('modal-title');
+  const openBtn   = document.getElementById('modal-open-btn');
+  const closeBtn  = document.getElementById('modal-close');
+
+  let artifacts = [];
+  let activeTag = 'all';
+
+  async function init() {
+    try {
+      const res  = await fetch('showcase.json');
+      const data = await res.json();
+      artifacts  = (data.artifacts || []).slice().reverse(); // newest first
+      buildFilters();
+      render();
+    } catch {
+      // showcase.json missing — leave empty state
+    }
+  }
+
+  function buildFilters() {
+    const tags = new Set();
+    artifacts.forEach(a => (a.tags || []).forEach(t => tags.add(t)));
+    tags.forEach(tag => {
+      const btn = document.createElement('button');
+      btn.className  = 'filter-btn';
+      btn.dataset.tag = tag;
+      btn.textContent = tag;
+      btn.addEventListener('click', () => setFilter(tag));
+      filtersEl.appendChild(btn);
+    });
+  }
+
+  function setFilter(tag) {
+    activeTag = tag;
+    filtersEl.querySelectorAll('.filter-btn').forEach(b =>
+      b.classList.toggle('active', b.dataset.tag === tag)
+    );
+    render();
+  }
+
+  function render() {
+    const list = activeTag === 'all'
+      ? artifacts
+      : artifacts.filter(a => (a.tags || []).includes(activeTag));
+
+    if (!list.length) {
+      gridEl.innerHTML = `<div class="empty-state">
+        <strong>Nothing here yet.</strong>
+        <p>Try a different filter.</p>
+      </div>`;
+      return;
+    }
+
+    gridEl.innerHTML = list.map(a => `
+      <button class="card" data-file="${esc(a.file)}" data-title="${esc(a.title)}">
+        <div class="card-header">
+          <span class="card-date">${formatDate(a.date)}</span>
+          ${a.tags && a.tags[0] ? `<span class="card-category">${esc(a.tags[0])}</span>` : ''}
+        </div>
+        <div class="card-body">
+          <h2 class="card-title">${esc(a.title)}</h2>
+          <p class="card-desc">${esc(a.description)}</p>
+          <div class="card-tags">
+            ${(a.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('')}
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-cta">View artifact →</span>
+        </div>
+      </button>
+    `).join('');
+
+    gridEl.querySelectorAll('.card').forEach(card =>
+      card.addEventListener('click', () => openModal(card.dataset.file, card.dataset.title))
+    );
+  }
+
+  function openModal(file, title) {
+    titleEl.textContent  = title;
+    iframe.src           = file;
+    openBtn.href         = file;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    iframe.src = '';
+    document.body.style.overflow = '';
+  }
+
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  function formatDate(d) {
+    if (!d) return '';
+    const [y, m] = d.split('-');
+    return `${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+m - 1]} ${y}`;
+  }
+
+  function esc(s) {
+    return String(s ?? '')
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  init();
+</script>
+</body>
+</html>
