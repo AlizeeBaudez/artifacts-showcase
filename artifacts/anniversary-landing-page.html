@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ten Years — Julie Marchand</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<!-- MailerLite embed script -->
+<script defer src="https://assets.mailerlite.com/js/universal.js"></script>
+<script defer>ml('account', 'YOUR_ACCOUNT_ID');</script>
+
+<style>
+  /* ============================================
+     DESIGN SYSTEM — mirrors juliemarchand.com
+     Cream background · warm serif · clean sans
+     ============================================ */
+  :root {
+    --cream:        #F5F0E8;
+    --cream-dark:   #EDE6D6;
+    --dark:         #1C1C1A;
+    --warm-mid:     #8C7B6B;
+    --accent:       #C4936A;
+    --accent-light: #E8D5BE;
+    --accent-faint: rgba(196,147,106,0.08);
+    --border:       rgba(140,123,107,0.18);
+    --border-strong:rgba(140,123,107,0.35);
+    --white:        #FFFFFF;
+
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-sans:  'DM Sans', system-ui, sans-serif;
+
+    --max-w: 720px;
+    --max-w-wide: 960px;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+
+  /* ============================================
+     UTILITIES
+     ============================================ */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--accent);
+    margin: 0 auto;
+  }
+
+  /* ============================================
+     FADE-UP ANIMATION
+     ============================================ */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ============================================
+     SECTION 1 — HERO
+     Full-height, centered, typographic
+     ============================================ */
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 24px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Large decorative "10" behind everything */
+  .hero::before {
+    content: '10';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -52%);
+    font-family: var(--font-serif);
+    font-size: clamp(240px, 40vw, 480px);
+    font-weight: 300;
+    color: rgba(196,147,106,0.07);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: var(--max-w);
+  }
+
+  .hero-eyebrow {
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease 0.1s both;
+  }
+
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(16px, 2vw, 19px);
+    color: var(--warm-mid);
+    max-width: 520px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+    animation: fadeUp 0.8s ease 0.35s both;
+  }
+
+  .hero-cta {
+    animation: fadeUp 0.8s ease 0.5s both;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--dark);
+    color: var(--cream);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 16px 36px;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    display: inline-block;
+    border: 1px solid var(--border-strong);
+    color: var(--dark);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 36px;
+    border-radius: 2px;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    background: var(--accent-faint);
+    transform: translateY(-1px);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: fadeUp 1s ease 0.8s both;
+  }
+
+  .hero-scroll span {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* ============================================
+     SECTION 2 — THE STORY
+     ============================================ */
+  .story {
+    padding: 100px 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .story-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+
+  .story-eyebrow {
+    margin-bottom: 24px;
+  }
+
+  .story-lead {
+    font-family: var(--font-serif);
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 300;
+    line-height: 1.25;
+    margin-bottom: 48px;
+    letter-spacing: -0.3px;
+  }
+
+  .story-lead em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .story-body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .story-body p {
+    font-size: 16.5px;
+    color: var(--warm-mid);
+    line-height: 1.8;
+  }
+
+  .story-body p strong {
+    color: var(--dark);
+    font-weight: 500;
+  }
+
+  /* Pull quote */
+  .story-quote {
+    border-left: 2px solid var(--accent);
+    padding: 8px 0 8px 28px;
+    margin: 12px 0;
+  }
+
+  .story-quote p {
+    font-family: var(--font-serif);
+    font-size: clamp(20px, 3vw, 26px) !important;
+    font-style: italic;
+    color: var(--dark) !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Timeline dots */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 48px 0;
+    border-left: 1px solid var(--border);
+    padding-left: 28px;
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 28px;
+  }
+
+  .timeline-item:last-child { padding-bottom: 0; }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -34px;
+    top: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    border: 2px solid var(--accent);
+  }
+
+  .timeline-year {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .timeline-text {
+    font-size: 15px;
+    color: var(--warm-mid);
+    line-height: 1.65;
+  }
+
+  .timeline-text strong { color: var(--dark); font-weight: 500; }
+
+  /* ============================================
+     SECTION 3 — WHAT THIS MEANS
+     Dark background block
+     ============================================ */
+  .means {
+    background: var(--dark);
+    color: var(--cream);
+    padding: 100px 24px;
+  }
+
+  .means-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+
+  .means .eyebrow { color: var(--accent); margin-bottom: 24px; }
+
+  .means-title {
+    font-family: var(--font-serif);
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 48px;
+    letter-spacing: -0.3px;
+  }
+
+  .means-title em { font-style: italic; color: var(--accent); }
+
+  .means-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 48px;
+  }
+
+  .means-item {
+    padding: 28px 24px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .means-item-num {
+    font-family: var(--font-serif);
+    font-size: 36px;
+    font-weight: 300;
+    color: rgba(196,147,106,0.4);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .means-item-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .means-item-text {
+    font-size: 13.5px;
+    color: rgba(245,240,232,0.55);
+    line-height: 1.65;
+  }
+
+  .means-closing {
+    font-family: var(--font-serif);
+    font-size: clamp(18px, 2.5vw, 24px);
+    font-style: italic;
+    color: rgba(245,240,232,0.7);
+    line-height: 1.5;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 36px;
+  }
+
+  .means-closing strong {
+    color: var(--cream);
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  /* ============================================
+     SECTION 4 — NEWSLETTER CTA (Primary)
+     ============================================ */
+  .newsletter {
+    padding: 100px 24px;
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .newsletter-inner {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .newsletter .eyebrow { margin-bottom: 20px; }
+
+  .newsletter-title {
+    font-family: var(--font-serif);
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    margin-bottom: 20px;
+  }
+
+  .newsletter-title em { font-style: italic; color: var(--accent); }
+
+  .newsletter-desc {
+    font-size: 15.5px;
+    color: var(--warm-mid);
+    margin-bottom: 12px;
+    line-height: 1.7;
+  }
+
+  .newsletter-meta {
+    font-size: 12px;
+    color: var(--warm-mid);
+    letter-spacing: 0.5px;
+    margin-bottom: 40px;
+    opacity: 0.7;
+  }
+
+  /* MailerLite form overrides */
+  .ml-form-wrapper {
+    margin-top: 8px;
+  }
+
+  /* Squarespace will override some of these —
+     these are defaults for the standalone HTML preview */
+  .ml-embedded {
+    font-family: var(--font-sans) !important;
+  }
+
+  /* ============================================
+     SECTION 5 — DISCOVERY CALL CTA (Secondary)
+     ============================================ */
+  .discovery {
+    padding: 80px 24px 100px;
+    text-align: center;
+  }
+
+  .discovery-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    text-align: left;
+  }
+
+  .discovery-text .eyebrow { margin-bottom: 16px; }
+
+  .discovery-title {
+    font-family: var(--font-serif);
+    font-size: clamp(26px, 3.5vw, 38px);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .discovery-title em { font-style: italic; color: var(--accent); }
+
+  .discovery-body {
+    font-size: 15px;
+    color: var(--warm-mid);
+    line-height: 1.75;
+    margin-bottom: 28px;
+  }
+
+  .discovery-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 36px 32px;
+  }
+
+  .discovery-card-title {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .discovery-card-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .discovery-card-list li {
+    font-size: 14px;
+    color: var(--warm-mid);
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .discovery-card-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 12px;
+    top: 2px;
+  }
+
+  .discovery-note {
+    font-size: 12px;
+    color: var(--warm-mid);
+    margin-top: 12px;
+    font-style: italic;
+    opacity: 0.8;
+  }
+
+  /* ============================================
+     FOOTER
+     ============================================ */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 36px 24px;
+    text-align: center;
+  }
+
+  .footer-inner {
+    max-width: var(--max-w-wide);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-brand {
+    font-family: var(--font-serif);
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--warm-mid);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    font-size: 12px;
+    color: var(--warm-mid);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--accent); }
+
+  /* ============================================
+     ANIMATIONS
+     ============================================ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50%       { opacity: 1;   transform: scaleY(1.15); }
+  }
+
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
+  @media (max-width: 768px) {
+    .means-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .discovery-inner {
+      grid-template-columns: 1fr;
+      gap: 36px;
+      text-align: center;
+    }
+
+    .discovery-text .eyebrow,
+    .discovery-title,
+    .discovery-body {
+      text-align: center;
+    }
+
+    .discovery-card { padding: 28px 24px; }
+
+    .footer-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .footer-links { justify-content: center; }
+
+    .hero { min-height: 100svh; padding: 100px 24px 80px; }
+
+    .timeline { padding-left: 20px; }
+    .timeline-item::before { left: -27px; }
+  }
+
+  @media (max-width: 480px) {
+    .story, .means, .newsletter, .discovery {
+      padding-top: 72px;
+      padding-bottom: 72px;
+    }
+
+    .hero-title { letter-spacing: -0.5px; }
+  }
+
+  /* MAP */
+  .story-map {
+    margin: 8px 0;
+  }
+
+  .map-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .story-map-img {
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    opacity: 0.92;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     SECTION 1 — HERO
+     ============================================ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow hero-eyebrow">Julie Marchand · 2016–2026</div>
+
+    <h1 class="hero-title">
+      Ten years of<br>
+      <em>not compromising.</em>
+    </h1>
+
+    <p class="hero-subtitle">
+      A decade of content strategy and organic growth — built independently, without a plan B,
+      and without cutting corners on the work or the people.
+    </p>
+
+    <div class="hero-cta">
+      <a href="#story" class="btn-primary">Read the story</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     SECTION 2 — THE STORY
+     ============================================ -->
+<section class="story" id="story">
+  <div class="story-inner">
+
+    <div class="eyebrow story-eyebrow fade-up">The story</div>
+
+    <h2 class="story-lead fade-up">
+      It started with a borrowed laptop<br>
+      and one client who needed a website.<br>
+      <em>€200. A registration number. A business.</em>
+    </h2>
+
+    <div class="story-body">
+
+      <p class="fade-up">
+        In early 2016, I left a comfortable agency role to figure out what working for myself
+        actually felt like. I came back from a month travelling with a direction. Within weeks,
+        I had invoiced my first client — a small retailer who needed a content overhaul —
+        created a company to do it, and landed a retainer managing the editorial strategy
+        for a regional media group. Not quite a grand plan. More like a series of good decisions made quickly.
+      </p>
+
+      <p class="fade-up">
+        For two years I held both — a part-time consulting arrangement and my own growing client list —
+        learning on the job, taking on content strategy missions, brand messaging, multilingual copywriting,
+        and increasingly, organic growth consulting. The hot topic at the time was content clusters
+        and topical authority. It feels like a lifetime ago. By the time I went fully independent,
+        the business was already generating 20% of my income on a handful of evenings a week.
+        The maths made sense. I went full-time.
+      </p>
+
+      <div class="story-quote fade-up">
+        <p>"Autonomy wasn't a perk. It was the non-negotiable I built everything else around."</p>
+      </div>
+
+      <p class="fade-up">
+        What followed was two years of working from home offices and co-working spaces across Europe —
+        <strong>Lisbon, Warsaw, Tallinn, Vienna, the Azores</strong> —
+        building a consulting practice from wherever I happened to be.
+        Doing international content strategy while actually living it.
+        Investing in the craft: attending conferences twice a year, earning certifications,
+        reading obsessively, learning from peers who were further ahead.
+      </p>
+
+      <!-- Timeline -->
+      <div class="timeline fade-up">
+        <div class="timeline-item">
+          <div class="timeline-year">2016</div>
+          <div class="timeline-text"><strong>First invoice. First registration. First retainer.</strong> Three things in the same month, none of them planned together. The business was live.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2016–2018</div>
+          <div class="timeline-text"><strong>Two years consulting part-time, building in parallel.</strong> Growing a content strategy and organic growth specialisation from real client work — then taking it fully independent.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2018–2020</div>
+          <div class="timeline-text"><strong>Full-time. Fully mobile.</strong> Home offices across Lisbon, Warsaw, Tallinn, Vienna, the Azores. The business grew every year. The investment in the craft paid off.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2020–2024</div>
+          <div class="timeline-text"><strong>Lyon. A home. A pandemic. An industry that transformed more than once.</strong> Steady growth through it all. Content clusters gave way to E-E-A-T thinking, then AI-driven search, then a complete rethink of what organic visibility means. Still here. Still curious.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2025</div>
+          <div class="timeline-text"><strong>Took a deliberate pause.</strong> Had a child. The business waited. So did the clients worth keeping.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2026</div>
+          <div class="timeline-text"><strong>Year ten. Back fully.</strong> Formalising a decade of pattern recognition into a framework. The work is sharper than it has ever been.</div>
+        </div>
+      </div>
+
+      <!-- Industries / breadth -->
+      <p class="fade-up">
+        Over ten years, the work has taken me across industries as varied as
+        fintech, higher education, SaaS, retail, food and beverage, hospitality,
+        professional services, e-commerce, and publishing —
+        across markets including France, the UK, Germany, the US, Canada, the Netherlands, and more.
+        The through-line was always the same: <strong>helping businesses communicate clearly
+        and build visibility in markets where they aren't yet known.</strong>
+      </p>
+
+      <!-- World map -->
+      <div class="story-map fade-up">
+        <p class="map-label">Markets worked across — 2016 to 2026</p>
+        <img
+          src="markets-worked-past-10-years.png"
+          alt="World map showing markets Julie Marchand has worked across over 10 years"
+          class="story-map-img"
+        />
+      </div>
+
+      <p class="fade-up">
+        None of this happened alone. My partner has shared an office with me for seven of those ten years.
+        Friends celebrated the wins and steadied the harder moments.
+        Clients became collaborators, then people I'm genuinely glad I met.
+        That web of people is part of what made this possible —
+        and part of what makes the work good.
+      </p>
+
+      <p class="fade-up">
+        <strong>This anniversary isn't a lookback. It's a marker for where I'm going next.</strong>
+      </p>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================
+     SECTION 3 — WHAT THIS MEANS
+     ============================================ -->
+<section class="means">
+  <div class="means-inner">
+
+    <div class="eyebrow fade-up">What ten years means for the work</div>
+
+    <h2 class="means-title fade-up">
+      Independence isn't just a lifestyle choice.<br>
+      <em>It's a structural advantage.</em>
+    </h2>
+
+    <div class="means-grid">
+      <div class="means-item fade-up">
+        <div class="means-item-num">01</div>
+        <div class="means-item-title">No hierarchy between you and the thinking</div>
+        <div class="means-item-text">No account manager filtering the strategy before it reaches you. What you get is the actual analysis, directly.</div>
+      </div>
+      <div class="means-item fade-up">
+        <div class="means-item-num">02</div>
+        <div class="means-item-title">No incentive to recommend what's billable</div>
+        <div class="means-item-text">Independent consultants are paid to give the right answer, not the answer that extends the engagement.</div>
+      </div>
+      <div class="means-item fade-up">
+        <div class="means-item-num">03</div>
+        <div class="means-item-title">Ten years of pattern recognition</div>
+        <div class="means-item-text">From content clusters to AI-driven search. Across markets, languages, and business models. That depth shapes every recommendation.</div>
+      </div>
+      <div class="means-item fade-up">
+        <div class="means-item-num">04</div>
+        <div class="means-item-title">Full accountability to the outcome</div>
+        <div class="means-item-text">One consultant. Fully responsible for the work. No junior team running your account while the senior sells the next one.</div>
+      </div>
+    </div>
+
+    <p class="means-closing fade-up">
+      The businesses I work with are navigating <strong>real complexity</strong> —
+      multi-market expansion, fragmented content architectures, brand visibility that needs to travel across languages and cultures.
+      That's not a job for a generic audit. It's a job for someone who has spent a decade thinking about exactly this.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ============================================
+     SECTION 4 — NEWSLETTER (Primary CTA)
+     ============================================ -->
+<section class="newsletter" id="newsletter">
+  <div class="newsletter-inner">
+
+    <div class="eyebrow fade-up">Stay in the loop</div>
+
+    <h2 class="newsletter-title fade-up">
+      <em>Clear Signal</em> —<br>the newsletter
+    </h2>
+
+    <p class="newsletter-desc fade-up">
+      Content strategy, organic growth, and the future of brand visibility.
+      Practical and direct — written for people who are serious about getting this right.
+    </p>
+
+    <p class="newsletter-meta fade-up">~250 readers · 52% open rate · no fluff · no spam</p>
+
+    <!-- MailerLite embedded form -->
+    <div class="ml-form-wrapper fade-up">
+      <div class="ml-embedded" data-form="eFciQb"></div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================
+     SECTION 5 — DISCOVERY CALL (Secondary CTA)
+     ============================================ -->
+<section class="discovery" id="work-together">
+  <div class="discovery-inner">
+
+    <div class="discovery-text">
+      <div class="eyebrow fade-up">Work together</div>
+      <h2 class="discovery-title fade-up">
+        Working on content strategy<br>
+        <em>in 2026?</em>
+      </h2>
+      <p class="discovery-body fade-up">
+        If you're navigating multi-market expansion, a scattered content architecture,
+        or trying to build visibility that actually travels across borders and languages —
+        let's have a short conversation to see if there's a fit.
+      </p>
+      <a href="#"
+         target="_blank"
+         rel="noopener"
+         class="btn-secondary fade-up">
+        Book an assessment call
+      </a>
+      <p class="discovery-note fade-up">Not a sales call — a short conversation to identify the right next step.</p>
+    </div>
+
+    <div class="discovery-card fade-up">
+      <div class="discovery-card-title">This is a good fit if you're…</div>
+      <ul class="discovery-card-list">
+        <li>Expanding into new markets and need a clear content strategy that travels</li>
+        <li>Dealing with a fragmented multi-market content structure that no longer makes sense</li>
+        <li>Preparing a launch, rebrand, or strategic shift and need expert input before you act</li>
+        <li>A marketing team that wants one clear strategy partner — not an agency overhead</li>
+      </ul>
+      <a href="#"
+         target="_blank"
+         rel="noopener"
+         class="btn-primary"
+         style="width:100%; text-align:center;">
+        Book a call →
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">Julie Marchand</div>
+    <nav class="footer-links">
+      <a href="#">Home</a>
+      <a href="#">Services</a>
+      <a href="#">Newsletter</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+
+<!-- ============================================
+     SCROLL ANIMATION SCRIPT
+     ============================================ -->
+<script>
+  // IntersectionObserver for fade-up elements
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

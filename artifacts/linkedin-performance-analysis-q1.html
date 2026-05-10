@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinkedIn Performance Analysis — Claire Mercier · Q1 2027</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --blue: #0A66C2;
+    --blue-light: #EBF4FF;
+    --slate: #2C3E50;
+    --mid: #596880;
+    --light: #F7F9FC;
+    --border: #E1E8F0;
+    --green: #1A7A4A;
+    --green-light: #E6F7EE;
+    --red: #C0392B;
+    --red-light: #FEF0EE;
+    --amber: #D4820A;
+    --amber-light: #FFF8E6;
+    --accent: #0A66C2;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #F0F4F8;
+    color: var(--slate);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .page { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+
+  /* Header */
+  .header {
+    background: var(--blue);
+    color: white;
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    right: -40px; top: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .header h1 { font-size: 26px; font-weight: 700; margin-bottom: 4px; }
+  .header .sub { font-size: 14px; opacity: 0.8; margin-bottom: 24px; }
+  .kpi-row { display: flex; gap: 20px; flex-wrap: wrap; }
+  .kpi {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 14px 20px;
+    min-width: 140px;
+  }
+  .kpi .val { font-size: 28px; font-weight: 700; line-height: 1.1; }
+  .kpi .lbl { font-size: 12px; opacity: 0.8; margin-top: 2px; }
+
+  /* Sections */
+  .section {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    border: 1px solid var(--border);
+  }
+  .section h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--slate);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section h2 .num {
+    background: var(--blue);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 50%;
+    width: 22px; height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .section .desc {
+    color: var(--mid);
+    font-size: 13px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+  }
+
+  /* Charts */
+  .chart-wrap { position: relative; width: 100%; }
+  .chart-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .chart-wrap canvas { width: 100% !important; }
+
+  /* Insight boxes */
+  .insight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+  .insight {
+    border-radius: 8px;
+    padding: 16px 18px;
+    font-size: 13px;
+  }
+  .insight.green { background: var(--green-light); border-left: 3px solid var(--green); }
+  .insight.red { background: var(--red-light); border-left: 3px solid var(--red); }
+  .insight.amber { background: var(--amber-light); border-left: 3px solid var(--amber); }
+  .insight.blue { background: var(--blue-light); border-left: 3px solid var(--blue); }
+  .insight strong { display: block; margin-bottom: 4px; font-size: 13px; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    background: var(--light);
+    text-align: left;
+    padding: 10px 12px;
+    font-weight: 600;
+    color: var(--mid);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 2px solid var(--border);
+  }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--light); }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .badge.green { background: var(--green-light); color: var(--green); }
+  .badge.red { background: var(--red-light); color: var(--red); }
+  .badge.amber { background: var(--amber-light); color: var(--amber); }
+  .badge.blue { background: var(--blue-light); color: var(--blue); }
+  .badge.grey { background: #F0F0F0; color: #666; }
+
+  /* Comparison cards */
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+  .compare-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 22px;
+  }
+  .compare-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 14px; }
+  .compare-card .metric-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .compare-card .metric-row:last-child { border-bottom: none; }
+  .compare-card .metric-row .val { font-weight: 700; }
+  .compare-card.winner { border-color: var(--green); border-width: 2px; }
+  .compare-card.winner h3::after { content: '  ✓ Better'; font-size: 11px; color: var(--green); font-weight: 400; }
+
+  /* Rec list */
+  .rec-list { list-style: none; }
+  .rec-list li {
+    padding: 14px 16px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 4px solid;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .rec-list li.must { background: var(--green-light); border-color: var(--green); }
+  .rec-list li.should { background: var(--blue-light); border-color: var(--blue); }
+  .rec-list li.consider { background: var(--amber-light); border-color: var(--amber); }
+  .rec-list li strong { display: block; font-size: 14px; margin-bottom: 3px; }
+  .priority-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .priority-tag.high { background: var(--green); color: white; }
+  .priority-tag.medium { background: var(--blue); color: white; }
+  .priority-tag.low { background: var(--amber); color: white; }
+
+  .footer {
+    text-align: center;
+    color: var(--mid);
+    font-size: 12px;
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* Star post highlight */
+  .star-row { background: #FFFBE6 !important; }
+  .star-row td { font-weight: 500; }
+
+  /* Trend arrow */
+  .up { color: var(--green); }
+  .down { color: var(--red); }
+  .neutral { color: var(--amber); }
+
+  .note {
+    background: var(--light);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 12px;
+    color: var(--mid);
+    margin-top: 16px;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>LinkedIn Performance Analysis</h1>
+    <div class="sub">Claire Mercier · December – February 16, 2027 · 22 posts analysed</div>
+    <div class="kpi-row">
+      <div class="kpi"><div class="val">4,721</div><div class="lbl">Followers</div></div>
+      <div class="kpi"><div class="val">9,204</div><div class="lbl">Total Impressions</div></div>
+      <div class="kpi"><div class="val">4,089</div><div class="lbl">Unique Reach</div></div>
+      <div class="kpi"><div class="val">22</div><div class="lbl">Posts Published</div></div>
+      <div class="kpi"><div class="val">2.1%</div><div class="lbl">Avg Engagement Rate</div></div>
+      <div class="kpi"><div class="val">418</div><div class="lbl">Avg Impressions/Post</div></div>
+    </div>
+  </div>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <div class="section">
+    <h2><span class="num">→</span> Executive Summary</h2>
+    <div class="desc">What the data is telling you at a glance.</div>
+    <p style="font-size:14px; line-height:1.8; color:#2C3E50;">
+      Over the December–February 2027 period, your LinkedIn presence is clearly gaining momentum, but the data reveals a critical tension: <strong>posting frequency and post quality are pulling in opposite directions.</strong> Your strongest posts — the introduction post (1,044 impressions, 30 reactions) and the content consumption behaviour data post (2,704 impressions) — came when you were posting less often and with more deliberate intent. As February brought near-daily posting, average impressions per post dropped to roughly 100–150, a significant regression from the 350–500 range of December.
+    </p>
+    <p style="font-size:14px; line-height:1.8; color:#2C3E50; margin-top:12px;">
+      The most striking insight is that <strong>data-backed posts and genuine personal milestones massively outperform opinion posts and promotional content</strong> — often by a factor of 3–4x in both impressions and reactions. The "about me" signature block has minimal impact on engagement rate (2.04% with vs 1.66% without), but the posts with the highest raw impressions consistently don't have it. On format: you're running an all-text strategy, which works well for your audience, with one outlier showing that adding an external link card to a strong piece of external research dramatically amplifies reach.
+    </p>
+    <div class="insight-grid">
+      <div class="insight green"><strong>Biggest win: the content data post (Feb 9)</strong>2,704 impressions — 6× your average. Data + external credibility = outsized reach for your audience.</div>
+      <div class="insight red"><strong>Biggest risk: daily posting in February</strong>February's daily cadence correlated with a ~65% drop in per-post impressions vs December. Less, but better, is the move.</div>
+      <div class="insight amber"><strong>Hidden gem: Jan 10 "I stopped billing by the hour"</strong>18 interactions on 536 impressions — 2nd highest engagement. A short, sharp, philosophical post with no signature.</div>
+      <div class="insight blue"><strong>About me footer: neutral to slightly helpful</strong>ER is marginally better with the signature (2.04% vs 1.66%), but the version you're running matters more than whether you include it.</div>
+    </div>
+  </div>
+
+  <!-- IMPRESSIONS TIMELINE -->
+  <div class="section">
+    <h2><span class="num">1</span> Impressions Per Post — December to February</h2>
+    <div class="desc">Each bar is one post. The content data post (Feb 9) is deliberately truncated at 1,000 — its real value is 2,704 — to keep the scale readable for the other 21 posts.</div>
+    <div class="chart-wrap" style="height:280px;">
+      <canvas id="impressionsChart"></canvas>
+    </div>
+    <div class="note">⚠ The Feb 9 post analytics file incorrectly showed 0 impressions — the real figure (2,704) comes from the LinkedIn dashboard overview and is confirmed as the top-impression post across the entire period.</div>
+    <div class="insight-grid" style="margin-top:16px;">
+      <div class="insight green"><strong>Dec–Jan average: ~430 impressions/post</strong>When posting 2–3× per week with considered content, you were consistently above the 350 mark.</div>
+      <div class="insight red"><strong>February average (excl. viral post): ~129 impressions/post</strong>7 posts in 10 days = each post gets a smaller slice of algorithm attention and audience bandwidth.</div>
+    </div>
+  </div>
+
+  <!-- ENGAGEMENT RATE -->
+  <div class="section">
+    <h2><span class="num">2</span> Engagement Rate Per Post</h2>
+    <div class="desc">Engagement rate = (reactions + comments + saves + reposts) ÷ impressions. LinkedIn benchmark for personal profiles: 1.5–3.5%. The Feb 9 viral post has a very low ER despite high impressions — classic "reach without depth" pattern for data/link posts.</div>
+    <div class="chart-wrap" style="height:280px;">
+      <canvas id="erChart"></canvas>
+    </div>
+    <div class="insight-grid" style="margin-top:16px;">
+      <div class="insight blue"><strong>Your ER is healthy overall at 2.1% avg</strong>Most posts sit in the 1.5–3.5% benchmark range. The outliers (0.00% posts) are typically promotional or newsletter-pitch type content.</div>
+      <div class="insight amber"><strong>High impressions ≠ high engagement</strong>The Feb 9 viral post had only 0.20% ER. Your audience discovered you but didn't deeply engage. Great for awareness; less useful for conversion.</div>
+    </div>
+  </div>
+
+  <!-- FREQUENCY vs PERFORMANCE -->
+  <div class="section">
+    <h2><span class="num">3</span> Posting Frequency vs Average Impressions</h2>
+    <div class="desc">The clearest finding in the entire dataset. As weekly post count increased, per-post impressions fell. Week 11 appears high due entirely to the viral Feb 9 post — without it, that week's avg drops to ~122 impressions per post.</div>
+    <div class="chart-2col">
+      <div>
+        <div class="chart-wrap" style="height:260px;"><canvas id="freqChart"></canvas></div>
+      </div>
+      <div>
+        <div class="chart-wrap" style="height:260px;"><canvas id="freqLineChart"></canvas></div>
+      </div>
+    </div>
+    <div class="insight-grid" style="margin-top:16px;">
+      <div class="insight green"><strong>Sweet spot: 2–3 posts/week</strong>Weeks where you posted twice had avg impressions of 387–765. Three posts/week kept you near 268. Four posts dropped you below 200.</div>
+      <div class="insight red"><strong>Daily posting is cannibalising your reach</strong>LinkedIn's algorithm appears to throttle accounts posting too frequently. Your audience also has a finite capacity to engage with your content each day.</div>
+    </div>
+  </div>
+
+  <!-- ABOUT ME ANALYSIS -->
+  <div class="section">
+    <h2><span class="num">4</span> The "About Me" Footer — Does It Help or Hurt?</h2>
+    <div class="desc">10 posts had the signature block ("I'm Claire, Senior Content Strategist…"), 12 did not. Both short (2-line) and long (3-line with "Follow for…") versions are included in the "with" group.</div>
+
+    <div class="compare-grid">
+      <div class="compare-card">
+        <h3>Without Signature Block</h3>
+        <div class="metric-row"><span>Posts analysed</span><span class="val">12</span></div>
+        <div class="metric-row"><span>Avg impressions</span><span class="val">506</span></div>
+        <div class="metric-row"><span>Median impressions</span><span class="val">218</span></div>
+        <div class="metric-row"><span>Avg reactions</span><span class="val">5.3</span></div>
+        <div class="metric-row"><span>Avg comments</span><span class="val">1.9</span></div>
+        <div class="metric-row"><span>Avg engagement rate</span><span class="val">1.66%</span></div>
+      </div>
+      <div class="compare-card winner">
+        <h3>With Signature Block</h3>
+        <div class="metric-row"><span>Posts analysed</span><span class="val">10</span></div>
+        <div class="metric-row"><span>Avg impressions</span><span class="val">296</span></div>
+        <div class="metric-row"><span>Median impressions</span><span class="val">251</span></div>
+        <div class="metric-row"><span>Avg reactions</span><span class="val">4.7</span></div>
+        <div class="metric-row"><span>Avg comments</span><span class="val">1.3</span></div>
+        <div class="metric-row"><span>Avg engagement rate</span><span class="val">2.04%</span></div>
+      </div>
+    </div>
+
+    <div class="chart-wrap" style="height:240px; margin-top:24px;">
+      <canvas id="aboutMeChart"></canvas>
+    </div>
+
+    <div class="insight-grid" style="margin-top:16px;">
+      <div class="insight green"><strong>ER is slightly higher WITH the footer (+0.38 pp)</strong>When people read all the way to the signature, they're engaged. That signals post quality, not the signature itself.</div>
+      <div class="insight amber"><strong>Avg impressions are higher WITHOUT the footer</strong>But this is confounded: your 3 highest-impression posts (Dec 21 intro, Jan 10 outcomes, Feb 9 data) all happened to not have it. The signature isn't the cause of lower reach.</div>
+      <div class="insight blue"><strong>The 3-line version underperforms the 2-line version</strong>Posts with the long "Follow for practical takes on content strategy…" footer averaged lower ER than the shorter "Reach out if this sounds like what you need." version. Shorter = better.</div>
+      <div class="insight red"><strong>Promotional posts + signature = worst combination</strong>The Jan 23 Strategy Sprint promo post (118 impressions, 3 engagements) had both the footer AND a salesy tone. Promotional framing plus a pitch footer signals "ad" to both the algorithm and your audience.</div>
+    </div>
+
+    <div class="note" style="margin-top:16px;">
+      <strong>The verdict:</strong> The "about me" footer is neither magic nor a liability on its own. What matters more is post type alignment. Keep the signature on client success stories and specific service calls to action. Remove it from pure thought leadership, hot takes, and data commentary. The algorithm may also favour posts that don't feel like ads — so use the footer intentionally, not by default.
+    </div>
+  </div>
+
+  <!-- TOPICS ANALYSIS -->
+  <div class="section">
+    <h2><span class="num">5</span> Topic Performance — What Content Lands Best</h2>
+    <div class="desc">Posts grouped by primary topic. "AI/Tech" skews high on impressions due to the viral Feb 9 post; the underlying pattern is more nuanced.</div>
+    <div class="chart-wrap" style="height:300px;">
+      <canvas id="topicsChart"></canvas>
+    </div>
+    <table style="margin-top:20px;">
+      <thead>
+        <tr>
+          <th>Topic</th>
+          <th># Posts</th>
+          <th>Avg Impressions</th>
+          <th>Avg Engagements</th>
+          <th>Avg ER</th>
+          <th>Verdict</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="star-row">
+          <td><strong>Introduction / Milestone</strong></td>
+          <td>2</td>
+          <td>637</td>
+          <td>19.3</td>
+          <td>2.9%</td>
+          <td><span class="badge green">Top performer</span></td>
+        </tr>
+        <tr class="star-row">
+          <td><strong>AI / Tech (w/ data)</strong></td>
+          <td>2</td>
+          <td>1,417</td>
+          <td>3.8</td>
+          <td>0.9%</td>
+          <td><span class="badge blue">High reach, low depth</span></td>
+        </tr>
+        <tr>
+          <td>Consulting Philosophy</td>
+          <td>5</td>
+          <td>280</td>
+          <td>7.9</td>
+          <td>2.1%</td>
+          <td><span class="badge green">Solid anchor content</span></td>
+        </tr>
+        <tr>
+          <td>Content Strategy / Framework</td>
+          <td>1</td>
+          <td>553</td>
+          <td>17.2</td>
+          <td>3.1%</td>
+          <td><span class="badge green">Strong — do more</span></td>
+        </tr>
+        <tr>
+          <td>Business / Personal</td>
+          <td>1</td>
+          <td>228</td>
+          <td>8.6</td>
+          <td>3.8%</td>
+          <td><span class="badge green">Highest ER</span></td>
+        </tr>
+        <tr>
+          <td>Consulting / Client Work</td>
+          <td>1</td>
+          <td>431</td>
+          <td>7.5</td>
+          <td>1.8%</td>
+          <td><span class="badge blue">Steady — good CTA content</span></td>
+        </tr>
+        <tr>
+          <td>Brand / Positioning</td>
+          <td>1</td>
+          <td>245</td>
+          <td>6.4</td>
+          <td>2.6%</td>
+          <td><span class="badge blue">Good engagement</span></td>
+        </tr>
+        <tr>
+          <td>Multilingual SEO</td>
+          <td>3</td>
+          <td>256</td>
+          <td>2.9</td>
+          <td>1.5%</td>
+          <td><span class="badge grey">Underperforming vs your niche</span></td>
+        </tr>
+        <tr>
+          <td>Content Strategy</td>
+          <td>1</td>
+          <td>411</td>
+          <td>7.5</td>
+          <td>1.8%</td>
+          <td><span class="badge blue">Solid</span></td>
+        </tr>
+        <tr>
+          <td>SEO Industry (commentary)</td>
+          <td>2</td>
+          <td>152</td>
+          <td>0.5</td>
+          <td>0.4%</td>
+          <td><span class="badge red">Avoid — low signal</span></td>
+        </tr>
+        <tr>
+          <td>Promotional</td>
+          <td>1</td>
+          <td>118</td>
+          <td>3.2</td>
+          <td>2.7%</td>
+          <td><span class="badge red">Lowest impressions</span></td>
+        </tr>
+        <tr>
+          <td>SEO Strategy (general)</td>
+          <td>3</td>
+          <td>232</td>
+          <td>3.2</td>
+          <td>1.4%</td>
+          <td><span class="badge grey">Needs sharper angle</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TIMING -->
+  <div class="section">
+    <h2><span class="num">6</span> Timing Analysis — Day &amp; Time of Posting</h2>
+    <div class="desc">When you post has a real effect on reach. Note that all times are CET. The evening post (Jan 19, 21:42) is a single data point but interesting.</div>
+    <div class="chart-2col">
+      <div>
+        <p style="font-size:12px; font-weight:600; color:var(--mid); margin-bottom:10px; text-transform:uppercase; letter-spacing:0.04em;">Avg Impressions by Day of Week</p>
+        <div class="chart-wrap" style="height:230px;"><canvas id="dowChart"></canvas></div>
+      </div>
+      <div>
+        <p style="font-size:12px; font-weight:600; color:var(--mid); margin-bottom:10px; text-transform:uppercase; letter-spacing:0.04em;">Avg Impressions by Time of Day</p>
+        <div class="chart-wrap" style="height:230px;"><canvas id="todChart"></canvas></div>
+      </div>
+    </div>
+    <div class="insight-grid" style="margin-top:20px;">
+      <div class="insight amber"><strong>Monday is interesting (but driven by outliers)</strong>Monday averages 878 impressions — but that's Feb 9 (2,704) pulling the average up. Remove it and Monday avg = 217. Not inherently special.</div>
+      <div class="insight green"><strong>Tuesday and Wednesday are your most consistent days</strong>Tue: 6 posts, avg 337 impressions, 1.97% ER. Wed: 6 posts, avg 327 impressions, 2.18% ER. Both solid with no viral outliers skewing them.</div>
+      <div class="insight blue"><strong>Afternoon posts (12–17h) outperform morning when you exclude the viral post</strong>Without Feb 9: morning avg drops to ~235. Afternoon avg stays at 333. Your audience seems more active / more likely to engage during business hours, early afternoon.</div>
+      <div class="insight amber"><strong>The 9am slot is your current default in February</strong>You shifted to 9am in February, coinciding with the drop in performance. Can't tell if timing caused it — the frequency/daily cadence is a more likely culprit.</div>
+    </div>
+  </div>
+
+  <!-- FORMAT ANALYSIS -->
+  <div class="section">
+    <h2><span class="num">7</span> Post Format — All Text, One Outlier</h2>
+    <div class="desc">All 22 posts in this period are text-only. One exception: the Feb 9 post included an external link card (industry research on content consumption behaviour). That's the entire format story — which makes the results meaningful.</div>
+    <div class="compare-grid">
+      <div class="compare-card">
+        <h3>Text Only</h3>
+        <div class="metric-row"><span>Posts</span><span class="val">21</span></div>
+        <div class="metric-row"><span>Avg impressions</span><span class="val">304</span></div>
+        <div class="metric-row"><span>Median impressions</span><span class="val">245</span></div>
+        <div class="metric-row"><span>Avg reactions</span><span class="val">4.6</span></div>
+        <div class="metric-row"><span>Avg ER</span><span class="val">2.19%</span></div>
+      </div>
+      <div class="compare-card winner">
+        <h3>Text + External Link Card</h3>
+        <div class="metric-row"><span>Posts</span><span class="val">1</span></div>
+        <div class="metric-row"><span>Impressions</span><span class="val">2,704</span></div>
+        <div class="metric-row"><span>Reactions</span><span class="val">4</span></div>
+        <div class="metric-row"><span>Comments</span><span class="val">1</span></div>
+        <div class="metric-row"><span>ER</span><span class="val">0.20%</span></div>
+      </div>
+    </div>
+    <div class="insight-grid" style="margin-top:16px;">
+      <div class="insight blue"><strong>Link cards dramatically boost impressions but lower ER</strong>The content data post reached 2,704 people — nearly 9× your avg — but with only 0.20% ER. People saw it, scrolled past, or clicked the link. Awareness ≠ engagement.</div>
+      <div class="insight green"><strong>Text-only is your engine for genuine connection</strong>Your 2.19% avg ER on text posts is solid for B2B LinkedIn. Your audience engages with your thinking, not visual assets. This is an advantage for consistency.</div>
+      <div class="insight amber"><strong>Images in your feed (pre-Dec) don't appear to drive better results</strong>The images visible in the LinkedIn PDF (maps, desk photos, graphics) seem to belong to older content outside the analytics window. No evidence they outperformed text in your account.</div>
+      <div class="insight blue"><strong>Consider link cards for data-backed posts, not for all content</strong>The link card worked because the external data was relevant and authoritative. Adding a link for the sake of it won't replicate this — match the format to the content.</div>
+    </div>
+  </div>
+
+  <!-- TOP & BOTTOM POSTS -->
+  <div class="section">
+    <h2><span class="num">8</span> Top &amp; Bottom Posts — Full Breakdown</h2>
+    <div class="desc">All 22 posts ranked. Star rows are your standouts — study their structure. The bottom posts reveal patterns worth correcting.</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Post Summary</th>
+          <th>Format</th>
+          <th>About Me</th>
+          <th>Impressions</th>
+          <th>Reactions</th>
+          <th>Comments</th>
+          <th>ER</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="star-row">
+          <td>Feb 9</td>
+          <td><strong>How people actually consume content — industry research</strong></td>
+          <td><span class="badge blue">Link card</span></td>
+          <td><span class="badge grey">No</span></td>
+          <td><strong>2,704</strong></td>
+          <td>4</td>
+          <td>1</td>
+          <td>0.2%</td>
+        </tr>
+        <tr class="star-row">
+          <td>Dec 21</td>
+          <td><strong>"If you're new here" — Introduction post</strong></td>
+          <td><span class="badge grey">Text</span></td>
+          <td><span class="badge grey">No</span></td>
+          <td><strong>1,044</strong></td>
+          <td><strong>30</strong></td>
+          <td>0</td>
+          <td>2.9%</td>
+        </tr>
+        <tr class="star-row">
+          <td>Jan 10</td>
+          <td><strong>"I stopped billing by the hour" — time vs outcomes</strong></td>
+          <td><span class="badge grey">Text</span></td>
+          <td><span class="badge grey">No</span></td>
+          <td><strong>536</strong></td>
+          <td>12</td>
+          <td>6</td>
+          <td>3.4%</td>
+        </tr>
+        <tr>
+          <td>Jan 3</td>
+          <td>Content prioritisation framework — CRITICAL/IMPORTANT/SECONDARY</td>
+          <td><span class="badge grey">Text</span></td>
+          <td><span class="badge blue">Yes (3-line)</span></td>
+          <td>553</td>
+          <td>15</td>
+          <td>2</td>
+          <td>3.1%</td>
+        </tr>
+        <tr>
+          <td>Dec 23</td>
+          <td>Retail brand / multilingual employer presence story</td>
+          <td><span class="badge grey">Text</span></td>
+          <td><span class="badge blue">Yes (3-line)</span></td>
+          <td>484</td>
+          <td>3</td>
+          <td>0</td>
+          <td>0.7%</td>
+        </tr>
+        <tr>
+          <td>Feb 2</td>
+          <td>Client case study — content not converting</td>
+          <td><span class="badge grey">Text</span></td>
+          <td><span class="badge blue">Yes (2-line)</span></td>
+          <td>431</td>
+          <td>2</td>
+          <td>5</td>
+          <td>1.8%</td>
+        </tr>
+        <tr>
+          <td>Jan 26</td>
+          <td>Project-based pricing ≠ outcome-based pricing</td>
+          <td><span class="badge grey">Text</span></td>
+          <td><span class="badge grey">No</span></td>
+          <td>413</td>
+          <td>5</td>
+          <td>6</td>
+          <td>2.9%</td>
+        </tr>
+        <tr>
+          <td>Dec 27</td>
+          <td>Semantic depth in content strategy</td>
+          <td><span class="badge grey">Text</span></td>
+          <td><span class="badge blue">Yes (3-line)</span></td>
+          <td>411</td>
+          <td>8</td>
+          <td>0</td>
+          <td>1.8%</td>
+        </tr>
+        <tr>
+          <td>Jan 24</td>
+          <td>Deliverable theatre — when the doc becomes the work</td>
+          <td><span class="badge grey">Text</span></td>
+          <td><span class="badge grey">No</span></td>
+          <td>311</td>
+          <td>2</td>
+          <td>6</td>
+          <td>2.8%</td>
+        </tr>
+        <tr>
+          <td>Jan 4</td>
+          <td>11 years in business — reflection</td>
+          <td><span class="badge grey">Text</span></td>
+          <td><span class="badge blue">Yes (3-line)</span></td>
+          <td>228</td>
+          <td>5</td>
+          <td>3</td>
+          <td>3.8%</td>
+        </tr>
+        <tr>
+          <td>Jan 18</td>
+          <td>Multilingual sites rarely fail loudly — they drift</td>
+          <td><span class="badge grey">Text</span></td>
+          <td><span class="badge grey">No</span></td>
+          <td>282</td>
+          <td>3</td>
+          <td>1</td>
+          <td>1.5%</td>
+        </tr>
+        <tr>
+          <td>Jan 16</td>
+          <td>What I cut before I ever share a strategy</td>
+          <td><span class="badge grey">Text</span></td>
+          <td><span class="badge blue">Yes (2-line)</span></td>
+          <td>258</td>
+          <td>3</td>
+          <td>0</td>
+          <td>1.3%</td>
+        </tr>
+        <tr>
+          <td>Jan 19</td>
+          <td>Social presence raises expectations — does your site deliver?</td>
+          <td><span class="badge grey">Text</span></td>
+          <td><span class="badge blue">Yes (2-line)</span></td>
+          <td>245</td>
+          <td>6</td>
+          <td>0</td>
+          <td>2.6%</td>
+        </tr>
+        <tr>
+          <td>Feb 5</td>
+          <td>4 questions before investing in a content strategy</td>
+          <td><span class="badge grey">Text</span></td>
+          <td><span class="badge blue">Yes (2-line)</span></td>
+          <td>157</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1.4%</td>
+        </tr>
+        <tr>
+          <td>Jan 12</td>
+          <td>Newsletter pitch — "something worth your inbox"</td>
+          <td><span class="badge grey">Text</span></td>
+          <td><span class="badge grey">No</span></td>
+          <td>154</td>
+          <td>1</td>
+          <td>0</td>
+          <td>0.7%</td>
+        </tr>
+        <tr>
+          <td>Jan 25</td>
+          <td>AI-generated content scores — LLMs are not editors</td>
+          <td><span class="badge grey">Text</span></td>
+          <td><span class="badge grey">No</span></td>
+          <td>150</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        <tr>
+          <td>Feb 10</td>
+          <td>Going multilingual — phase it or launch all at once?</td>
+          <td><span class="badge grey">Text</span></td>
+          <td><span class="badge grey">No</span></td>
+          <td>151</td>
+          <td>1</td>
+          <td>0</td>
+          <td>0.7%</td>
+        </tr>
+        <tr>
+          <td>Feb 11</td>
+          <td>Brand coherence across markets from day one</td>
+          <td><span class="badge grey">Text</span></td>
+          <td><span class="badge grey">No</span></td>
+          <td>132</td>
+          <td>4</td>
+          <td>0</td>
+          <td>3.3%</td>
+        </tr>
+        <tr>
+          <td>Feb 4</td>
+          <td>Three years using AI as a sounding board — now it ships things</td>
+          <td><span class="badge grey">Text</span></td>
+          <td><span class="badge grey">No</span></td>
+          <td>128</td>
+          <td>0</td>
+          <td>2</td>
+          <td>1.7%</td>
+        </tr>
+        <tr>
+          <td>Feb 12</td>
+          <td>Handing over a strategy feels like explaining a map in the dark</td>
+          <td><span class="badge grey">Text</span></td>
+          <td><span class="badge blue">Yes (2-line)</span></td>
+          <td>84</td>
+          <td>1</td>
+          <td>0</td>
+          <td>1.3%</td>
+        </tr>
+        <tr style="background:#FFF0F0;">
+          <td>Feb 3</td>
+          <td>Some teams don't need more content — they need focus</td>
+          <td><span class="badge grey">Text</span></td>
+          <td><span class="badge grey">No</span></td>
+          <td>59</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        <tr style="background:#FFF0F0;">
+          <td>Jan 23</td>
+          <td>✦ One spot open for a Content Strategy Sprint ✦ (promo)</td>
+          <td><span class="badge grey">Text</span></td>
+          <td><span class="badge blue">Yes (2-line)</span></td>
+          <td>118</td>
+          <td>2</td>
+          <td>1</td>
+          <td>2.7%</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note">Posts highlighted in yellow = top performers. Posts in pink = need attention. Jan 10 data sourced from LinkedIn dashboard overview (individual analytics file not available for this post).</div>
+  </div>
+
+  <!-- AUDIENCE -->
+  <div class="section">
+    <h2><span class="num">9</span> Who's Engaging — Your Audience Profile</h2>
+    <div class="desc">Aggregated demographic data from the Dec 21 post (highest engagement) and the overall account overview. This is who's actually reading and reacting.</div>
+    <div class="chart-2col">
+      <div>
+        <p style="font-size:12px; font-weight:600; color:var(--mid); margin-bottom:10px; text-transform:uppercase; letter-spacing:0.04em;">Top Job Titles</p>
+        <div class="chart-wrap" style="height:220px;"><canvas id="jobChart"></canvas></div>
+      </div>
+      <div>
+        <p style="font-size:12px; font-weight:600; color:var(--mid); margin-bottom:10px; text-transform:uppercase; letter-spacing:0.04em;">Seniority Level</p>
+        <div class="chart-wrap" style="height:220px;"><canvas id="seniorityChart"></canvas></div>
+      </div>
+    </div>
+    <div class="insight-grid" style="margin-top:20px;">
+      <div class="insight blue"><strong>Your audience is primarily content practitioners (Founders, Content Consultants/Strategists)</strong>The top titles (Content Strategist, Founder, Content Consultant, Co-Founder) suggest your content is reaching peers and potential referrers — not necessarily direct clients.</div>
+      <div class="insight amber"><strong>38% are "Experienced" level, 21% Entry-level</strong>You have a mixed audience — some junior practitioners learning from you, some peers engaging with your POV. Distinguish who you're writing for in each post.</div>
+      <div class="insight green"><strong>Lyon + Paris dominate geographically</strong>Your core engaged audience is French-speaking/based. Posts touching on international content topics (English, global markets) might have appeal beyond this core — as the Feb 9 viral post suggests.</div>
+      <div class="insight blue"><strong>Advertising Services + Marketing Services = 70%+ of sectors</strong>Agency and consultant types dominate. They're reading your content for POV/learning, not necessarily to hire you. Potential clients (Marketing Directors at companies) may be underpenetrated.</div>
+    </div>
+  </div>
+
+  <!-- RECOMMENDATIONS -->
+  <div class="section">
+    <h2><span class="num">10</span> Recommendations — What to Do Next</h2>
+    <div class="desc">Prioritised by impact. Green = do immediately, Blue = implement over next 4 weeks, Amber = test and iterate.</div>
+    <ul class="rec-list">
+
+      <li class="must">
+        <strong>Cut posting to 3× per week max <span class="priority-tag high">HIGH PRIORITY</span></strong>
+        The data is unambiguous: your per-post impressions dropped ~65% when you went daily in February. Quality > quantity, and LinkedIn's algorithm appears to spread your reach thinner as frequency increases. Pick Tuesday, Wednesday and Thursday as your core posting days (best average performance). Let each post breathe for at least 36–48 hours.
+      </li>
+
+      <li class="must">
+        <strong>Find and share external data 2× per month <span class="priority-tag high">HIGH PRIORITY</span></strong>
+        The content consumption research post got 2,704 impressions (9× your average) by anchoring your POV to third-party data. You don't need to post link cards every time — you can cite stats in text. But identifying 2 compelling data points per month from research papers, industry studies, or Twitter/X threads and building posts around them is your fastest path to organic reach expansion. Your angle on the data is what makes it yours.
+      </li>
+
+      <li class="must">
+        <strong>Write one genuine personal/milestone post per month <span class="priority-tag high">HIGH PRIORITY</span></strong>
+        Your Dec 21 intro post (30 reactions) and Jan 4 11-year post (highest ER at 3.77%) both outperformed everything except the viral data post. People want to know the human behind the expertise. These don't need to be navel-gazing — they work best when personal experience connects to a strategic insight (e.g., "11 years in → here's what changed about how I work").
+      </li>
+
+      <li class="should">
+        <strong>Restructure the "about me" footer: shorter and more selective <span class="priority-tag medium">MEDIUM PRIORITY</span></strong>
+        Stop using the 3-line version ("Follow for practical takes on content strategy…"). It reads as filler. The 2-line "Reach out if this sounds like what you need" is better — it's direct, not performative. But the most important move: only use the footer on posts where a conversion is the point (client stories, service mentions, Sprint announcements). Remove it from thought leadership, data commentary, and opinion posts. Those stand better on their own.
+      </li>
+
+      <li class="should">
+        <strong>Build more structured framework posts <span class="priority-tag medium">MEDIUM PRIORITY</span></strong>
+        The Jan 3 prioritisation framework post (CRITICAL / IMPORTANT / SECONDARY) got 553 impressions and 17 engagements — 3rd best by interactions excluding the Jan 10 and Jan 26 posts. Structured, numbered, or tiered content is highly shareable on LinkedIn because it's immediately usable. Aim for one per month: a framework, a decision matrix, or a "before you do X, check these Y things" structure.
+      </li>
+
+      <li class="should">
+        <strong>Post at 14:30–15:30 CET (Tue/Wed/Thu) <span class="priority-tag medium">MEDIUM PRIORITY</span></strong>
+        Afternoon posts average 333 impressions vs ~235 for morning posts (once the viral outlier is removed). Your audience is likely in France + UK, working 9-6 CET. Early-mid afternoon catches them mid-day, when they're more likely to pause and scroll. The shift to 9am in February coincided with lower performance — that may be more about frequency, but it's worth testing.
+      </li>
+
+      <li class="consider">
+        <strong>Reframe multilingual SEO posts for a broader hook <span class="priority-tag low">LOW PRIORITY</span></strong>
+        Multilingual SEO posts underperform (avg 256 impressions, 2.9 engagements) despite being a core service. The issue may be audience alignment — most of your engaged followers are content practitioners, not the decision-makers at companies planning international expansion. Try reframing: instead of "here's a technical consideration for multilingual sites," try "here's a business decision most companies get wrong before they go global." Lead with the business consequence, not the SEO mechanic.
+      </li>
+
+      <li class="consider">
+        <strong>Avoid pure promotional posts — embed the offer differently <span class="priority-tag low">LOW PRIORITY</span></strong>
+        The Jan 23 Strategy Sprint promo post (118 impressions — lowest in the dataset) confirms what you probably already know: explicit "I have a spot open" posts underperform. Instead, let client stories, frameworks, and POV posts do the selling indirectly. If you want a direct CTA, bury it: end a strong-performing post type with "details in comments" and put the pitch there.
+      </li>
+
+    </ul>
+  </div>
+
+  <!-- WHAT MAKES YOUR BEST POSTS DIFFERENT -->
+  <div class="section">
+    <h2><span class="num">11</span> Anatomy of Your Best Posts — Pattern Recognition</h2>
+    <div class="desc">Looking across your top 5 posts (by impression × engagement combined), here's the structural pattern they share.</div>
+    <table>
+      <thead>
+        <tr><th>Element</th><th>Top Posts Do This</th><th>Weaker Posts Do This</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Opening line</strong></td><td>Challenge a belief, pose a tension, or make a sharp claim<br><em>"I stopped billing by the hour"</em><br><em>"Multilingual sites rarely fail loudly. They drift."</em></td><td>Describe a service or announce an offer</td></tr>
+        <tr><td><strong>Structure</strong></td><td>Short paragraphs, white space, a logical build-up to an insight or question</td><td>Long dense paragraphs; information without tension</td></tr>
+        <tr><td><strong>Voice</strong></td><td>First person, opinion-driven, grounded in real experience with named clients or situations</td><td>Generic, educational, "here's what you should know"</td></tr>
+        <tr><td><strong>Ending</strong></td><td>An honest question that invites real debate — "Which side of this have you been on?" / "What did you go with?"</td><td>A CTA with a signature block or a pitch</td></tr>
+        <tr><td><strong>About me footer</strong></td><td>Absent, or very short (max 2 lines, optional)</td><td>3-line footer including "Follow for…"</td></tr>
+        <tr><td><strong>External reference</strong></td><td>Links to or cites credible external research when relevant (industry consumption data)</td><td>Pure opinion with no external anchor</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    Analysis prepared February 16, 2027 · Based on 22 posts published December 21, 2026 – February 12, 2027 · Data from LinkedIn individual post analytics + dashboard overview<br>
+    Note: Jan 10 post metrics sourced from LinkedIn dashboard top posts view (individual analytics file unavailable). Feb 9 post impressions corrected from 0 to 2,704 using dashboard overview data.
+  </div>
+</div>
+
+<script>
+const blue = '#0A66C2';
+const blueAlpha = 'rgba(10,102,194,0.75)';
+const green = '#1A7A4A';
+const greenAlpha = 'rgba(26,122,74,0.75)';
+const amber = '#D4820A';
+const amberAlpha = 'rgba(212,130,10,0.75)';
+const red = '#C0392B';
+const redAlpha = 'rgba(192,57,43,0.75)';
+const lightBorder = '#E1E8F0';
+
+// ─── 1. IMPRESSIONS TIMELINE ───
+new Chart(document.getElementById('impressionsChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Dec 21','Dec 23','Dec 27','Jan 3','Jan 4','Jan 10','Jan 12','Jan 16','Jan 18','Jan 19','Jan 23','Jan 24','Jan 25','Jan 26','Feb 2','Feb 3','Feb 4','Feb 5','Feb 9*','Feb 10','Feb 11','Feb 12'],
+    datasets: [{
+      label: 'Impressions',
+      data: [1044, 484, 411, 553, 228, 536, 154, 258, 282, 245, 118, 311, 150, 413, 431, 59, 128, 157, 1000, 151, 132, 84],
+      backgroundColor: ['#0A66C2','#0A66C2','#0A66C2','#0A66C2','#0A66C2','#0A66C2','#0A66C2','#0A66C2','#0A66C2','#0A66C2','#0A66C2','#0A66C2','#0A66C2','#0A66C2','#0A66C2','#0A66C2','#0A66C2','#0A66C2','#D4820A','#0A66C2','#0A66C2','#0A66C2'],
+      borderRadius: 4,
+      borderSkipped: false,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: (ctx) => {
+            if (ctx.dataIndex === 18) return 'Impressions: 2,704 (capped at 1,000 for scale)';
+            return `Impressions: ${ctx.parsed.y.toLocaleString()}`;
+          }
+        }
+      }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+      y: {
+        grid: { color: lightBorder },
+        ticks: { font: { size: 11 } },
+        title: { display: true, text: 'Impressions', font: { size: 11 } }
+      }
+    }
+  }
+});
+
+// ─── 2. ENGAGEMENT RATE ───
+new Chart(document.getElementById('erChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Dec 21','Dec 23','Dec 27','Jan 3','Jan 4','Jan 10','Jan 12','Jan 16','Jan 18','Jan 19','Jan 23','Jan 24','Jan 25','Jan 26','Feb 2','Feb 3','Feb 4','Feb 5','Feb 9','Feb 10','Feb 11','Feb 12'],
+    datasets: [{
+      label: 'Engagement Rate %',
+      data: [2.88, 0.67, 1.83, 3.11, 3.77, 3.41, 0.70, 1.25, 1.52, 2.63, 2.73, 2.76, 0.0, 2.86, 1.75, 0.0, 1.68, 1.37, 0.20, 0.71, 3.25, 1.28],
+      backgroundColor: [2.88, 0.67, 1.83, 3.11, 3.77, 3.41, 0.70, 1.25, 1.52, 2.63, 2.73, 2.76, 0.0, 2.86, 1.75, 0.0, 1.68, 1.37, 0.20, 0.71, 3.25, 1.28].map(v =>
+        v >= 3.0 ? greenAlpha : v >= 1.5 ? blueAlpha : v >= 0.5 ? amberAlpha : redAlpha
+      ),
+      borderRadius: 4, borderSkipped: false,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+      y: {
+        grid: { color: lightBorder },
+        ticks: { font: { size: 11 }, callback: v => v + '%' },
+        title: { display: true, text: 'Engagement Rate', font: { size: 11 } }
+      }
+    }
+  }
+});
+
+// ─── 3. FREQUENCY BAR ───
+new Chart(document.getElementById('freqChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Wk4 (Dec19)','Wk5 (Dec26)','Wk6 (Jan2)','Wk7 (Jan9)','Wk8 (Jan16)','Wk9 (Jan23)','Wk10 (Feb2)','Wk11 (Feb9)'],
+    datasets: [{
+      label: 'Posts published',
+      data: [2, 1, 2, 2, 3, 4, 4, 4],
+      backgroundColor: 'rgba(10,102,194,0.6)',
+      borderRadius: 4, yAxisID: 'y',
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, title: { display: true, text: 'Posts per week', font: { size: 12 } } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+      y: { grid: { color: lightBorder }, ticks: { stepSize: 1, font: { size: 11 } }, title: { display: true, text: 'Posts' } }
+    }
+  }
+});
+
+// ─── 3b. FREQUENCY LINE ───
+new Chart(document.getElementById('freqLineChart'), {
+  type: 'line',
+  data: {
+    labels: ['Wk4','Wk5','Wk6','Wk7','Wk8','Wk9','Wk10','Wk11*'],
+    datasets: [{
+      label: 'Avg impressions/post',
+      data: [765, 411, 391, 345, 261, 248, 193, 768],
+      borderColor: blue,
+      backgroundColor: 'rgba(10,102,194,0.12)',
+      tension: 0.3,
+      fill: true,
+      pointBackgroundColor: [blue,blue,blue,blue,blue,blue,blue,amber],
+      pointRadius: 5,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      title: { display: true, text: 'Avg impressions per post (*Wk11 inflated by viral post)', font: { size: 12 } },
+      tooltip: { callbacks: { label: ctx => ctx.dataIndex === 7 ? 'Avg: 768 (viral outlier — excl: 122)' : `Avg: ${ctx.parsed.y} imp` } }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+      y: { grid: { color: lightBorder }, ticks: { font: { size: 11 } }, title: { display: true, text: 'Avg Impressions' } }
+    }
+  }
+});
+
+// ─── 4. ABOUT ME COMPARISON ───
+new Chart(document.getElementById('aboutMeChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Avg Impressions', 'Avg Reactions', 'Avg Comments', 'Avg ER (%)'],
+    datasets: [
+      {
+        label: 'Without "About Me"',
+        data: [506, 5.3, 1.9, 1.66],
+        backgroundColor: 'rgba(10,102,194,0.6)',
+        borderRadius: 4,
+      },
+      {
+        label: 'With "About Me"',
+        data: [296, 4.7, 1.3, 2.04],
+        backgroundColor: 'rgba(26,122,74,0.65)',
+        borderRadius: 4,
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      x: { grid: { display: false } },
+      y: { grid: { color: lightBorder }, ticks: { font: { size: 11 } } }
+    }
+  }
+});
+
+// ─── 5. TOPICS ───
+new Chart(document.getElementById('topicsChart'), {
+  type: 'bar',
+  data: {
+    labels: ['AI / Tech\n(w data)', 'Intro /\nMilestone', 'Content\nFramework', 'Client\nWork', 'Consulting\nPhilosophy', 'Content\nStrategy', 'Multilingual\nSEO', 'Brand /\nPositioning', 'SEO\nStrategy', 'Promotional', 'SEO Industry\n(Commentary)'],
+    datasets: [
+      {
+        label: 'Avg Impressions',
+        data: [1417, 637, 553, 431, 280, 411, 256, 245, 232, 118, 152],
+        backgroundColor: 'rgba(10,102,194,0.7)',
+        borderRadius: 4,
+        yAxisID: 'y',
+      },
+      {
+        label: 'Avg ER (%)',
+        data: [0.9, 2.9, 3.1, 1.8, 2.1, 1.8, 1.5, 2.6, 1.4, 2.7, 0.4],
+        backgroundColor: 'rgba(26,122,74,0.65)',
+        borderRadius: 4,
+        yAxisID: 'y2',
+        type: 'line',
+        tension: 0.3,
+        borderColor: green,
+        pointBackgroundColor: green,
+        pointRadius: 4,
+        fill: false,
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+      y: { grid: { color: lightBorder }, position: 'left', title: { display: true, text: 'Avg Impressions' } },
+      y2: { position: 'right', grid: { display: false }, ticks: { callback: v => v + '%' }, title: { display: true, text: 'Avg ER' }, min: 0, max: 5 }
+    }
+  }
+});
+
+// ─── 6. DAY OF WEEK ───
+new Chart(document.getElementById('dowChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    datasets: [{
+      label: 'Avg Impressions',
+      data: [878, 337, 327, 210, 484],
+      backgroundColor: [amberAlpha, blueAlpha, blueAlpha, blueAlpha, blueAlpha],
+      borderRadius: 4,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: { label: ctx => ctx.dataIndex === 0 ? 'Avg: 878 (driven by viral Feb 9 post — excl: 217)' : `Avg: ${ctx.parsed.y} imp` }
+      }
+    },
+    scales: {
+      x: { grid: { display: false } },
+      y: { grid: { color: lightBorder }, ticks: { font: { size: 11 } } }
+    }
+  }
+});
+
+// ─── 6b. TIME OF DAY ───
+new Chart(document.getElementById('todChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Morning\n(≤11h)', 'Afternoon\n(12–17h)', 'Evening\n(18h+)'],
+    datasets: [
+      {
+        label: 'Avg Impressions',
+        data: [510, 333, 245],
+        backgroundColor: [amberAlpha, blueAlpha, 'rgba(130,130,130,0.5)'],
+        borderRadius: 4,
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => ctx.dataIndex === 0 ? 'Avg: 510 (driven by viral Feb 9 post — excl: ~235)' : `Avg: ${ctx.parsed.y} imp`
+        }
+      }
+    },
+    scales: {
+      x: { grid: { display: false } },
+      y: { grid: { color: lightBorder }, ticks: { font: { size: 11 } } }
+    }
+  }
+});
+
+// ─── 9. JOB TITLES ───
+new Chart(document.getElementById('jobChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Founder', 'Content Strategist', 'Co-Founder', 'Content Consultant', 'CEO'],
+    datasets: [{
+      label: '% of audience',
+      data: [5.8, 4.6, 2.8, 2.7, 2.0],
+      backgroundColor: 'rgba(10,102,194,0.65)',
+      borderRadius: 4,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    indexAxis: 'y',
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { color: lightBorder }, ticks: { callback: v => v + '%', font: { size: 11 } } },
+      y: { grid: { display: false }, ticks: { font: { size: 11 } } }
+    }
+  }
+});
+
+// ─── 9b. SENIORITY ───
+new Chart(document.getElementById('seniorityChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Experienced', 'Entry-level', 'Director', 'Manager', 'Owner'],
+    datasets: [{
+      data: [38, 21, 11, 9, 5],
+      backgroundColor: [blue, 'rgba(10,102,194,0.65)', 'rgba(10,102,194,0.45)', 'rgba(10,102,194,0.3)', 'rgba(10,102,194,0.15)'],
+      borderWidth: 2,
+      borderColor: 'white',
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { position: 'right', labels: { font: { size: 11 }, boxWidth: 12 } },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed}%` } }
+    }
+  }
+});
+</script>
+</body>
+</html>

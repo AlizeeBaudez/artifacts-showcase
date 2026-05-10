@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f5;
+    --ink: #1a1814;
+    --muted: #8c8880;
+    --rule: #e8e4de;
+    --move: #FF3B30;
+    --exercise: #30D158;
+    --stand: #007AFF;
+    --sleep-col: #a78bfa;
+    --focus-col: #f59e0b;
+    --body-col: #10b981;
+    --accent: #1a1814;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    padding: 3rem 1.5rem 5rem;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  header { margin-bottom: 3.5rem; }
+  .eyebrow {
+    font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.7rem;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 400; line-height: 1.1; margin-bottom: 0.8rem;
+  }
+  h1 em { font-style: italic; color: var(--muted); }
+  .subtitle { font-size: 0.88rem; color: var(--muted); max-width: 480px; }
+
+  /* AREA SECTIONS */
+  .areas { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 16px; overflow: hidden; margin-bottom: 2.5rem; }
+  .area-row { background: var(--bg); display: grid; grid-template-columns: 180px 1fr; }
+  .area-label {
+    padding: 1.6rem 1.4rem;
+    border-right: 1px solid var(--rule);
+    display: flex; flex-direction: column; justify-content: center; gap: 0.3rem;
+  }
+  .area-name {
+    font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 400;
+  }
+  .area-icon { font-size: 1.2rem; margin-bottom: 0.2rem; }
+  .area-body { padding: 1.4rem 1.6rem; }
+  .pill-list { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .pill {
+    background: var(--rule); border-radius: 20px;
+    padding: 0.28rem 0.75rem; font-size: 0.78rem; color: var(--ink);
+    border: 1px solid transparent;
+  }
+  .pill.primary { background: var(--ink); color: var(--bg); }
+  .pill.sleep { border-color: var(--sleep-col); color: var(--sleep-col); background: rgba(167,139,250,0.07); }
+  .pill.focus { border-color: var(--focus-col); color: var(--focus-col); background: rgba(245,158,11,0.07); }
+  .pill.body { border-color: var(--body-col); color: var(--body-col); background: rgba(16,185,129,0.07); }
+
+  /* RINGS SECTION */
+  h2 {
+    font-family: 'Playfair Display', serif; font-size: 1.5rem;
+    font-weight: 400; margin-bottom: 0.3rem;
+  }
+  .section-sub { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.5rem; }
+
+  .rings-legend { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .ring-item { display: flex; align-items: center; gap: 0.45rem; font-size: 0.8rem; }
+  .ring-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  .days-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+  .day-card {
+    background: white; border-radius: 12px; border: 1px solid var(--rule);
+    padding: 0.9rem 0.7rem; text-align: center;
+  }
+  .day-card.rest { background: var(--bg); }
+  .day-name {
+    font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--muted); margin-bottom: 0.6rem; font-weight: 500;
+  }
+  .ring-goal { margin-bottom: 0.45rem; }
+  .ring-goal .ring-label {
+    font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted); display: block; margin-bottom: 0.15rem;
+  }
+  .ring-goal .ring-val {
+    font-size: 0.85rem; font-weight: 500; display: block; line-height: 1.2;
+  }
+  .ring-move .ring-val { color: var(--move); }
+  .ring-exercise .ring-val { color: var(--exercise); }
+  .ring-stand .ring-val { color: var(--stand); }
+  .day-note {
+    margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid var(--rule);
+    font-size: 0.62rem; color: var(--muted); line-height: 1.4;
+  }
+
+  /* MINDSET NOTE */
+  .note-box {
+    margin-top: 2.5rem;
+    border-left: 3px solid var(--ink); padding: 1.2rem 1.5rem;
+    background: white; border-radius: 0 12px 12px 0;
+  }
+  .note-box p { font-size: 0.85rem; color: var(--muted); line-height: 1.75; }
+  .note-box strong { color: var(--ink); font-weight: 500; }
+
+  @media (max-width: 640px) {
+    .area-row { grid-template-columns: 1fr; }
+    .area-label { border-right: none; border-bottom: 1px solid var(--rule); padding: 1rem 1.2rem 0.7rem; }
+    .days-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">high-output phase · remote work · back to full schedule</div>
+  <h1>Your plan,<br><em>right now.</em></h1>
+  <p class="subtitle">Four areas. One ring goal per day. Nothing you can't do in the hours you have.</p>
+</header>
+
+<!-- AREAS -->
+<div class="areas">
+
+  <div class="area-row">
+    <div class="area-label">
+      <div class="area-icon">🌙</div>
+      <div class="area-name">Sleep</div>
+    </div>
+    <div class="area-body">
+      <div class="pill-list">
+        <span class="pill primary">Same wake time every day</span>
+        <span class="pill sleep">Morning light in 20 min</span>
+        <span class="pill sleep">Room 18–19°C</span>
+        <span class="pill sleep">No screens 30 min before bed</span>
+        <span class="pill sleep">Magnesium glycinate 200mg at night</span>
+        <span class="pill">Caffeine before noon only</span>
+        <span class="pill">10–20 min nap on bad nights</span>
+        <span class="pill">Protect 11pm–2am window</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="area-row">
+    <div class="area-label">
+      <div class="area-icon">💪</div>
+      <div class="area-name">Fitness</div>
+    </div>
+    <div class="area-body">
+      <div class="pill-list">
+        <span class="pill primary">2× strength / week, 20 min min</span>
+        <span class="pill body">Full-body compound lifts — keep it simple</span>
+        <span class="pill body">Kettlebell or bands — 1 tool enough</span>
+        <span class="pill">Steps already solid — don't chase more</span>
+        <span class="pill">Consistency over intensity right now</span>
+        <span class="pill">Replicate the conditions from your best training month</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="area-row">
+    <div class="area-label">
+      <div class="area-icon">🧠</div>
+      <div class="area-name">Focus</div>
+    </div>
+    <div class="area-body">
+      <div class="pill-list">
+        <span class="pill primary">First 90 min of the workday = deep work</span>
+        <span class="pill focus">Omega-3 + multivitamin daily</span>
+        <span class="pill focus">Choline-rich foods (eggs, fish)</span>
+        <span class="pill focus">Magnesium glycinate (sleep + cognition)</span>
+        <span class="pill">Mental fog = sleep deficit, not failure</span>
+        <span class="pill">Batch decisions, don't scatter them</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="area-row">
+    <div class="area-label">
+      <div class="area-icon">⚖️</div>
+      <div class="area-name">Body</div>
+    </div>
+    <div class="area-body">
+      <div class="pill-list">
+        <span class="pill primary">Protein 1.6–1.8 g/kg/day (active phase)</span>
+        <span class="pill body">Don't cut calories — fuel the output</span>
+        <span class="pill body">Body composition shifts with training load</span>
+        <span class="pill">Weight trend is healthy — protect it, don't push it</span>
+        <span class="pill">Vitamin D supplement through winter</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- RINGS -->
+<h2>Ring goals by day</h2>
+<p class="section-sub">Calibrated to a sustainable weekly rhythm. Targets set to close reliably — raise them once the habit is locked in.</p>
+
+<div class="rings-legend">
+  <div class="ring-item"><div class="ring-dot" style="background:var(--move)"></div>Move (kcal)</div>
+  <div class="ring-item"><div class="ring-dot" style="background:var(--exercise)"></div>Exercise (min)</div>
+  <div class="ring-item"><div class="ring-dot" style="background:var(--stand)"></div>Stand (hrs)</div>
+</div>
+
+<div class="days-grid">
+
+  <div class="day-card">
+    <div class="day-name">Mon</div>
+    <div class="ring-goal ring-move"><span class="ring-label">Move</span><span class="ring-val">380</span></div>
+    <div class="ring-goal ring-exercise"><span class="ring-label">Exercise</span><span class="ring-val">30</span></div>
+    <div class="ring-goal ring-stand"><span class="ring-label">Stand</span><span class="ring-val">10</span></div>
+    <div class="day-note">Strength A · desk day</div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">Tue</div>
+    <div class="ring-goal ring-move"><span class="ring-label">Move</span><span class="ring-val">400</span></div>
+    <div class="ring-goal ring-exercise"><span class="ring-label">Exercise</span><span class="ring-val">30</span></div>
+    <div class="ring-goal ring-stand"><span class="ring-label">Stand</span><span class="ring-val">10</span></div>
+    <div class="day-note">Group class · midday</div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">Wed</div>
+    <div class="ring-goal ring-move"><span class="ring-label">Move</span><span class="ring-val">380</span></div>
+    <div class="ring-goal ring-exercise"><span class="ring-label">Exercise</span><span class="ring-val">30</span></div>
+    <div class="ring-goal ring-stand"><span class="ring-label">Stand</span><span class="ring-val">10</span></div>
+    <div class="day-note">Strength B · desk day</div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">Thu</div>
+    <div class="ring-goal ring-move"><span class="ring-label">Move</span><span class="ring-val">380</span></div>
+    <div class="ring-goal ring-exercise"><span class="ring-label">Exercise</span><span class="ring-val">20</span></div>
+    <div class="ring-goal ring-stand"><span class="ring-label">Stand</span><span class="ring-val">10</span></div>
+    <div class="day-note">Mobility · desk day</div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">Fri</div>
+    <div class="ring-goal ring-move"><span class="ring-label">Move</span><span class="ring-val">410</span></div>
+    <div class="ring-goal ring-exercise"><span class="ring-label">Exercise</span><span class="ring-val">30</span></div>
+    <div class="ring-goal ring-stand"><span class="ring-label">Stand</span><span class="ring-val">9</span></div>
+    <div class="day-note">Strength C · shorter day</div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-name">Sat</div>
+    <div class="ring-goal ring-move"><span class="ring-label">Move</span><span class="ring-val">380</span></div>
+    <div class="ring-goal ring-exercise"><span class="ring-label">Exercise</span><span class="ring-val">20</span></div>
+    <div class="ring-goal ring-stand"><span class="ring-label">Stand</span><span class="ring-val">9</span></div>
+    <div class="day-note">Errands · incidental movement</div>
+  </div>
+
+  <div class="day-card rest">
+    <div class="day-name">Sun</div>
+    <div class="ring-goal ring-move"><span class="ring-label">Move</span><span class="ring-val">350</span></div>
+    <div class="ring-goal ring-exercise"><span class="ring-label">Exercise</span><span class="ring-val">15</span></div>
+    <div class="ring-goal ring-stand"><span class="ring-label">Stand</span><span class="ring-val">8</span></div>
+    <div class="day-note">Rest or outdoor walk</div>
+  </div>
+
+</div>
+
+<div class="note-box">
+  <p><strong>One mindset shift:</strong> Targets set slightly below your peak capacity aren't a downgrade — they're a floor you can hit even on a depleted day. Consistency compounds faster than occasional maximums. <strong>Raise each target by 25 kcal once you've closed it 10 days in a row.</strong></p>
+  <p style="margin-top: 0.7rem;">On exercise minutes: on session days (Mon, Tue, Wed, Fri) a 25-min workout closes the ring automatically. Thursday's 15-min mobility flow counts too. Saturday and Sunday are intentionally low — a walk or active errand gets you there. <strong>The 30 min target is what happens naturally when you do the session, not an extra effort on top.</strong></p>
+</div>
+
+</body>
+</html>

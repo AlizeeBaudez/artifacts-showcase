@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weekly Planner (Mon-Fri, 9-17)</title>
+
+  <!-- Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    @page { size: A4 landscape; margin: 0; }
+    * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+    :root {
+      --ink: #111;
+      --muted: #4a4a4a;
+      --rule: #d7d7d7;
+      --rule-strong: #bfbfbf;
+      --paper: #fff;
+      --stone-solid: #F0EAE6;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      text-transform: uppercase;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--rule-strong);
+    }
+
+    /* HEADER AREA */
+    header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--rule-strong);
+      background-color: var(--stone-solid);
+      flex-shrink: 0; /* Prevent header from shrinking */
+    }
+
+    .header-box {
+      padding: 1.5vh 2vw;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .header-box:first-child {
+      border-right: 1px solid var(--rule-strong);
+    }
+
+    .label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      color: var(--muted);
+    }
+
+    .field-line {
+      height: 24px;
+      border-bottom: 1px solid var(--rule);
+      width: 100%;
+    }
+
+    /* WEEK DAYS GRID */
+    .days-grid {
+      display: grid;
+      /* Time column (60px) + 5 Days (1fr each) */
+      grid-template-columns: 60px repeat(5, 1fr);
+      flex-grow: 1;
+      min-height: 0;
+    }
+
+    .col {
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--rule);
+    }
+
+    .col:last-child {
+      border-right: none;
+    }
+
+    /* Header for each column (Time or Day) */
+    .col-header {
+      height: 40px; /* Fixed height for headers */
+      display: flex;
+      align-items: center;
+      padding-left: 10px;
+      border-bottom: 1px solid var(--rule-strong);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      background-color: #fff;
+    }
+
+    .time-header {
+      justify-content: center;
+      padding-left: 0;
+      background-color: var(--stone-solid); /* Differentiate time corner */
+    }
+
+    .day-content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Time Slots */
+    .hour-slot {
+      flex: 1; /* Distribute available height evenly */
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+    }
+
+    .hour-slot:last-child {
+      border-bottom: none;
+    }
+
+    /* Time Labels in the first column */
+    .time-label {
+      display: flex;
+      align-items: flex-start; /* Align text to top of slot */
+      justify-content: center;
+      font-size: 0.7rem;
+      color: var(--muted);
+      font-weight: 500;
+      padding-top: 4px; /* Small offset from the line */
+      background-color: var(--stone-solid);
+    }
+
+    /* Specific styling to ensure the label sits correctly */
+    .time-label span {
+        background: var(--stone-solid);
+        padding: 0 4px;
+        transform: translateY(-50%); /* Center on the line if we used absolute, but here we just want it top aligned */
+    }
+
+    /* BOTTOM SECTIONS */
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 20vh; /* Slightly reduced to give more room to hours */
+      border-top: 1px solid var(--rule-strong);
+      flex-shrink: 0;
+    }
+
+    .bottom-box {
+      padding: 1.5vh 2vw;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bottom-box:first-child {
+      border-right: 1px solid var(--rule-strong);
+    }
+
+    .fill-area {
+      flex-grow: 1;
+      margin-top: 8px;
+      border: 1px solid var(--rule);
+      background: #fff;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Top Header -->
+    <header>
+      <div class="header-box">
+        <div class="label">Main focus of the week</div>
+        <div class="field-line"></div>
+      </div>
+      <div class="header-box">
+        <div class="label">Week of</div>
+        <div class="field-line"></div>
+      </div>
+    </header>
+
+    <!-- Main Days Grid -->
+    <div class="days-grid">
+
+      <!-- Time Column -->
+      <div class="col">
+        <div class="col-header time-header"></div>
+        <div class="day-content">
+            <!-- 9 to 17 implies 8 blocks: 9-10, 10-11, ... 16-17 -->
+            <div class="hour-slot time-label">09:00</div>
+            <div class="hour-slot time-label">10:00</div>
+            <div class="hour-slot time-label">11:00</div>
+            <div class="hour-slot time-label">12:00</div>
+            <div class="hour-slot time-label">13:00</div>
+            <div class="hour-slot time-label">14:00</div>
+            <div class="hour-slot time-label">15:00</div>
+            <div class="hour-slot time-label">16:00</div>
+        </div>
+      </div>
+
+      <!-- Monday -->
+      <div class="col">
+        <div class="col-header">Monday</div>
+        <div class="day-content">
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+        </div>
+      </div>
+
+      <!-- Tuesday -->
+      <div class="col">
+        <div class="col-header">Tuesday</div>
+        <div class="day-content">
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+        </div>
+      </div>
+
+      <!-- Wednesday -->
+      <div class="col">
+        <div class="col-header">Wednesday</div>
+        <div class="day-content">
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+        </div>
+      </div>
+
+      <!-- Thursday -->
+      <div class="col">
+        <div class="col-header">Thursday</div>
+        <div class="day-content">
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+        </div>
+      </div>
+
+      <!-- Friday -->
+      <div class="col">
+        <div class="col-header">Friday</div>
+        <div class="day-content">
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+          <div class="hour-slot"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Sections -->
+    <div class="bottom-grid">
+      <div class="bottom-box">
+        <div class="label">Weekly Wins</div>
+        <div class="fill-area"></div>
+      </div>
+      <div class="bottom-box">
+        <div class="label">Notes / Next Week</div>
+        <div class="fill-area"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

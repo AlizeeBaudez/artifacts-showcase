@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #F7F9FC; color: #1A2535; font-size: 13px; }
+  .wrap { padding: 24px 20px 32px; max-width: 860px; margin: 0 auto; }
+  h1 { font-size: 16px; font-weight: 800; letter-spacing: -0.2px; margin-bottom: 4px; }
+  .sub { font-size: 12px; color: #596880; margin-bottom: 20px; }
+
+  /* Legend */
+  .legend { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: #596880; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 3px; }
+
+  /* Shared flow */
+  .shared-row { display: flex; align-items: center; gap: 0; margin-bottom: 8px; }
+  .arrow-h { width: 32px; display: flex; align-items: center; justify-content: center; color: #8CA0B8; font-size: 16px; flex-shrink: 0; }
+  .split-arrow { text-align: center; margin-bottom: 8px; color: #8CA0B8; font-size: 13px; }
+
+  /* Nodes */
+  .node {
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    transition: all 0.15s;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .node:hover { transform: translateY(-1px); box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
+  .node.active { border-color: #0A66C2 !important; }
+  .node .ntype { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
+  .node .ntitle { font-size: 12.5px; font-weight: 700; line-height: 1.3; }
+  .node .nsub { font-size: 11px; margin-top: 3px; opacity: 0.75; line-height: 1.3; }
+  .node .nbadge { display: inline-block; padding: 1px 6px; border-radius: 10px; font-size: 10px; font-weight: 700; margin-top: 5px; }
+
+  /* Auto nodes */
+  .node.auto { background: #F0F4F8; border-color: #D0DAEC; }
+  .node.auto .ntype { color: #596880; }
+  .node.auto .ntitle { color: #1A2535; }
+  .node.auto .nbadge { background: #E1E8F0; color: #596880; }
+
+  /* Decision nodes */
+  .node.decision { background: #EBF4FF; border-color: #B8D4F0; }
+  .node.decision .ntype { color: #0A66C2; }
+  .node.decision .ntitle { color: #0A66C2; }
+  .node.decision .nbadge { background: #C8E0FF; color: #0A66C2; }
+
+  /* Trigger */
+  .node.trigger { background: #1A2535; border-color: #1A2535; }
+  .node.trigger .ntype { color: #8CA0B8; }
+  .node.trigger .ntitle { color: white; }
+  .node.trigger .nsub { color: #8CA0B8; }
+
+  /* LinkedIn track */
+  .node.li { background: #EBF4FF; border-color: #B8D4F0; }
+  .node.li .ntype { color: #0A66C2; }
+  .node.li .ntitle { color: #0A66C2; }
+  .node.li .nbadge { background: #C8E0FF; color: #0A66C2; }
+
+  /* Newsletter track */
+  .node.nl { background: #FFF3DC; border-color: #F0D890; }
+  .node.nl .ntype { color: #B86E00; }
+  .node.nl .ntitle { color: #B86E00; }
+  .node.nl .nbadge { background: #FFE8A8; color: #B86E00; }
+
+  /* Output nodes */
+  .node.output { background: #E6F7EE; border-color: #A8D8BA; }
+  .node.output .ntype { color: #1A7A4A; }
+  .node.output .ntitle { color: #1A7A4A; }
+
+  /* Branch labels */
+  .branch-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 3px 10px; border-radius: 4px; display: inline-block; margin-bottom: 8px; }
+  .branch-label.li { background: #EBF4FF; color: #0A66C2; }
+  .branch-label.nl { background: #FFF3DC; color: #B86E00; }
+
+  /* Two-column layout */
+  .tracks { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 12px; }
+  .track { display: flex; flex-direction: column; gap: 0; }
+  .track-inner { display: flex; flex-direction: column; align-items: flex-start; }
+  .arrow-v { text-align: left; padding-left: 14px; color: #8CA0B8; line-height: 1; font-size: 14px; padding-top: 3px; padding-bottom: 3px; }
+
+  /* Detail panel */
+  .detail-panel {
+    margin-top: 20px;
+    background: white;
+    border: 1.5px solid #D0DAEC;
+    border-radius: 10px;
+    padding: 18px 20px;
+    min-height: 100px;
+    transition: all 0.2s;
+  }
+  .detail-panel .dp-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #596880; margin-bottom: 8px; }
+  .detail-panel h3 { font-size: 15px; font-weight: 800; margin-bottom: 8px; color: #1A2535; }
+  .detail-panel p { font-size: 12.5px; line-height: 1.6; color: #3A4A60; margin-bottom: 8px; }
+  .detail-panel ul { padding-left: 18px; }
+  .detail-panel li { font-size: 12.5px; line-height: 1.6; color: #3A4A60; margin-bottom: 4px; }
+  .detail-panel .hint { font-size: 11px; color: #8CA0B8; font-style: italic; margin-top: 8px; }
+  .detail-panel .dp-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; margin-right: 4px; margin-bottom: 4px; }
+  .detail-panel .dp-badge.auto { background: #F0F4F8; color: #596880; }
+  .detail-panel .dp-badge.choice { background: #EBF4FF; color: #0A66C2; }
+  .detail-panel .dp-badge.nl { background: #FFF3DC; color: #B86E00; }
+  .detail-panel .dp-badge.green { background: #E6F7EE; color: #1A7A4A; }
+
+  /* Shared bottom */
+  .shared-bottom { margin-top: 12px; display: flex; align-items: center; gap: 0; }
+
+  /* Split graphic */
+  .split-viz { display: flex; align-items: flex-start; justify-content: center; gap: 0; margin: 4px 0 4px; position: relative; }
+  .split-line { width: 1px; height: 24px; background: #D0DAEC; margin: 0 auto; }
+  .split-horiz { display: flex; align-items: flex-start; gap: 0; width: 100%; }
+  .split-branch { flex: 1; display: flex; flex-direction: column; align-items: center; }
+  .split-branch-line { height: 20px; width: 1px; background: #D0DAEC; margin: 0 auto 0; }
+  .split-bar { height: 1px; background: #D0DAEC; flex: 1; margin-top: 0; }
+
+  .default-hint { font-size: 11px; color: #8CA0B8; font-style: italic; margin-top: 8px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>content-session — skill decision map</h1>
+  <div class="sub">Click any step to see what happens. Auto steps run without input. Decision steps involve you.</div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#374151;"></div> Trigger</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#D0DAEC;"></div> Auto (no input needed)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#B8D4F0;"></div> Your choice</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#F0D890;"></div> Newsletter track</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#A8D8BA;"></div> Output</div>
+  </div>
+
+  <!-- Shared top flow -->
+  <div class="shared-row">
+    <div class="node trigger" style="width:160px;" onclick="showDetail('trigger')">
+      <div class="ntype">Entry</div>
+      <div class="ntitle">Trigger</div>
+      <div class="nsub">"content session" / "write LinkedIn post" / "write newsletter"</div>
+    </div>
+    <div class="arrow-h">→</div>
+    <div class="node auto" style="width:190px;" onclick="showDetail('context')">
+      <div class="ntype">Auto · ~30s</div>
+      <div class="ntitle">Context Pull</div>
+      <div class="nsub">Reads Signals Bank, LinkedIn archive, email platform, any shared URL</div>
+      <span class="nbadge">4 sources</span>
+    </div>
+    <div class="arrow-h">→</div>
+    <div class="node decision" style="width:190px;" onclick="showDetail('session-type')">
+      <div class="ntype">Decision</div>
+      <div class="ntitle">Session Type</div>
+      <div class="nsub">What are we making today?</div>
+      <span class="nbadge">LinkedIn / Newsletter / Both</span>
+    </div>
+  </div>
+
+  <!-- Split arrow -->
+  <div style="display:flex; gap:0; margin-left:0; margin-top:0;">
+    <div style="width:160px;"></div>
+    <div style="width:32px;"></div>
+    <div style="width:190px;"></div>
+    <div style="width:32px;"></div>
+    <div style="width:190px; display:flex; flex-direction:column; align-items:center;">
+      <div style="width:1px; height:12px; background:#D0DAEC; margin:0 auto;"></div>
+      <div style="display:flex; width:80%; align-items:flex-start;">
+        <div style="flex:1; height:1px; background:#D0DAEC; margin-top:0; align-self:center;"></div>
+        <div style="width:1px; height:16px; background:#D0DAEC;"></div>
+        <div style="flex:1; height:1px; background:#D0DAEC; margin-top:0; align-self:center;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Two tracks -->
+  <div class="tracks" style="margin-top:0;">
+
+    <!-- LinkedIn track -->
+    <div class="track">
+      <span class="branch-label li">🔵 LinkedIn Track</span>
+      <div class="track-inner">
+
+        <div class="node li" style="width:100%;" onclick="showDetail('li-recent')">
+          <div class="ntype">Auto · from archive</div>
+          <div class="ntitle">What's been covered?</div>
+          <div class="nsub">Shows last 4 posts (format + topic). These are off-limits for this week.</div>
+        </div>
+        <div class="arrow-v">↓</div>
+
+        <div class="node li" style="width:100%;" onclick="showDetail('li-surface')">
+          <div class="ntype">Auto · from Signals Bank</div>
+          <div class="ntitle">Surface 3–5 signals</div>
+          <div class="nsub">Matched to this week's calendar slot. Ranked by recency + format fit.</div>
+        </div>
+        <div class="arrow-v">↓</div>
+
+        <div class="node decision" style="width:100%;" onclick="showDetail('li-pick')">
+          <div class="ntype">Your choice</div>
+          <div class="ntitle">Pick angle + format</div>
+          <div class="nsub">Confirm the format type or let the skill suggest based on the signal.</div>
+          <span class="nbadge">8 formats available</span>
+        </div>
+        <div class="arrow-v">↓</div>
+
+        <div class="node auto" style="width:100%;" onclick="showDetail('li-draft')">
+          <div class="ntype">Auto → conditional</div>
+          <div class="ntitle">Draft</div>
+          <div class="nsub">Alternate language → interview mode (3–4 questions first). Primary language → cold draft.</div>
+        </div>
+        <div class="arrow-v">↓</div>
+
+        <div class="node output" style="width:100%;" onclick="showDetail('li-output')">
+          <div class="ntype">Output</div>
+          <div class="ntitle">Post + checklist</div>
+          <div class="nsub">Signals Bank entry → "Used – Social Media". Archive entry created.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Newsletter track -->
+    <div class="track">
+      <span class="branch-label nl">🟡 Newsletter Track</span>
+      <div class="track-inner">
+
+        <div class="node nl" style="width:100%;" onclick="showDetail('nl-signals')">
+          <div class="ntype">Auto · from Signals Bank + email platform</div>
+          <div class="ntitle">Show available material</div>
+          <div class="nsub">Uncaptured signals not yet used. Last 2 campaigns shown for context.</div>
+        </div>
+        <div class="arrow-v">↓</div>
+
+        <div class="node nl" style="width:100%;" onclick="showDetail('nl-mode')">
+          <div class="ntype">Auto-suggested · you confirm</div>
+          <div class="ntitle">Mode suggestion</div>
+          <div class="nsub">3–5 signals → Signals (30 min). 1 deep signal → Essay. Low energy → Memo.</div>
+          <span class="nbadge">Default: Signals</span>
+        </div>
+        <div class="arrow-v">↓</div>
+
+        <div class="node nl" style="width:100%;" onclick="showDetail('nl-outline')">
+          <div class="ntype">Auto · pre-filled</div>
+          <div class="ntitle">Outline populated</div>
+          <div class="nsub">Signals slotted into the format template. No blank page. "Sleep on it" reminder shown.</div>
+        </div>
+        <div class="arrow-v">↓</div>
+
+        <div class="node decision" style="width:100%;" onclick="showDetail('nl-confirm')">
+          <div class="ntype">Your choice</div>
+          <div class="ntitle">Confirm outline</div>
+          <div class="nsub">Adjust signal selection, reorder, or swap before drafting begins.</div>
+        </div>
+        <div class="arrow-v">↓</div>
+
+        <div class="node output" style="width:100%;" onclick="showDetail('nl-output')">
+          <div class="ntype">Output</div>
+          <div class="ntitle">Primary draft + adapted version</div>
+          <div class="nsub">Pre-send checklist. Signals Bank entries → "Used – NL".</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Detail panel -->
+  <div class="detail-panel" id="detail-panel">
+    <div class="dp-label">How it works</div>
+    <h3>Click any step above to see details</h3>
+    <p class="hint">Each box shows what happens automatically, what requires your input, and why the step exists.</p>
+  </div>
+
+</div>
+
+<script>
+const details = {
+  trigger: {
+    label: "Entry Point",
+    title: "How the skill wakes up",
+    html: `<p>The skill triggers when you say anything like:</p>
+    <ul>
+      <li>"Let's do a content session"</li>
+      <li>"I want to write a LinkedIn post"</li>
+      <li>"Let's work on the newsletter"</li>
+      <li>"I have a signal I want to post about" + URL</li>
+    </ul>
+    <p>If you share a URL at the same time, it gets fetched immediately and treated as a priority input — ideas from it surface first.</p>
+    <p class="hint">You don't need to specify what you're making. The skill reads your signals and presents what's ready.</p>`
+  },
+  context: {
+    label: "Auto Step · ~30 seconds",
+    title: "Context Pull — 4 sources",
+    html: `<p>Before presenting anything, the skill reads:</p>
+    <ul>
+      <li><span class="dp-badge auto">Signals Bank</span> All entries where Status = "Captured" — sorted by recency</li>
+      <li><span class="dp-badge auto">LinkedIn archive</span> Your last 4 posts — format type, topic, performance — to avoid repetition</li>
+      <li><span class="dp-badge auto">Email platform</span> Last 2–3 campaigns — subjects, mode used, stats — for newsletter sessions</li>
+      <li><span class="dp-badge auto">Shared URL</span> If you dropped a link, it's fetched and read here</li>
+    </ul>
+    <p class="hint">You won't see this step happening. It just runs. Then the skill presents a summary of what it found.</p>`
+  },
+  'session-type': {
+    label: "Your First Decision",
+    title: "What are we making today?",
+    html: `<p>If you specified a channel in your trigger ("write LinkedIn"), this routes automatically. Otherwise the skill presents a quick summary:</p>
+    <ul>
+      <li>How many signals are available and their quality</li>
+      <li>What formats haven't been used this week on LinkedIn</li>
+      <li>Whether you have enough material for a newsletter now</li>
+    </ul>
+    <p>Then asks: <strong>LinkedIn, newsletter, or both?</strong></p>
+    <p class="hint">Both is valid — the skill handles LinkedIn first, then newsletter, flagging any signal that works for both formats.</p>`
+  },
+  'li-recent': {
+    label: "LinkedIn Track · Auto",
+    title: "What's off-limits this week",
+    html: `<p>The skill pulls your last 4 LinkedIn posts from the archive and shows:</p>
+    <ul>
+      <li>Format type used (e.g., Sharp Take, Framework, Client Story)</li>
+      <li>Topic/angle</li>
+      <li>Date posted</li>
+    </ul>
+    <p>This prevents structural repetition — if you wrote a Sharp Take last Tuesday, the skill won't suggest another this week. If you covered a specific angle last month, that topic is flagged.</p>
+    <p class="hint">This step answers the "am I repeating myself?" anxiety before you even start writing.</p>`
+  },
+  'li-surface': {
+    label: "LinkedIn Track · Auto",
+    title: "Signals matched to this week's slot",
+    html: `<p>Based on the current week in the monthly template, the skill surfaces 3–5 signals from your Signals Bank that fit. It ranks by:</p>
+    <ul>
+      <li><strong>Recency</strong> — newer signals score higher</li>
+      <li><strong>Format fit</strong> — Signal tags matched against the week's format slot (e.g., "Authority Anchor" signals for Framework weeks)</li>
+      <li><strong>Audience alignment</strong> — which persona the signal naturally speaks to</li>
+    </ul>
+    <p>Each signal is presented with its angle and suggested format — not just the raw observation.</p>
+    <p class="hint">The scoring is invisible to you. You just see a ranked, readable list of "what's ready to use."</p>`
+  },
+  'li-pick': {
+    label: "Your Choice",
+    title: "Pick your angle + confirm the format",
+    html: `<p>You pick a number from the list. The skill then proposes:</p>
+    <ul>
+      <li>Which of the 8 formats fits best (and why)</li>
+      <li>The language based on signal type and weekly slot</li>
+      <li>Any multi-format opportunity flag (e.g., "this could also work as a newsletter signal")</li>
+    </ul>
+    <p>You confirm or override. That's the last input before drafting.</p>
+    <span class="dp-badge choice">Sharp Take</span><span class="dp-badge choice">Framework</span><span class="dp-badge choice">Client Story</span><span class="dp-badge choice">Data Hook</span><span class="dp-badge choice">Persona Post</span><span class="dp-badge choice">Personal</span><span class="dp-badge choice">Quiet Offer</span><span class="dp-badge choice">Honest Position ✨ new</span>`
+  },
+  'li-draft': {
+    label: "LinkedIn Track · Conditional",
+    title: "Drafting — alternate vs primary language",
+    html: `<p><strong>Alternate language posts:</strong> The skill goes into interview mode first. It asks 3–4 short, specific questions to get your spoken register. Answers are used directly in the draft — not as inputs to rewrite, but as raw material. Your spoken voice is closer to your target register than any cold draft.</p>
+    <p><strong>Primary language posts:</strong> Cold draft from the signal. Sharp Takes get checked for banned transition sentences ("The game has shifted", "Here's the thing") before being shown to you.</p>
+    <p>Before drafting any post, the skill also checks: does this structurally resemble anything from the last 3–4 posts? If yes, it flags it.</p>
+    <p class="hint">The interview mode step is what makes alternate-language posts feel like yours instead of the model's.</p>`
+  },
+  'li-output': {
+    label: "Output",
+    title: "What you get at the end",
+    html: `<p>The final output includes:</p>
+    <ul>
+      <li>The post draft, formatted and ready to paste into LinkedIn</li>
+      <li>The pre-publish 3-question checklist inline</li>
+      <li>If relevant: suggested link for first comment</li>
+      <li>If relevant: the 2-line "About me" signature to use or not</li>
+    </ul>
+    <p>After you confirm you're posting it:</p>
+    <ul>
+      <li>Signals Bank entry status → <strong>"Used – Social Media"</strong></li>
+      <li>LinkedIn archive entry created (you add performance data weekly)</li>
+    </ul>`
+  },
+  'nl-signals': {
+    label: "Newsletter Track · Auto",
+    title: "What material exists right now",
+    html: `<p>The skill shows two things side by side:</p>
+    <ul>
+      <li><strong>Available signals:</strong> All Signals Bank entries with Status = "Captured" and not used in a newsletter yet, grouped by theme</li>
+      <li><strong>Last 2 campaigns:</strong> From your email platform — subject lines, mode used, and open rate — so you don't accidentally repeat a recent theme</li>
+    </ul>
+    <p>This replaces "starting from scratch." You're choosing from a prepared table, not a blank document.</p>
+    <p class="hint">You never have to remember what signals you have. The skill reads them for you every session.</p>`
+  },
+  'nl-mode': {
+    label: "Newsletter Track · Auto-suggested",
+    title: "Mode suggestion — and the 30-minute default",
+    html: `<p>Based on what's available, the skill suggests a mode:</p>
+    <ul>
+      <li><span class="dp-badge nl">3–5 good signals</span> → <strong>Signals edition</strong> — shown as a 30-minute session explicitly</li>
+      <li><span class="dp-badge nl">1 deep signal with strong "why it matters"</span> → <strong>Essay edition</strong></li>
+      <li><span class="dp-badge nl">Low energy / transition moment / sparse signals</span> → <strong>Memo</strong></li>
+    </ul>
+    <p>You confirm or override. The skill defaults to <strong>Signals</strong> unless there's a genuinely compelling reason to go deeper. This is the structural fix for "everything feels too big."</p>
+    <p class="hint">The 30-minute framing is intentional. It changes how you sit down to write.</p>`
+  },
+  'nl-outline': {
+    label: "Newsletter Track · Auto",
+    title: "Pre-filled outline — no blank page",
+    html: `<p>The skill populates the appropriate outline template with your signals already slotted in:</p>
+    <ul>
+      <li><strong>Signals edition:</strong> Opening reflection prompt + Signal 1/2/3 pre-filled from your Bank entries + closing section prompt + "Work With Me" variant suggestion</li>
+      <li><strong>Essay edition:</strong> Entry point → core idea → supporting observations (from signals) → implications → closing section</li>
+      <li><strong>Memo:</strong> Minimal skeleton — just the 3 sections</li>
+    </ul>
+    <p>After showing the outline, the skill shows: <strong>"Sleep on it reminder: if this outline still feels clear tomorrow, write. If it feels muddy, come back."</strong></p>
+    <p class="hint">The outline is the session output if you're not ready to write yet. That's a valid session.</p>`
+  },
+  'nl-confirm': {
+    label: "Your Choice",
+    title: "Confirm the outline before drafting",
+    html: `<p>You review the auto-populated outline and can:</p>
+    <ul>
+      <li>Swap one signal for another</li>
+      <li>Reorder the signals</li>
+      <li>Adjust the opening reflection angle</li>
+      <li>Change the "Work With Me" variant</li>
+    </ul>
+    <p>Once you say "looks good" or "let's write," drafting begins. No going back to mode selection.</p>
+    <p class="hint">This is a 2-minute step. The outline should be mostly right already. You're adjusting, not building.</p>`
+  },
+  'nl-output': {
+    label: "Output",
+    title: "What you get at the end",
+    html: `<p>The final newsletter output includes:</p>
+    <ul>
+      <li>Full primary language draft</li>
+      <li>Adapted version for bilingual audiences</li>
+      <li>3–5 subject line options using the 6 curiosity angles</li>
+      <li>Pre-send checklist (all sections)</li>
+      <li>"Work With Me" variant with correct link placeholder</li>
+    </ul>
+    <p>After you confirm it's going out:</p>
+    <ul>
+      <li>Signals Bank entries → <strong>"Used – NL"</strong></li>
+    </ul>
+    <p class="hint">The bilingual draft is produced in one session. You edit the adapted version for voice — the skill handles structure.</p>`
+  }
+};
+
+function showDetail(id) {
+  const d = details[id];
+  if (!d) return;
+  document.querySelectorAll('.node').forEach(n => n.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  const panel = document.getElementById('detail-panel');
+  panel.innerHTML = `<div class="dp-label">${d.label}</div><h3>${d.title}</h3>${d.html}`;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Good Stuff — Marine Lefèvre's Wall of Love</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:#faf6ef; --warm-white:#fdf9f4; --sand:#e8dcc8; --taupe:#c9b99a;
+  --clay:#a07855; --terracotta:#b5663c; --forest:#4a5e4a; --sage:#7a9178;
+  --ink:#2c2318; --ink-soft:#4a3f32; --ink-muted:#7a6e62;
+  --gold:#c4933a; --gold-light:#e8c57a; --r:14px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.6;overflow-x:hidden;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
+
+/* HERO */
+.hero{position:relative;text-align:center;padding:80px 24px 54px;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(196,147,58,.13) 0%,transparent 70%);pointer-events:none}
+.hero-eyebrow{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--clay);margin-bottom:18px;opacity:0;animation:fadeUp .7s .15s forwards}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,7vw,5rem);font-weight:700;line-height:1.1;margin-bottom:18px;opacity:0;animation:fadeUp .8s .3s forwards}
+.hero-title em{font-style:italic;color:var(--terracotta)}
+.hero-subtitle{font-family:'Lora',serif;font-style:italic;font-size:1.02rem;color:var(--ink-muted);max-width:500px;margin:0 auto 36px;opacity:0;animation:fadeUp .8s .45s forwards}
+.hero-divider{display:flex;align-items:center;justify-content:center;gap:16px;opacity:0;animation:fadeUp .6s .6s forwards}
+.hero-divider-line{width:55px;height:1px;background:linear-gradient(to right,transparent,var(--taupe))}
+.hero-divider-line:last-child{background:linear-gradient(to left,transparent,var(--taupe))}
+.hero-divider-ornament{color:var(--gold);font-size:1rem}
+
+/* RANDOM FAB */
+.random-fab{position:fixed;bottom:28px;right:28px;z-index:999;background:var(--ink);color:var(--cream);border:none;border-radius:50px;padding:14px 22px;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:500;letter-spacing:.04em;cursor:pointer;display:flex;align-items:center;gap:9px;box-shadow:0 6px 28px rgba(44,35,24,.28);transition:transform .2s,box-shadow .2s;opacity:0;animation:fadeUp .6s 1.1s forwards}
+.random-fab:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 10px 36px rgba(44,35,24,.35)}
+
+/* RANDOM OVERLAY */
+.random-overlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(44,35,24,.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:24px}
+.random-overlay.open{display:flex}
+.random-card{background:var(--warm-white);border-radius:20px;padding:44px 46px;max-width:580px;width:100%;position:relative;animation:scaleIn .3s ease forwards}
+.random-card-close{position:absolute;top:18px;right:18px;background:none;border:none;cursor:pointer;font-size:1.5rem;color:var(--ink-muted);line-height:1;transition:color .15s}
+.random-card-close:hover{color:var(--ink)}
+.random-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--clay);margin-bottom:20px;display:block}
+.random-quote{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1.15rem,3vw,1.6rem);line-height:1.5;color:var(--ink);margin-bottom:28px}
+.random-quote::before{content:'\201C';color:var(--gold-light)}
+.random-quote::after{content:'\201D';color:var(--gold-light)}
+.random-from{font-size:.82rem;color:var(--ink-muted);margin-bottom:26px}
+.random-from strong{color:var(--ink-soft);font-weight:500}
+.random-again{background:var(--ink);color:var(--cream);border:none;border-radius:40px;padding:11px 24px;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:500;letter-spacing:.04em;cursor:pointer;transition:background .2s;display:inline-flex;align-items:center;gap:8px}
+.random-again:hover{background:var(--terracotta)}
+
+/* NAV TABS */
+.nav-tabs{display:flex;justify-content:center;gap:7px;padding:0 24px 44px;flex-wrap:wrap;opacity:0;animation:fadeUp .6s .75s forwards}
+.tab-btn{padding:9px 20px;border-radius:40px;border:1.5px solid var(--sand);background:transparent;color:var(--ink-muted);font-family:'DM Sans',sans-serif;font-size:.81rem;cursor:pointer;transition:all .22s ease}
+.tab-btn:hover{border-color:var(--taupe);color:var(--ink-soft);background:rgba(232,220,200,.3)}
+.tab-btn.active{background:var(--ink);border-color:var(--ink);color:var(--cream)}
+
+/* STATS */
+.stats-bar{display:flex;max-width:640px;margin:0 auto 56px;background:var(--warm-white);border:1px solid var(--sand);border-radius:var(--r);overflow:hidden;opacity:0;animation:fadeUp .7s .95s forwards}
+.stat{flex:1;text-align:center;padding:20px 14px;border-right:1px solid var(--sand)}
+.stat:last-child{border-right:none}
+.stat-number{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;color:var(--terracotta);display:block;line-height:1;margin-bottom:5px}
+.stat-label{font-size:.69rem;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted)}
+
+/* SECTIONS */
+.section{max-width:1180px;margin:0 auto;padding:0 24px 80px;display:none}
+.section.visible{display:block}
+.section-header{text-align:center;margin-bottom:44px}
+.section-tag{display:inline-block;font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--clay);margin-bottom:12px;padding:5px 14px;border:1px solid var(--taupe);border-radius:20px}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:600;color:var(--ink);margin-bottom:8px}
+.section-desc{font-family:'Lora',serif;font-style:italic;color:var(--ink-muted);font-size:.92rem}
+
+/* MOOD */
+.mood-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:12px;margin-bottom:36px}
+.mood-btn{background:var(--warm-white);border:1.5px solid var(--sand);border-radius:var(--r);padding:16px 18px;cursor:pointer;text-align:left;transition:all .22s;font-family:'DM Sans',sans-serif}
+.mood-btn:hover{border-color:var(--taupe);box-shadow:0 4px 18px rgba(44,35,24,.07)}
+.mood-btn.active{border-color:var(--terracotta);background:rgba(181,102,60,.06)}
+.mood-emoji{font-size:1.5rem;display:block;margin-bottom:8px}
+.mood-label{font-size:.82rem;font-weight:500;color:var(--ink);display:block;line-height:1.3}
+.mood-sub{font-size:.73rem;color:var(--ink-muted);display:block;margin-top:3px}
+.mood-result{background:var(--warm-white);border:1px solid var(--sand);border-radius:20px;padding:36px 40px;display:none;animation:fadeUp .4s ease forwards}
+.mood-result.visible{display:block}
+.mood-result-title{font-family:'Playfair Display',serif;font-style:italic;font-size:1rem;color:var(--clay);margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--sand)}
+.mood-quotes{display:flex;flex-direction:column;gap:16px}
+.mood-quote-item{padding:18px 20px;background:var(--cream);border-radius:10px;border-left:3px solid var(--gold-light)}
+.mood-quote-text{font-family:'Lora',serif;font-style:italic;font-size:.93rem;line-height:1.65;color:var(--ink-soft)}
+.mood-quote-from{font-size:.75rem;color:var(--ink-muted);margin-top:8px}
+.mood-quote-from strong{color:var(--clay);font-weight:500}
+
+/* SKILL FILTERS */
+.skill-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;justify-content:center}
+.skill-tag{padding:6px 15px;border-radius:30px;border:1px solid var(--sand);background:transparent;font-family:'DM Sans',sans-serif;font-size:.75rem;color:var(--ink-muted);cursor:pointer;transition:all .2s}
+.skill-tag:hover{border-color:var(--taupe);color:var(--ink-soft)}
+.skill-tag.active{background:var(--forest);border-color:var(--forest);color:#fff}
+
+/* CARDS */
+.grid{columns:3 300px;column-gap:20px}
+.card{break-inside:avoid;background:var(--warm-white);border:1px solid var(--sand);border-radius:var(--r);padding:26px 28px;margin-bottom:20px;position:relative;transition:transform .25s,box-shadow .25s;opacity:0;transform:translateY(16px);animation:cardIn .5s ease forwards}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 36px rgba(44,35,24,.09)}
+.card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;border-radius:var(--r) 0 0 var(--r);background:var(--sand)}
+.card.ac-terracotta::before{background:var(--terracotta)}
+.card.ac-forest::before{background:var(--forest)}
+.card.ac-gold::before{background:var(--gold)}
+.card.ac-clay::before{background:var(--clay)}
+.card.ac-sage::before{background:var(--sage)}
+.card.ac-taupe::before{background:var(--taupe)}
+.card.hidden{display:none}
+.card:nth-child(1){animation-delay:.04s}.card:nth-child(2){animation-delay:.1s}.card:nth-child(3){animation-delay:.16s}.card:nth-child(4){animation-delay:.22s}.card:nth-child(5){animation-delay:.28s}.card:nth-child(6){animation-delay:.34s}.card:nth-child(7){animation-delay:.4s}.card:nth-child(8){animation-delay:.46s}.card:nth-child(9){animation-delay:.52s}.card:nth-child(10){animation-delay:.58s}.card:nth-child(11){animation-delay:.64s}.card:nth-child(n+12){animation-delay:.7s}
+.card-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px}
+.card-skill-tag{font-size:.67rem;padding:2px 9px;border-radius:20px;border:1px solid var(--sand);color:var(--ink-muted)}
+.card-quote{font-family:'Lora',serif;font-size:.95rem;line-height:1.7;color:var(--ink-soft);margin-bottom:18px;position:relative;padding-left:2px}
+.card-quote::before{content:'\201C';font-family:'Playfair Display',serif;font-size:3.2rem;color:var(--gold-light);line-height:0;position:absolute;top:14px;left:-4px;opacity:.7}
+.card-quote-text{padding-left:16px;display:block}
+.card-footer{display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid var(--sand)}
+.card-avatar{width:33px;height:33px;border-radius:50%;background:var(--sand);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.82rem;font-weight:600;color:var(--clay);flex-shrink:0}
+.card-meta{flex:1;min-width:0}
+.card-name{font-weight:500;font-size:.82rem;color:var(--ink);line-height:1.3}
+.card-role{font-size:.72rem;color:var(--ink-muted);line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card-date{font-size:.7rem;color:var(--taupe);font-style:italic;flex-shrink:0;text-align:right}
+.card.featured{background:linear-gradient(135deg,#2c2318 0%,#4a3022 100%);border-color:transparent;padding:34px 36px}
+.card.featured::before{background:var(--gold)}
+.card.featured .card-quote{color:rgba(250,246,239,.88)}
+.card.featured .card-quote::before{color:var(--gold-light);opacity:.5}
+.card.featured .card-footer{border-top-color:rgba(255,255,255,.1)}
+.card.featured .card-avatar{background:rgba(255,255,255,.1);color:var(--gold-light)}
+.card.featured .card-name{color:var(--cream)}
+.card.featured .card-role{color:rgba(250,246,239,.5)}
+.card.featured .card-date{color:rgba(250,246,239,.32)}
+.card.featured .card-skill-tag{border-color:rgba(255,255,255,.2);color:rgba(250,246,239,.55)}
+
+/* MILESTONES */
+.milestone-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:20px}
+.milestone-card{background:var(--warm-white);border:1px solid var(--sand);border-radius:var(--r);padding:28px;opacity:0;transform:translateY(16px);animation:cardIn .5s ease forwards;transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden}
+.milestone-card::after{content:'';position:absolute;bottom:-28px;right:-28px;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,rgba(196,147,58,.07) 0%,transparent 70%)}
+.milestone-card:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(44,35,24,.08)}
+.milestone-card:nth-child(1){animation-delay:.08s}.milestone-card:nth-child(2){animation-delay:.16s}.milestone-card:nth-child(3){animation-delay:.24s}.milestone-card:nth-child(4){animation-delay:.32s}.milestone-card:nth-child(n+5){animation-delay:.4s}
+.milestone-emoji{font-size:1.8rem;display:block;margin-bottom:12px}
+.milestone-event{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:12px}
+.milestone-quote{font-family:'Lora',serif;font-style:italic;font-size:.9rem;line-height:1.65;color:var(--ink-soft);margin-bottom:16px;padding-left:12px;border-left:2px solid var(--gold-light)}
+.milestone-from{font-size:.76rem;color:var(--ink-muted);display:flex;align-items:center;gap:7px}
+.milestone-from-dot{width:4px;height:4px;border-radius:50%;background:var(--taupe);flex-shrink:0}
+
+/* FOOTER */
+.page-footer{text-align:center;padding:44px 24px 80px;border-top:1px solid var(--sand);margin-top:10px}
+.footer-text{font-family:'Lora',serif;font-style:italic;color:var(--ink-muted);font-size:.88rem;margin-bottom:7px}
+.footer-name{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--clay);font-weight:600;letter-spacing:.05em}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes cardIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+@media(max-width:640px){.grid{columns:1}.stats-bar{flex-direction:column}.stat{border-right:none;border-bottom:1px solid var(--sand)}.stat:last-child{border-bottom:none}.random-fab{bottom:16px;right:16px;padding:12px 18px}.random-card{padding:28px 24px}.mood-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<!-- RANDOM OVERLAY -->
+<div class="random-overlay" id="randomOverlay" onclick="closeRandom(event)">
+  <div class="random-card" id="randomCard">
+    <button class="random-card-close" onclick="document.getElementById('randomOverlay').classList.remove('open')">✕</button>
+    <span class="random-label">✦ A message for you</span>
+    <p class="random-quote" id="randomQuote"></p>
+    <p class="random-from" id="randomFrom"></p>
+    <button class="random-again" onclick="showRandom()">✦ Show me another</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <p class="hero-eyebrow">Marine Lefèvre · Wall of Love</p>
+  <h1 class="hero-title">The <em>Good</em> Stuff</h1>
+  <p class="hero-subtitle">A collection of kind words, warm notes, and honest praise — saved here for the hard days.</p>
+  <div class="hero-divider"><span class="hero-divider-line"></span><span class="hero-divider-ornament">✦</span><span class="hero-divider-line"></span></div>
+</header>
+
+<!-- NAV -->
+<nav class="nav-tabs">
+  <button class="tab-btn active" onclick="showTab('mood',this)">🌿 Read this when…</button>
+  <button class="tab-btn" onclick="showTab('pro',this)">✦ Professional kudos</button>
+  <button class="tab-btn" onclick="showTab('personal',this)">🤍 Personal milestones</button>
+</nav>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><span class="stat-number">10</span><span class="stat-label">Years independent</span></div>
+  <div class="stat"><span class="stat-number">45+</span><span class="stat-label">Quotes saved</span></div>
+  <div class="stat"><span class="stat-number">4</span><span class="stat-label">Languages of warmth</span></div>
+  <div class="stat"><span class="stat-number">∞</span><span class="stat-label">Times to re-read</span></div>
+</div>
+
+
+<!-- ══ MOOD SECTION ══ -->
+<section id="mood" class="section visible">
+  <div class="section-header">
+    <span class="section-tag">For the hard days</span>
+    <h2 class="section-title">Read this when you're feeling…</h2>
+    <p class="section-desc">Pick a mood. Let the right words find you.</p>
+  </div>
+  <div class="mood-grid">
+    <button class="mood-btn" onclick="showMood('expertise',this)"><span class="mood-emoji">🧠</span><span class="mood-label">like I'm not expert enough</span><span class="mood-sub">Imposter syndrome day</span></button>
+    <button class="mood-btn" onclick="showMood('worth',this)"><span class="mood-emoji">📉</span><span class="mood-label">like it's not worth it</span><span class="mood-sub">When the freelance grind bites</span></button>
+    <button class="mood-btn" onclick="showMood('invisible',this)"><span class="mood-emoji">👻</span><span class="mood-label">invisible or forgotten</span><span class="mood-sub">When no one seems to notice</span></button>
+    <button class="mood-btn" onclick="showMood('warmth',this)"><span class="mood-emoji">🫂</span><span class="mood-label">like I need warmth</span><span class="mood-sub">Just needs to feel held</span></button>
+    <button class="mood-btn" onclick="showMood('pitch',this)"><span class="mood-emoji">💼</span><span class="mood-label">nervous before a pitch</span><span class="mood-sub">About to sell yourself</span></button>
+  </div>
+  <div class="mood-result" id="moodResult">
+    <p class="mood-result-title" id="moodResultTitle"></p>
+    <div class="mood-quotes" id="moodQuotes"></div>
+  </div>
+</section>
+
+
+<!-- ══ PROFESSIONAL SECTION ══ -->
+<section id="pro" class="section">
+  <div class="section-header">
+    <span class="section-tag">Work & craft</span>
+    <h2 class="section-title">What people say about your work</h2>
+    <p class="section-desc">From clients, peers, collaborators — proof that what you do lands.</p>
+  </div>
+  <div class="skill-filters">
+    <button class="skill-tag active" onclick="filterSkill('all',this)">All</button>
+    <button class="skill-tag" onclick="filterSkill('strategy',this)">SEO Strategy</button>
+    <button class="skill-tag" onclick="filterSkill('deliverables',this)">Deliverables</button>
+    <button class="skill-tag" onclick="filterSkill('newsletter',this)">Newsletter</button>
+    <button class="skill-tag" onclick="filterSkill('teaching',this)">Teaching</button>
+    <button class="skill-tag" onclick="filterSkill('community',this)">Community</button>
+    <button class="skill-tag" onclick="filterSkill('trust',this)">Trust & reliability</button>
+  </div>
+  <div class="grid" id="proGrid">
+
+    <div class="card featured ac-gold" data-skills="trust community"><div class="card-tags"><span class="card-skill-tag">Trust</span><span class="card-skill-tag">Community</span></div><div class="card-quote"><span class="card-quote-text">I genuinely appreciate everything you've brought to this space over the year — in more ways than I can easily articulate. You probably don't even realise half of it. And yes, I'm terrible at saying so out loud.</span></div><div class="card-footer"><div class="card-avatar">NB</div><div class="card-meta"><div class="card-name">Nicolas Beaumont</div><div class="card-role">Independent SEO Consultant, UK</div></div><div class="card-date">Oct 2026</div></div></div>
+
+    <div class="card featured ac-terracotta" data-skills="newsletter"><div class="card-tags"><span class="card-skill-tag">Newsletter</span></div><div class="card-quote"><span class="card-quote-text">I really enjoyed your advent series, Marine! Hope the holiday break is everything you need it to be — and all the best heading into the new year.</span></div><div class="card-footer"><div class="card-avatar">LG</div><div class="card-meta"><div class="card-name">Laurent Girard</div><div class="card-role">Search Ecosystem Relations, a major search engine</div></div><div class="card-date">Oct 2024</div></div></div>
+
+    <div class="card ac-terracotta" data-skills="newsletter"><div class="card-tags"><span class="card-skill-tag">Newsletter</span></div><div class="card-quote"><span class="card-quote-text">I have developed what I can only describe as a parasocial attachment to your newsletter. Every issue feels like hearing from a friend who actually knows what they're talking about.</span></div><div class="card-footer"><div class="card-avatar">CR</div><div class="card-meta"><div class="card-name">Céline Rochard</div><div class="card-role">Fractional SEO Lead, a Paris-based agency</div></div><div class="card-date">Oct 2025</div></div></div>
+
+    <div class="card ac-forest" data-skills="newsletter strategy"><div class="card-tags"><span class="card-skill-tag">Newsletter</span><span class="card-skill-tag">SEO Strategy</span></div><div class="card-quote"><span class="card-quote-text">Did you post this on LinkedIn? If not, please do — I'd love to share it with my network. This deserves a wider audience.</span></div><div class="card-footer"><div class="card-avatar">CR</div><div class="card-meta"><div class="card-name">Céline Rochard</div><div class="card-role">On "Can small sites still compete?"</div></div><div class="card-date">Jun 2025</div></div></div>
+
+    <div class="card ac-clay" data-skills="newsletter"><div class="card-tags"><span class="card-skill-tag">Newsletter</span></div><div class="card-quote"><span class="card-quote-text">How can I help you get this in front of more people next week? Tell me what you need.</span></div><div class="card-footer"><div class="card-avatar">CR</div><div class="card-meta"><div class="card-name">Céline Rochard</div><div class="card-role">On the organic growth series launch</div></div><div class="card-date">Apr 2025</div></div></div>
+
+    <div class="card ac-sage" data-skills="strategy"><div class="card-tags"><span class="card-skill-tag">SEO Strategy</span></div><div class="card-quote"><span class="card-quote-text">I've been meaning to sharpen my own positioning for months. Seeing how clearly you've laid yours out is exactly the push I needed to finally do it.</span></div><div class="card-footer"><div class="card-avatar">CR</div><div class="card-meta"><div class="card-name">Céline Rochard</div><div class="card-role">On your brand positioning clarity</div></div><div class="card-date">Nov 2026</div></div></div>
+
+    <div class="card ac-clay" data-skills="community"><div class="card-tags"><span class="card-skill-tag">Community</span></div><div class="card-quote"><span class="card-quote-text">I spotted you in the conference promo and thought — yes, obviously, that makes complete sense. You have a natural warmth on camera that just draws people in.</span></div><div class="card-footer"><div class="card-avatar">CR</div><div class="card-meta"><div class="card-name">Céline Rochard</div><div class="card-role">After the ISS Barcelona promo feature</div></div><div class="card-date">Jul 2025</div></div></div>
+
+    <div class="card ac-gold" data-skills="trust"><div class="card-tags"><span class="card-skill-tag">Trust</span></div><div class="card-quote"><span class="card-quote-text">BRAVO — from someone who actually understands what this takes. Running your own consultancy is genuinely hard, and you do it with such quiet confidence. That deserves to be acknowledged.</span></div><div class="card-footer"><div class="card-avatar">CR</div><div class="card-meta"><div class="card-name">Céline Rochard</div><div class="card-role">On running your own business, Nov 2022</div></div><div class="card-date">Nov 2022</div></div></div>
+
+    <div class="card ac-gold" data-skills="trust"><div class="card-tags"><span class="card-skill-tag">Trust</span></div><div class="card-quote"><span class="card-quote-text">This is such a brilliant idea — why haven't more people done this? You're genuinely awesome. Congratulations on the milestone.</span></div><div class="card-footer"><div class="card-avatar">CR</div><div class="card-meta"><div class="card-name">Céline Rochard</div><div class="card-role">On your 7-year anniversary edition</div></div><div class="card-date">Jan 2024</div></div></div>
+
+    <div class="card ac-gold" data-skills="newsletter"><div class="card-tags"><span class="card-skill-tag">Newsletter</span></div><div class="card-quote"><span class="card-quote-text">It's back!! This genuinely made my morning 🙌</span></div><div class="card-footer"><div class="card-avatar">RV</div><div class="card-meta"><div class="card-name">Rémi Vautrin</div><div class="card-role">Studio Bascule — On the SEO Advent Calendar relaunch</div></div><div class="card-date">Oct 2025</div></div></div>
+
+    <div class="card ac-terracotta" data-skills="newsletter"><div class="card-tags"><span class="card-skill-tag">Newsletter</span></div><div class="card-quote"><span class="card-quote-text">Best piece of news I've had all week, honestly.</span></div><div class="card-footer"><div class="card-avatar">AB</div><div class="card-meta"><div class="card-name">Aurore Blanc</div><div class="card-role">Founder, a content strategy studio — On your newsletter relaunch</div></div><div class="card-date">Jun 2024</div></div></div>
+
+    <div class="card ac-sage" data-skills="newsletter"><div class="card-tags"><span class="card-skill-tag">Newsletter</span></div><div class="card-quote"><span class="card-quote-text">Bravo pour ta newsletter — je suis vraiment content de m'y être abonné. Chaque numéro apporte quelque chose de concret, c'est rare.</span></div><div class="card-footer"><div class="card-avatar">FL</div><div class="card-meta"><div class="card-name">Florent Lacombe</div><div class="card-role">Directeur associé, a digital agency</div></div><div class="card-date">Jul 2024</div></div></div>
+
+    <div class="card ac-forest" data-skills="newsletter"><div class="card-tags"><span class="card-skill-tag">Newsletter</span></div><div class="card-quote"><span class="card-quote-text">The illustrations in the advent emails are wonderful — they give the whole thing such a distinct personality. I look forward to them every year.</span></div><div class="card-footer"><div class="card-avatar">TP</div><div class="card-meta"><div class="card-name">Thomas Perrin</div><div class="card-role">simoncox-style independent — On the 2023 SEO Advent Calendar</div></div><div class="card-date">Sep 2024</div></div></div>
+
+    <div class="card ac-taupe" data-skills="newsletter teaching"><div class="card-tags"><span class="card-skill-tag">Newsletter</span><span class="card-skill-tag">Teaching</span></div><div class="card-quote"><span class="card-quote-text">Thank you so much for this update. That was genuine, experience-backed knowledge — the kind you can't fake and can't find anywhere else. I've really missed this.</span></div><div class="card-footer"><div class="card-avatar">VM</div><div class="card-meta"><div class="card-name">Valentin M.</div><div class="card-role">Newsletter reader — On the newsletter break</div></div><div class="card-date">Nov 2024</div></div></div>
+
+    <div class="card ac-forest" data-skills="deliverables strategy"><div class="card-tags"><span class="card-skill-tag">Deliverables</span><span class="card-skill-tag">SEO Strategy</span></div><div class="card-quote"><span class="card-quote-text">Merci beaucoup pour ce livrable — les étapes sont claires, actionnables, vraiment bien pensées. Le client veut aller plus loin et aimerait qu'on discute d'un accompagnement continu.</span></div><div class="card-footer"><div class="card-avatar">SB</div><div class="card-meta"><div class="card-name">Sophie Barthes</div><div class="card-role">Founder, a Paris-based communications agency</div></div><div class="card-date">May 2024</div></div></div>
+
+    <div class="card ac-terracotta" data-skills="deliverables strategy"><div class="card-tags"><span class="card-skill-tag">Deliverables</span><span class="card-skill-tag">SEO Strategy</span></div><div class="card-quote"><span class="card-quote-text">La présentation SEO était parfaite. Ça va vraiment nous aider à structurer les contenus et à prioriser les mots-clés. On s'appuie dessus pour toute la suite.</span></div><div class="card-footer"><div class="card-avatar">MH</div><div class="card-meta"><div class="card-name">Mathieu Hoarau</div><div class="card-role">Directeur conseil Stratégie, a D2C brand</div></div><div class="card-date">Dec 2023</div></div></div>
+
+    <div class="card ac-gold" data-skills="deliverables"><div class="card-tags"><span class="card-skill-tag">Deliverables</span></div><div class="card-quote"><span class="card-quote-text">C'est exactement ce que je cherchais. Très bon travail — merci pour la précision et la qualité de l'analyse.</span></div><div class="card-footer"><div class="card-avatar">JC</div><div class="card-meta"><div class="card-name">Julien Coste</div><div class="card-role">a D2C brand — On keyword research deliverable</div></div><div class="card-date">Aug 2023</div></div></div>
+
+    <div class="card ac-clay" data-skills="teaching strategy"><div class="card-tags"><span class="card-skill-tag">Teaching</span></div><div class="card-quote"><span class="card-quote-text">Merci infiniment pour ta pédagogie et tes explications si claires. J'aime vraiment que tu justifies chaque choix — ça donne l'impression d'apprendre, pas juste de recevoir des instructions.</span></div><div class="card-footer"><div class="card-avatar">EF</div><div class="card-meta"><div class="card-name">Élise Fonteneau</div><div class="card-role">Webflow Project Lead — After a coaching session</div></div><div class="card-date">Oct 2024</div></div></div>
+
+    <div class="card ac-sage" data-skills="strategy trust"><div class="card-tags"><span class="card-skill-tag">SEO Strategy</span><span class="card-skill-tag">Trust</span></div><div class="card-quote"><span class="card-quote-text">Yes, really happy to have you involved more regularly going forward 😄 The team has noticed the difference already.</span></div><div class="card-footer"><div class="card-avatar">OD</div><div class="card-meta"><div class="card-name">Olga Durand</div><div class="card-role">SEO Manager, a fintech scale-up — On extending the engagement</div></div><div class="card-date">Sep 2025</div></div></div>
+
+    <div class="card ac-clay" data-skills="deliverables trust"><div class="card-tags"><span class="card-skill-tag">Deliverables</span></div><div class="card-quote"><span class="card-quote-text">Merci pour les briefs sur Notion — c'est vraiment nickel ! Avoir de l'avance sur janvier nous enlève un poids énorme, merci beaucoup 🥳</span></div><div class="card-footer"><div class="card-avatar">LM</div><div class="card-meta"><div class="card-name">Laure Millet</div><div class="card-role">Rédactrice SEO, a regional content studio</div></div><div class="card-date">Oct 2025</div></div></div>
+
+    <div class="card ac-taupe" data-skills="teaching trust"><div class="card-tags"><span class="card-skill-tag">Teaching</span><span class="card-skill-tag">Trust</span></div><div class="card-quote"><span class="card-quote-text">Your insight and warmth have made this whole journey feel less lonely — while also genuinely making me better at my work. I'd count it a privilege to keep learning alongside you into the new year.</span></div><div class="card-footer"><div class="card-avatar">IC</div><div class="card-meta"><div class="card-name">Inès Castillo</div><div class="card-role">SEO Professional</div></div><div class="card-date">Oct 2023</div></div></div>
+
+    <div class="card ac-sage" data-skills="community trust"><div class="card-tags"><span class="card-skill-tag">Trust</span><span class="card-skill-tag">Community</span></div><div class="card-quote"><span class="card-quote-text">Merci pour l'appel et pour ton écoute. Ça m'a vraiment fait du bien. J'ai pris la décision de me concentrer sur ce qui compte vraiment pour moi.</span></div><div class="card-footer"><div class="card-avatar">PM</div><div class="card-meta"><div class="card-name">Pauline Maury</div><div class="card-role">Independent consultant — After you took the time to call</div></div><div class="card-date">Oct 2024</div></div></div>
+
+    <div class="card ac-terracotta" data-skills="trust community"><div class="card-tags"><span class="card-skill-tag">Community</span><span class="card-skill-tag">Trust</span></div><div class="card-quote"><span class="card-quote-text">It's in the diary — something genuinely nice to look forward to later in the week. Thank you for thinking of me!</span></div><div class="card-footer"><div class="card-avatar">NB</div><div class="card-meta"><div class="card-name">Nicolas Beaumont</div><div class="card-role">On joining your trusted collaborators network</div></div><div class="card-date">Jul 2026</div></div></div>
+
+    <div class="card ac-forest" data-skills="community"><div class="card-tags"><span class="card-skill-tag">Community</span></div><div class="card-quote"><span class="card-quote-text">Lovely to hear from you! I'm actually in Paris this week — would be great to grab a coffee if you have time.</span></div><div class="card-footer"><div class="card-avatar">CL</div><div class="card-meta"><div class="card-name">Camille Laurent</div><div class="card-role">SEO Consultant, a boutique digital agency — After you reached out cold</div></div><div class="card-date">Jul 2025</div></div></div>
+
+    <div class="card ac-clay" data-skills="community"><div class="card-tags"><span class="card-skill-tag">Community</span></div><div class="card-quote"><span class="card-quote-text">Merci encore pour ce message — il m'a touché au bon moment, encore plus parce que tu ne pouvais pas savoir à quel point j'en avais besoin aujourd'hui.</span></div><div class="card-footer"><div class="card-avatar">GV</div><div class="card-meta"><div class="card-name">Gabriel Vidal</div><div class="card-role">La lettre du SEO — On your feedback for his work</div></div><div class="card-date">Apr 2026</div></div></div>
+
+    <div class="card ac-clay" data-skills="newsletter community"><div class="card-tags"><span class="card-skill-tag">Newsletter</span></div><div class="card-quote"><span class="card-quote-text">Hey, you're far too kind to mention me like that — genuinely means a lot &lt;3</span></div><div class="card-footer"><div class="card-avatar">BR</div><div class="card-meta"><div class="card-name">Baptiste Renard</div><div class="card-role">On being featured in your newsletter</div></div><div class="card-date">Oct 2025</div></div></div>
+
+    <div class="card featured ac-terracotta" data-skills="trust"><div class="card-tags"><span class="card-skill-tag">Trust</span></div><div class="card-quote"><span class="card-quote-text">Félicitations pour ton 10e anniversaire — c'est vraiment quelque chose. Pas facile du tout. Moi aussi je fête 10 ans cette année. Continue comme ça.</span></div><div class="card-footer"><div class="card-avatar">JC</div><div class="card-meta"><div class="card-name">Julien Coste</div><div class="card-role">a D2C brand — On your 10th anniversary</div></div><div class="card-date">Jan 2027</div></div></div>
+
+    <div class="card ac-terracotta" data-skills="trust"><div class="card-tags"><span class="card-skill-tag">Trust</span></div><div class="card-quote"><span class="card-quote-text">BRAVO et très bon anniversaire !!!!!!</span></div><div class="card-footer"><div class="card-avatar">PG</div><div class="card-meta"><div class="card-name">Pierre Gauthier</div><div class="card-role">Founder, a digital studio — On 10 years</div></div><div class="card-date">Jan 2027</div></div></div>
+
+    <div class="card ac-sage" data-skills="community trust"><div class="card-tags"><span class="card-skill-tag">Community</span></div><div class="card-quote"><span class="card-quote-text">Congratulations Marine! Here's to another decade doing it on your own terms!</span></div><div class="card-footer"><div class="card-avatar">TP</div><div class="card-meta"><div class="card-name">Thomas Perrin</div><div class="card-role">Independent SEO — On your 7th anniversary</div></div><div class="card-date">Jan 2024</div></div></div>
+
+    <div class="card ac-gold" data-skills="deliverables strategy"><div class="card-tags"><span class="card-skill-tag">Deliverables</span></div><div class="card-quote"><span class="card-quote-text">Merci beaucoup pour tes retours SEO — très utiles et bien argumentés. N'hésite pas à nous signaler d'autres points d'amélioration, on prend tout ce que tu partages au sérieux.</span></div><div class="card-footer"><div class="card-avatar">HD</div><div class="card-meta"><div class="card-name">Hélène Dupuis</div><div class="card-role">Marketing Manager, a leisure e-commerce brand</div></div><div class="card-date">May 2026</div></div></div>
+
+    <div class="card ac-taupe" data-skills="newsletter"><div class="card-tags"><span class="card-skill-tag">Newsletter</span></div><div class="card-quote"><span class="card-quote-text">What a lovely surprise in my inbox on this grey Monday 😊 Great read as always — you have such a consistent voice. Miss you lots xxx</span></div><div class="card-footer"><div class="card-avatar">SD</div><div class="card-meta"><div class="card-name">Sophie Delacroix</div><div class="card-role">Head of Brand Marketing, a consumer brand</div></div><div class="card-date">Nov 2022</div></div></div>
+
+    <div class="card featured ac-gold" data-skills="newsletter trust"><div class="card-tags"><span class="card-skill-tag">Newsletter</span></div><div class="card-quote"><span class="card-quote-text">t'assures vraiment !! bisous très fiers de ton Papa 🏖️</span></div><div class="card-footer"><div class="card-avatar">P</div><div class="card-meta"><div class="card-name">Papa</div><div class="card-role">On the organic growth series launch</div></div><div class="card-date">Apr 2025</div></div></div>
+
+  </div>
+</section>
+
+
+<!-- ══ PERSONAL SECTION ══ -->
+<section id="personal" class="section">
+  <div class="section-header">
+    <span class="section-tag">Life & love</span>
+    <h2 class="section-title">The moments that changed everything</h2>
+    <p class="section-desc">Beyond work — the warmth people showed up with when it really counted.</p>
+  </div>
+  <div class="milestone-grid">
+    <div class="milestone-card"><span class="milestone-emoji">🐣</span><div class="milestone-event">Welcome, Léo — Dec 2025</div><div class="milestone-quote">HUGE congratulations! Léo is absolutely adorable. So sorry to hear the arrival was a little bumpy, but so glad everyone is doing well now ❤️ Can't wait to catch up properly when you're ready.</div><div class="milestone-from"><span class="milestone-from-dot"></span>Claire Fontaine</div></div>
+    <div class="milestone-card"><span class="milestone-emoji">🥹</span><div class="milestone-event">Céline, on Théo & Léo</div><div class="milestone-quote">I know new mums get a flood of messages, but I wanted to reach out anyway — I just know you two are going to be brilliant parents. I am genuinely so happy for you both. Sending so much love.</div><div class="milestone-from"><span class="milestone-from-dot"></span>Céline Rochard, Paris-based agency</div></div>
+    <div class="milestone-card"><span class="milestone-emoji">🎉</span><div class="milestone-event">Matthieu on Léo</div><div class="milestone-quote">This is such wonderful news — huge congratulations to you and Théo, and a very warm welcome to the world, Léo 🥰 Can't wait to see you at the next conference and hear all about it!</div><div class="milestone-from"><span class="milestone-from-dot"></span>Matthieu Arnaud, a digital consultancy</div></div>
+    <div class="milestone-card"><span class="milestone-emoji">💛</span><div class="milestone-event">Sabrina Leclercq on Léo</div><div class="milestone-quote">OH MY GOODNESS I am sending you the BIGGEST congratulations!!! He is absolutely perfect — I'm already obsessed!! Wishing you all the rest and all the joy in these first weeks.</div><div class="milestone-from"><span class="milestone-from-dot"></span>Sabrina Leclercq, SEO Consultant</div></div>
+    <div class="milestone-card"><span class="milestone-emoji">🌸</span><div class="milestone-event">Pierre Gauthier — naissance de Léo</div><div class="milestone-quote">Quelle merveilleuse nouvelle ! Félicitations aux parents et bienvenue à Léo ! Reposez-vous bien et profitez de chaque instant — ça passe tellement vite.</div><div class="milestone-from"><span class="milestone-from-dot"></span>Pierre Gauthier, a digital studio</div></div>
+    <div class="milestone-card"><span class="milestone-emoji">💌</span><div class="milestone-event">Nicolas on Léo — Dec 2025</div><div class="milestone-quote">Marine, this was absolutely the best news to come home to. 😄 Huge congratulations to you both — parenthood suits you already, I can just tell.</div><div class="milestone-from"><span class="milestone-from-dot"></span>Nicolas Beaumont, Independent SEO</div></div>
+    <div class="milestone-card"><span class="milestone-emoji">🎊</span><div class="milestone-event">Raphaël Imbert — naissance de Léo</div><div class="milestone-quote">Félicitations 🥳🥳🥳 Il est adorable ! Je vous souhaite tout le meilleur à vous trois. C'est incroyable — j'avais justement pensé à toi ce matin !</div><div class="milestone-from"><span class="milestone-from-dot"></span>Raphaël Imbert, a tech school</div></div>
+    <div class="milestone-card"><span class="milestone-emoji">🌿</span><div class="milestone-event">Véronique Palluy — EM Lyon</div><div class="milestone-quote">Toutes mes félicitations pour la naissance de Léo — il est magnifique et semble déjà si éveillé. Je vous souhaite énormément de bonheur. Profitez de chaque instant, ils sont précieux.</div><div class="milestone-from"><span class="milestone-from-dot"></span>Véronique Palluy, EM Lyon</div></div>
+    <div class="milestone-card"><span class="milestone-emoji">🤝</span><div class="milestone-event">Nicolas, during maternity leave</div><div class="milestone-quote">I hope this doesn't come across the wrong way — but would it help to have someone cover a client or two while you're off? Knowing you, you've probably planned for everything. But I wanted to offer, genuinely.</div><div class="milestone-from"><span class="milestone-from-dot"></span>Nicolas Beaumont — a real one, asking honestly</div></div>
+    <div class="milestone-card"><span class="milestone-emoji">🥂</span><div class="milestone-event">Aurélie Bonnet on returning</div><div class="milestone-quote">Welcome back, mama!!! Best wishes from the whole team — we missed you and we're so glad you're back 🎉</div><div class="milestone-from"><span class="milestone-from-dot"></span>Aurélie Bonnet, a copywriting studio</div></div>
+    <div class="milestone-card"><span class="milestone-emoji">💬</span><div class="milestone-event">Isabelle Renaud — Oct 2025</div><div class="milestone-quote">Félicitations !!! J'espère que tout se passe bien pour toi en ce moment. Ces premiers mois peuvent être épuisants et merveilleux en même temps — souvent les deux à la fois.</div><div class="milestone-from"><span class="milestone-from-dot"></span>Isabelle Renaud, Women in Tech SEO</div></div>
+    <div class="milestone-card"><span class="milestone-emoji">✨</span><div class="milestone-event">10 ans — les premières réactions</div><div class="milestone-quote">Félicitations pour ton 10e anniversaire ! C'est vraiment quelque chose. Moi aussi je fête 10 ans comme indépendant cette année. Continue, c'est inspirant.</div><div class="milestone-from"><span class="milestone-from-dot"></span>Julien Coste + Pierre Gauthier — Jan 2027</div></div>
+  </div>
+</section>
+
+<footer class="page-footer">
+  <p class="footer-text">Built on a decade of showing up, doing good work, and letting people in.</p>
+  <p class="footer-name">Marine Lefèvre · Lefèvre Conseil SEO · 2016–2026</p>
+</footer>
+
+<button class="random-fab" onclick="showRandom()">
+  <span>✦</span> Feel good, randomly
+</button>
+
+<script>
+const Q=[
+  {t:"I genuinely appreciate everything you've brought to this space over the year — in more ways than I can easily articulate. You probably don't even realise half of it.",f:"Nicolas Beaumont",r:"Independent SEO Consultant",m:["trust","community"]},
+  {t:"I really enjoyed your advent series, Marine! Hope the holiday break is everything you need it to be — and all the best heading into the new year.",f:"Laurent Girard",r:"Search Ecosystem Relations, a major search engine",m:["newsletter","expertise"]},
+  {t:"I have developed what I can only describe as a parasocial attachment to your newsletter. Every issue feels like hearing from a friend who actually knows what they're talking about.",f:"Céline Rochard",r:"a Paris-based agency",m:["newsletter","invisible"]},
+  {t:"How can I help you get this in front of more people next week? Tell me what you need.",f:"Céline Rochard",r:"a Paris-based agency",m:["newsletter","expertise"]},
+  {t:"Did you post this on LinkedIn? If not, please do — I'd love to share it with my network.",f:"Céline Rochard",r:"a Paris-based agency",m:["newsletter","expertise"]},
+  {t:"I've been meaning to sharpen my own positioning for months. Seeing how clearly you've laid yours out is exactly the push I needed.",f:"Céline Rochard",r:"a Paris-based agency",m:["strategy","expertise"]},
+  {t:"I spotted you in the conference promo and thought — yes, obviously, that makes complete sense. You have a natural warmth on camera.",f:"Céline Rochard",r:"a Paris-based agency",m:["community","warmth"]},
+  {t:"BRAVO — from someone who actually understands what this takes. Running your own consultancy is genuinely hard, and you do it with such quiet confidence.",f:"Céline Rochard",r:"a Paris-based agency",m:["worth","expertise"]},
+  {t:"This is such a brilliant idea — why haven't more people done this? You're genuinely awesome.",f:"Céline Rochard",r:"a Paris-based agency",m:["trust","worth"]},
+  {t:"It's back!! This genuinely made my morning 🙌",f:"Rémi Vautrin",r:"Studio Bascule",m:["newsletter","invisible"]},
+  {t:"Best piece of news I've had all week, honestly.",f:"Aurore Blanc",r:"a content strategy studio",m:["newsletter","invisible"]},
+  {t:"La présentation SEO était parfaite — ça va vraiment nous aider à structurer les contenus et à prioriser les mots-clés.",f:"Mathieu Hoarau",r:"a D2C brand",m:["deliverables","pitch","expertise"]},
+  {t:"C'est exactement ce que je cherchais. Très bon travail — merci pour la précision et la qualité de l'analyse.",f:"Julien Coste",r:"a D2C brand",m:["deliverables","pitch","expertise"]},
+  {t:"Les étapes sont claires, actionnables, vraiment bien pensées. Le client veut aller plus loin.",f:"Sophie Barthes",r:"a Paris-based communications agency",m:["deliverables","expertise","pitch"]},
+  {t:"J'aime vraiment que tu justifies chaque choix — ça donne l'impression d'apprendre, pas juste de recevoir des instructions.",f:"Élise Fonteneau",r:"After a coaching session",m:["teaching","expertise"]},
+  {t:"Your insight and warmth have made this whole journey feel less lonely — while also genuinely making me better at my work.",f:"Inès Castillo",r:"SEO Professional",m:["teaching","warmth","worth"]},
+  {t:"That was genuine, experience-backed knowledge — the kind you can't fake and can't find anywhere else. I've really missed this.",f:"Valentin M.",r:"Newsletter reader",m:["newsletter","teaching","invisible"]},
+  {t:"Merci pour l'appel et pour ton écoute. Ça m'a vraiment fait du bien.",f:"Pauline Maury",r:"Independent consultant",m:["warmth","trust"]},
+  {t:"Yes, really happy to have you involved more regularly going forward 😄 The team has noticed the difference already.",f:"Olga Durand",r:"SEO Manager, a fintech scale-up",m:["pitch","expertise","trust"]},
+  {t:"Félicitations pour ton 10e anniversaire — c'est vraiment quelque chose. Pas facile du tout. Continue comme ça.",f:"Julien Coste",r:"a D2C brand",m:["worth","trust"]},
+  {t:"I just know you two are going to be brilliant parents. I am genuinely so happy for you both.",f:"Céline Rochard",r:"a Paris-based agency",m:["warmth"]},
+  {t:"Lovely to hear from you! I'm actually in Paris this week — would be great to grab a coffee if you have time.",f:"Camille Laurent",r:"a boutique digital agency",m:["community","invisible"]},
+  {t:"t'assures vraiment !! bisous très fiers de ton Papa 🏖️",f:"Papa",r:"On the organic growth series launch",m:["warmth","worth"]},
+  {t:"Bravo pour ta newsletter — je suis vraiment content de m'y être abonné. Chaque numéro apporte quelque chose de concret.",f:"Florent Lacombe",r:"a digital agency",m:["newsletter","expertise"]},
+  {t:"The illustrations in the advent emails are wonderful — they give the whole thing such a distinct personality.",f:"Thomas Perrin",r:"Independent SEO",m:["newsletter","invisible"]},
+  {t:"HUGE congratulations! Léo is absolutely adorable. So glad everyone is doing well now ❤️",f:"Claire Fontaine",r:"",m:["warmth"]},
+  {t:"OH MY GOODNESS I am sending you the BIGGEST congratulations!!! He is absolutely perfect — I'm already obsessed!!",f:"Sabrina Leclercq",r:"SEO Consultant",m:["warmth"]},
+];
+
+const M={
+  expertise:{title:"When you're doubting your expertise — read this.",q:Q.filter(x=>x.m.includes("expertise"))},
+  worth:{title:"When you're wondering if it's worth it — read this.",q:Q.filter(x=>x.m.includes("worth"))},
+  invisible:{title:"When you feel invisible or forgotten — read this.",q:Q.filter(x=>x.m.includes("invisible"))},
+  warmth:{title:"When you just need to feel held — read this.",q:Q.filter(x=>x.m.includes("warmth"))},
+  pitch:{title:"Before a pitch or a big moment — read this.",q:Q.filter(x=>x.m.includes("pitch"))},
+};
+
+function showTab(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('visible'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('visible');
+  btn.classList.add('active');
+}
+
+function showMood(mood,btn){
+  const d=M[mood]; if(!d)return;
+  document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('moodResultTitle').textContent=d.title;
+  const c=document.getElementById('moodQuotes'); c.innerHTML='';
+  const s=[...d.q].sort(()=>Math.random()-.5).slice(0,4);
+  s.forEach(q=>{c.innerHTML+=`<div class="mood-quote-item"><div class="mood-quote-text">"${q.t}"</div><div class="mood-quote-from"><strong>${q.f}</strong>${q.r?' — '+q.r:''}</div></div>`;});
+  const r=document.getElementById('moodResult'); r.classList.add('visible');
+  r.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function filterSkill(skill,btn){
+  document.querySelectorAll('.skill-tag').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#proGrid .card').forEach(card=>{
+    if(skill==='all'){card.classList.remove('hidden');}
+    else{const sk=card.dataset.skills||'';card.classList.toggle('hidden',!sk.includes(skill));}
+  });
+}
+
+function showRandom(){
+  const q=Q[Math.floor(Math.random()*Q.length)];
+  document.getElementById('randomQuote').textContent=q.t;
+  document.getElementById('randomFrom').innerHTML=`<strong>${q.f}</strong>${q.r?' — '+q.r:''}`;
+  document.getElementById('randomOverlay').classList.add('open');
+}
+function closeRandom(e){if(e.target===document.getElementById('randomOverlay'))document.getElementById('randomOverlay').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById('randomOverlay').classList.remove('open');});
+</script>
+</body>
+</html>

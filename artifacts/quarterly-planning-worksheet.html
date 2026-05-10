@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quarterly View Planner — Q1 2025</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    @page { size: A4 landscape; margin: 0; }
+    * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+    :root {
+      --ink: #111;
+      --muted: #4a4a4a;
+      --rule: #d7d7d7;
+      --rule-strong: #bfbfbf;
+      --paper: #fff;
+      --stone-solid: #F0EAE6;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      text-transform: uppercase;
+      overflow: hidden;
+    }
+
+    .stone { background-color: var(--stone-solid); }
+
+    .container {
+      width: 100vw;
+      height: 100vh;
+      border: 1px solid var(--rule-strong);
+      display: flex;
+      flex-direction: column;
+      background: var(--paper);
+    }
+
+    /* HEADER */
+    header {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.5fr;
+      align-items: center;
+      gap: 15px;
+      padding: 1.5vh 1.5vw;
+      border-bottom: 1px solid var(--rule-strong);
+    }
+
+    .title {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .quarter-select {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      color: var(--muted);
+    }
+    .q-badges { display: inline-flex; gap: 8px; }
+    .q {
+      width: 24px;
+      height: 24px;
+      border: 1px solid var(--rule-strong);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      background: #fff;
+    }
+    .q.active {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+      font-weight: 600;
+    }
+
+    .month-inputs {
+      display: flex;
+      justify-content: flex-end;
+      gap: 15px;
+      font-size: 0.7rem;
+      letter-spacing: 0.8px;
+      color: var(--muted);
+    }
+    .month { display: inline-flex; align-items: center; gap: 6px; }
+    .month-box {
+      width: 110px;
+      height: 28px;
+      border: 1px solid var(--rule);
+      background: #fff;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: 0.5px;
+    }
+
+    /* MAIN GRID */
+    .main-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      flex-grow: 1;
+      min-height: 0;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--rule-strong);
+      min-height: 0;
+    }
+    .column:last-child { border-right: none; }
+
+    /* SECTIONS */
+    .section-box { padding: 1.5vh 1.2vw; }
+
+    .label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .field {
+      border: 1px solid var(--rule);
+      background: #fff;
+      width: 100%;
+      padding: 6px 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.62rem;
+      line-height: 1.55;
+      color: var(--ink);
+      text-transform: none;
+    }
+
+    .field strong {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 1px;
+    }
+
+    .field p {
+      margin: 0 0 5px 0;
+    }
+
+    .field p:last-child { margin-bottom: 0; }
+
+    .intentions-wrap { padding: 1vh 0; }
+    .intent-box .field { height: 10vh; }
+
+    .intent-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .intent-sub {
+      font-size: 0.6rem;
+      font-weight: 400;
+      color: var(--muted);
+      text-transform: none;
+      line-height: 1.4;
+    }
+
+    .goals-box .field { height: 18vh; }
+
+    /* ACTION GRID */
+    .action-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      flex-grow: 1;
+      min-height: 0;
+    }
+
+    .action-item {
+      padding: 1.5vh 1.2vw;
+      border-right: 1px solid var(--rule);
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .action-item:nth-child(2n) { border-right: none; }
+
+    /* Monthly action list */
+    .action-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border: 1px solid var(--rule);
+      background: #fff;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .action-list li {
+      flex: 1;
+      border-bottom: 1px solid var(--rule);
+      padding: 0 7px;
+      display: flex;
+      align-items: center;
+      font-size: 0.6rem;
+      text-transform: none;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+    .action-list li:last-child { border-bottom: none; }
+
+    /* Rollover */
+    .rollover .field {
+      flex-grow: 1;
+      font-size: 0.58rem;
+      color: var(--muted);
+      text-transform: none;
+      font-style: italic;
+      line-height: 1.5;
+      background: #faf8f6;
+    }
+
+    /* Borders between action rows */
+    .action-item:nth-child(3),
+    .action-item:nth-child(4) {
+      border-top: 1px solid var(--rule);
+    }
+  </style>
+</head>
+
+<body>
+<div class="container">
+  <header class="stone">
+    <h1 class="title">Quarterly View</h1>
+
+    <div class="quarter-select">
+      <span>Quarter</span>
+      <div class="q-badges">
+        <span class="q active">1</span>
+        <span class="q">2</span>
+        <span class="q">3</span>
+        <span class="q">4</span>
+      </div>
+    </div>
+
+    <div class="month-inputs">
+      <div class="month">Month 1 <span class="month-box">January</span></div>
+      <div class="month">Month 2 <span class="month-box">February</span></div>
+      <div class="month">Month 3 <span class="month-box">March</span></div>
+    </div>
+  </header>
+
+  <div class="main-grid">
+
+    <!-- COLUMN 1 — STABILITY -->
+    <div class="column">
+      <div class="intentions-wrap stone">
+        <div class="section-box intent-box">
+          <div class="label">My first yearly intention is</div>
+          <div class="field">
+            <div class="intent-name">Stability</div>
+            <div class="intent-sub">To build a reliable revenue base — steady retainer clients, predictable income, and systems that don't depend on constant hustle</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-box goals-box">
+        <div class="label">My goals for this quarter</div>
+        <div class="field">
+          <p><strong>Goal 1 — Generate meaningful revenue</strong>Minimum 3 paid projects by end March — consulting and/or strategy engagements. Target 6k€ floor, 10k€ stretch.</p>
+          <p><strong>Goal 2 — Execute targeted outreach</strong>12 contacts from network + ideal-fit companies (mission-driven, established digital presence, real budget), sent in waves.</p>
+          <p><strong>Goal 3 — Close all outstanding Q4 revenue</strong>Invoice and collect from two open projects carried over from December.</p>
+        </div>
+      </div>
+
+      <div class="action-grid">
+        <div class="action-item">
+          <div class="label">Month 1 actions</div>
+          <ul class="action-list">
+            <li>Finalise service offering — Jan 10</li>
+            <li>Build outreach list of 12</li>
+            <li>Send wave 1 (4–5 contacts)</li>
+            <li>Chase Q4 open invoices</li>
+            <li>Follow up wave 1 replies</li>
+            <li>Send wave 2 (4 contacts)</li>
+          </ul>
+        </div>
+        <div class="action-item">
+          <div class="label">Month 2 actions</div>
+          <ul class="action-list">
+            <li>Invoice confirmed project (delivery done)</li>
+            <li>Follow up wave 2 outreach</li>
+            <li>Send wave 3 if pipeline thin</li>
+            <li>Deliver active projects</li>
+            <li>Confirm March project pipeline</li>
+            <li></li>
+          </ul>
+        </div>
+        <div class="action-item">
+          <div class="label">Month 3 actions</div>
+          <ul class="action-list">
+            <li>Close any open pipeline conversations</li>
+            <li>Invoice all completed work</li>
+            <li>Review what sold easily vs. friction</li>
+            <li>Q2 decision: retainer structure viable?</li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+        <div class="action-item rollover">
+          <div class="label">Rollover / Thoughts</div>
+          <div class="field">Pipeline was the critical gap in Q4. Sell first — invest in brand-building only once 2+ projects are confirmed. The outreach list is the alignment checkpoint for the quarter.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLUMN 2 — AUTHORITY -->
+    <div class="column">
+      <div class="intentions-wrap stone">
+        <div class="section-box intent-box">
+          <div class="label">My second yearly intention is</div>
+          <div class="field">
+            <div class="intent-name">Authority</div>
+            <div class="intent-sub">To lead with clarity and grounded expertise — showing how I work, demonstrating results, and being known for my thinking</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-box goals-box">
+        <div class="label">My goals for this quarter</div>
+        <div class="field">
+          <p><strong>Goal 4 — Launch new service offering and make first sales</strong>Live by Jan 20th. Reach 5 paying clients by end March via LinkedIn and direct outreach.</p>
+          <p><strong>Goal 5 — Define content strategy and publish 2 case studies</strong>Clarify what the newsletter/blog does in the ecosystem. One case study in Feb, one in March.</p>
+          <p><strong>Goal 6 — Publish 3 thought-leadership posts</strong>Share a concrete point of view on a current industry topic — one per month.</p>
+        </div>
+      </div>
+
+      <div class="action-grid">
+        <div class="action-item">
+          <div class="label">Month 1 actions</div>
+          <ul class="action-list">
+            <li>Announce offering on LinkedIn</li>
+            <li>Send launch email to existing contacts</li>
+            <li>Publish first thought-leadership post</li>
+            <li>Define content purpose (one sentence)</li>
+            <li>Continue LinkedIn cadence 3x/week</li>
+            <li></li>
+          </ul>
+        </div>
+        <div class="action-item">
+          <div class="label">Month 2 actions</div>
+          <ul class="action-list">
+            <li>Publish first case study</li>
+            <li>Reference work naturally in content</li>
+            <li>Send newsletter to list</li>
+            <li>Maintain LinkedIn cadence</li>
+            <li>Track enquiries weekly</li>
+            <li></li>
+          </ul>
+        </div>
+        <div class="action-item">
+          <div class="label">Month 3 actions</div>
+          <ul class="action-list">
+            <li>Publish second case study</li>
+            <li>Connect content more clearly to offers</li>
+            <li>Service push — LinkedIn + email</li>
+            <li>Review: iterate / maintain / pause</li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+        <div class="action-item rollover">
+          <div class="label">Rollover / Thoughts</div>
+          <div class="field">Service definition was a Q4 to-do — now it needs to be live and selling. The content ecosystem is directionally right. Now it needs traction, not more refinement. Content needs a clear job before it gets volume.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLUMN 3 — ALIGNMENT -->
+    <div class="column">
+      <div class="intentions-wrap stone">
+        <div class="section-box intent-box">
+          <div class="label">My third yearly intention is</div>
+          <div class="field">
+            <div class="intent-name">Alignment</div>
+            <div class="intent-sub">Actively choosing work and conditions that feel right — rather than just accepting whatever comes through the door</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-box goals-box">
+        <div class="label">My goals for this quarter</div>
+        <div class="field">
+          <p><strong>Goal 7 — Reach out only to clients you genuinely want to work with</strong>Purpose-driven, operationally mature, realistic budget. Who you contact is an alignment choice.</p>
+          <p><strong>Goal 8 — Protect deep-work time</strong>No fragmented days. Morning hours are for focused work. No context-switching before 11am.</p>
+          <p><strong>Goal 9 — Build a sustainable content creation rhythm</strong>Weekly batching so showing up consistently costs less energy.</p>
+        </div>
+      </div>
+
+      <div class="action-grid">
+        <div class="action-item">
+          <div class="label">Month 1 actions</div>
+          <ul class="action-list">
+            <li>Qualify each outreach target before sending</li>
+            <li>Set content batching day in calendar</li>
+            <li>Define deep-work hours — write them down</li>
+            <li>Week 1: no fragmented mornings check-in</li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+        <div class="action-item">
+          <div class="label">Month 2 actions</div>
+          <ul class="action-list">
+            <li>Sell first — brand investment waits</li>
+            <li>Keep batching day protected</li>
+            <li>No reactive mornings — check in monthly</li>
+            <li>Monthly alignment check: how does it feel?</li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+        <div class="action-item">
+          <div class="label">Month 3 actions</div>
+          <ul class="action-list">
+            <li>Did outreach feel aligned?</li>
+            <li>Did you protect your deep-work time?</li>
+            <li>What to carry into Q2?</li>
+            <li>Retainer model: green light if 2+ projects confirmed</li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+        <div class="action-item rollover">
+          <div class="label">Rollover / Thoughts</div>
+          <div class="field">Some Q4 trade-offs weren't failures — they opened unexpected doors. Q1 is about choosing deliberately, not just responding. Alignment lives in who you reach out to and what you say yes to.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

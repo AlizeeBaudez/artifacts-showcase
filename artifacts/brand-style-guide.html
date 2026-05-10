@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Camille Renard — Brand Style Guide 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#F6F0EA;--white:#FFFFFF;--deep-navy:#1A3A5C;--slate:#3A4A5C;
+  --teal:#2A7A6A;--charcoal:#2A2A2A;--border:#DDD6CE;--muted:#6B6560;
+  --bg:#F0EAE3;--tab-h:52px;
+}
+html{font-size:16px}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--charcoal);min-height:100vh}
+
+/* HEADER */
+.site-header{background:var(--charcoal);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+.site-header-brand{font-family:'Libre Baskerville',serif;font-size:16px;color:var(--white);letter-spacing:0.01em}
+.site-header-meta{font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.1em}
+
+/* TABS */
+.tabs-bar{background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:flex-end;padding:0 40px;gap:0;overflow-x:auto;position:sticky;top:64px;z-index:90}
+.tab-btn{font-family:'Inter',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);padding:0 20px;height:var(--tab-h);border:none;border-bottom:2px solid transparent;background:transparent;cursor:pointer;white-space:nowrap;transition:all .2s}
+.tab-btn:hover{color:var(--charcoal)}
+.tab-btn.active{color:var(--deep-navy);border-bottom-color:var(--deep-navy)}
+
+/* PANELS */
+.tab-panel{display:none;padding:40px;max-width:960px;margin:0 auto}
+.tab-panel.active{display:block}
+
+/* SECTION LABEL */
+.s-label{font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:24px;padding-bottom:10px;border-bottom:0.5px solid var(--border)}
+
+/* CARDS */
+.card{background:var(--white);border:0.5px solid var(--border);border-radius:4px;padding:20px 24px;margin-bottom:16px}
+.card h4{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.card p{font-size:13px;line-height:1.6;color:var(--charcoal)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px}
+.grid-4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;margin-bottom:16px}
+
+/* PALETTE */
+.palette-row{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:24px}
+.swatch{aspect-ratio:1/1.3;display:flex;flex-direction:column;justify-content:flex-end;padding:12px 10px}
+.sw-name{font-size:9px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:2px}
+.sw-hex{font-size:10px;font-family:monospace;letter-spacing:0.04em}
+.sw-light .sw-name,.sw-light .sw-hex{color:rgba(42,42,42,0.55)}
+.sw-dark .sw-name,.sw-dark .sw-hex{color:rgba(255,255,255,0.7)}
+
+/* USAGE TABLE */
+.usage-table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:24px}
+.usage-table th{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 12px;border-bottom:1px solid var(--border);background:var(--cream)}
+.usage-table td{padding:10px 12px;border-bottom:0.5px solid var(--border);vertical-align:top;line-height:1.5}
+.usage-table tr:last-child td{border-bottom:none}
+.usage-table tbody tr:hover td{background:var(--cream)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:middle;position:relative;top:-1px}
+
+/* TYPE SPECIMENS */
+.specimen{background:var(--white);border:0.5px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:12px}
+.specimen-meta{padding:8px 16px;background:var(--cream);border-bottom:0.5px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.specimen-label{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.specimen-spec{font-size:10px;color:var(--muted);font-family:monospace}
+.specimen-preview{padding:20px 16px}
+
+/* TYPE STYLES */
+.t-h1{font-family:'Libre Baskerville',serif;font-size:2.75rem;font-weight:400;line-height:1.05;letter-spacing:-0.02em;color:var(--charcoal)}
+.t-h2{font-family:'Libre Baskerville',serif;font-size:2rem;font-weight:400;line-height:1.1;letter-spacing:-0.01em;color:var(--charcoal)}
+.t-h3{font-family:'Inter',sans-serif;font-size:1.25rem;font-weight:600;line-height:1.3;color:var(--charcoal)}
+.t-h4{font-family:'Inter',sans-serif;font-size:1rem;font-weight:600;line-height:1.4;color:var(--charcoal)}
+.t-body{font-family:'Inter',sans-serif;font-size:1.0625rem;font-weight:400;line-height:1.65;color:var(--charcoal)}
+.t-lead{font-family:'Inter',sans-serif;font-size:1.25rem;font-weight:400;line-height:1.55;color:var(--charcoal)}
+.t-small{font-family:'Inter',sans-serif;font-size:0.8125rem;font-weight:400;line-height:1.5;color:var(--muted)}
+.t-eyebrow{font-family:'Inter',sans-serif;font-size:0.6875rem;font-weight:600;line-height:1.4;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)}
+
+/* BUTTONS */
+.btn-row{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.btn-primary{display:inline-block;background:var(--teal);color:var(--white);font-family:'Inter',sans-serif;font-size:0.6875rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:14px 28px;border-radius:3px;border:none;cursor:pointer}
+.btn-secondary{display:inline-block;background:transparent;color:var(--charcoal);font-family:'Inter',sans-serif;font-size:0.6875rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:13px 27px;border-radius:3px;border:1.5px solid var(--charcoal);cursor:pointer}
+.btn-tertiary{display:inline-block;background:transparent;color:var(--deep-navy);font-family:'Inter',sans-serif;font-size:0.6875rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:0;border:none;border-bottom:1px solid var(--deep-navy);cursor:pointer;border-radius:0}
+
+/* VOICE */
+.voice-col h4{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:12px}
+.voice-col.is h4{color:var(--slate)}
+.voice-col.not h4{color:var(--deep-navy)}
+.voice-list{list-style:none;padding:0}
+.voice-list li{font-size:13px;padding:7px 0;border-bottom:0.5px solid var(--border);color:var(--charcoal);line-height:1.5}
+.voice-list li:last-child{border-bottom:none}
+.voice-list li::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:8px;vertical-align:middle;position:relative;top:-1px}
+.voice-col.is .voice-list li::before{background:var(--slate)}
+.voice-col.not .voice-list li::before{background:var(--deep-navy)}
+
+/* SQSP TABLE */
+.sqsp-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:24px}
+.sqsp-table th{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 12px;border-bottom:1px solid var(--border);background:var(--cream)}
+.sqsp-table td{padding:9px 12px;border-bottom:0.5px solid var(--border);vertical-align:top;line-height:1.5}
+.sqsp-table code{font-family:monospace;font-size:11px;background:var(--cream);padding:2px 5px;border-radius:2px;color:var(--deep-navy)}
+.sqsp-table tr:last-child td{border-bottom:none}
+.path{font-size:11px;font-family:monospace;color:var(--muted);background:var(--cream);padding:2px 6px;border-radius:2px;white-space:nowrap}
+
+/* MOCK */
+.mock-nav{background:var(--white);border:0.5px solid var(--border);border-radius:4px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:52px;margin-bottom:16px}
+.mock-nav-brand{font-family:'Libre Baskerville',serif;font-size:14px;color:var(--charcoal)}
+.mock-nav-links{display:flex;gap:20px}
+.mock-nav-links span{font-size:12px;color:var(--charcoal)}
+.mock-nav-cta{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;background:var(--teal);color:var(--white);padding:8px 16px;border-radius:3px}
+
+.mock-hero{background:var(--cream);border:0.5px solid var(--border);border-radius:4px;padding:40px 36px;margin-bottom:16px}
+.mock-hero .eyebrow{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.mock-hero h2{font-family:'Libre Baskerville',serif;font-size:2rem;font-weight:400;line-height:1.1;color:var(--charcoal);margin-bottom:14px}
+.mock-hero p{font-size:15px;line-height:1.65;color:var(--charcoal);max-width:480px;margin-bottom:24px}
+
+/* EXPORT BTN */
+.export-bar{display:flex;gap:12px;align-items:center;margin-bottom:32px;padding-bottom:20px;border-bottom:0.5px solid var(--border)}
+.export-btn{font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;background:transparent;color:var(--muted);border:0.5px solid var(--border);border-radius:3px;padding:8px 16px;cursor:pointer;transition:all .2s}
+.export-btn:hover{border-color:var(--charcoal);color:var(--charcoal)}
+.export-btn.primary-export{background:var(--charcoal);color:var(--white);border-color:var(--charcoal)}
+.export-btn.primary-export:hover{background:var(--deep-navy);border-color:var(--deep-navy)}
+.copy-toast{font-size:11px;color:var(--slate);display:none;align-items:center;gap:6px}
+.copy-toast.show{display:flex}
+
+/* DONT GRID */
+.dont-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px}
+.dont-card{border:0.5px solid var(--border);border-radius:4px;overflow:hidden}
+.dont-preview{padding:20px 16px;min-height:80px;display:flex;align-items:center;background:var(--white)}
+.dont-lbl{padding:8px 12px;background:rgba(122,40,54,0.05);border-top:0.5px solid var(--border);font-size:11px;color:var(--deep-navy);font-weight:500}
+
+/* PDF/SHEETS */
+.format-block{background:var(--white);border:0.5px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:16px}
+.format-header{background:var(--charcoal);padding:14px 20px;display:flex;align-items:center;gap:12px}
+.format-header-title{font-family:'Libre Baskerville',serif;font-size:15px;color:var(--white)}
+.format-header-badge{font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;background:var(--teal);color:var(--white);padding:3px 8px;border-radius:2px}
+.format-body{padding:20px 24px}
+.format-rule{display:flex;gap:16px;padding:10px 0;border-bottom:0.5px solid var(--border);align-items:flex-start}
+.format-rule:last-child{border-bottom:none}
+.format-rule-key{font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);min-width:100px;padding-top:2px}
+.format-rule-val{font-size:13px;color:var(--charcoal);line-height:1.5}
+
+/* highlight box */
+.info-box{background:var(--cream);border-left:3px solid var(--teal);border-radius:0 4px 4px 0;padding:14px 18px;margin-bottom:16px;font-size:13px;line-height:1.6;color:var(--charcoal)}
+
+/* tag */
+.tag{display:inline-block;font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--deep-navy);border:0.5px solid var(--deep-navy);padding:2px 7px;border-radius:2px;margin-right:6px}
+
+/* section gap */
+.section-gap{margin-bottom:40px}
+
+/* IMAGERY PRINCIPLES */
+.img-principle{display:flex;gap:20px;align-items:flex-start;padding:16px 0;border-bottom:0.5px solid var(--border)}
+.img-principle:last-child{border-bottom:none}
+.img-principle-icon{width:36px;height:36px;border-radius:3px;background:var(--charcoal);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.img-principle-body h4{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.img-principle-body p{font-size:13px;line-height:1.6;color:var(--charcoal)}
+
+.verdict-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+.verdict-card{border:0.5px solid var(--border);border-radius:4px;overflow:hidden}
+.verdict-header{padding:8px 14px;font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase}
+.verdict-header.yes{background:#E5E9F0;color:#2A4A6A}
+.verdict-header.no{background:#E5EBF2;color:#1A3A5C}
+.verdict-body{padding:12px 14px;font-size:12.5px;line-height:1.55;color:var(--charcoal)}
+
+/* PROMPT LIBRARY */
+.prompt-category{margin-bottom:40px}
+.prompt-category-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.prompt-category-label{font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)}
+.prompt-category-tag{font-size:9px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;background:var(--charcoal);color:var(--white);padding:3px 8px;border-radius:2px}
+
+.prompt-card{background:var(--white);border:0.5px solid var(--border);border-radius:4px;margin-bottom:12px;overflow:hidden}
+.prompt-card-meta{padding:8px 16px;background:var(--cream);border-bottom:0.5px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.prompt-card-title{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.prompt-card-use{font-size:10px;color:var(--muted)}
+.prompt-card-body{padding:16px}
+.prompt-text{font-family:monospace;font-size:12px;line-height:1.7;color:var(--charcoal);background:var(--cream);border:0.5px solid var(--border);border-radius:3px;padding:14px 16px;white-space:pre-wrap;word-break:break-word}
+.prompt-var{color:var(--deep-navy);font-weight:600}
+.prompt-note{font-size:11.5px;color:var(--muted);margin-top:10px;line-height:1.5;font-style:italic}
+.copy-prompt-btn{font-family:'Inter',sans-serif;font-size:9px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;background:transparent;color:var(--muted);border:0.5px solid var(--border);border-radius:2px;padding:5px 10px;cursor:pointer;margin-top:10px;transition:all .2s}
+.copy-prompt-btn:hover{border-color:var(--charcoal);color:var(--charcoal)}
+.copy-prompt-btn.copied{color:var(--slate);border-color:var(--slate)}
+
+/* LOGO KIT */
+.logo-card{background:var(--white);border:0.5px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:16px}
+.logo-card-header{padding:10px 20px;background:var(--cream);border-bottom:0.5px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.logo-card-title{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.logo-card-badge{font-size:9px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:3px 8px;border-radius:2px}
+.badge-light{background:var(--cream);color:var(--muted);border:0.5px solid var(--border)}
+.badge-dark{background:var(--charcoal);color:rgba(255,255,255,0.7)}
+.badge-deep-navy{background:rgba(122,40,54,0.08);color:var(--deep-navy);border:0.5px solid rgba(122,40,54,0.2)}
+.preview-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0}
+.preview-cell{padding:48px 24px 36px;display:flex;align-items:center;justify-content:center;min-height:160px;position:relative}
+.preview-cell.on-cream{background:var(--cream)}
+.preview-cell.on-white{background:var(--white);border-left:0.5px solid var(--border);border-right:0.5px solid var(--border)}
+.preview-cell.on-dark{background:var(--charcoal)}
+.preview-bg-label{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap;font-family:'Inter',sans-serif}
+.preview-cell.on-cream .preview-bg-label,.preview-cell.on-white .preview-bg-label{color:rgba(42,42,42,0.3)}
+.preview-cell.on-dark .preview-bg-label{color:rgba(255,255,255,0.2)}
+.logo-dl-bar{padding:14px 20px;border-top:0.5px solid var(--border);display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--cream)}
+.dl-btn{font-family:'Inter',sans-serif;font-size:9px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:7px 14px;border-radius:2px;cursor:pointer;border:none;transition:all .15s}
+.dl-btn-primary{background:var(--charcoal);color:var(--white)}
+.dl-btn-primary:hover{background:var(--deep-navy)}
+.dl-btn-secondary{background:transparent;color:var(--muted);border:0.5px solid var(--border);cursor:pointer}
+.dl-btn-secondary:hover{border-color:var(--charcoal);color:var(--charcoal)}
+.dl-sep{width:0.5px;height:20px;background:var(--border);display:inline-block;margin:0 4px}
+.size-scale{display:flex;gap:24px;align-items:flex-end;flex-wrap:wrap;padding:20px 24px;border-top:0.5px solid var(--border);background:var(--white)}
+.size-item{display:flex;flex-direction:column;align-items:center;gap:8px}
+.size-label{font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-family:'Inter',sans-serif}
+.logo-toast{position:fixed;bottom:24px;right:24px;background:var(--charcoal);color:var(--white);font-size:11px;letter-spacing:0.06em;padding:10px 18px;border-radius:3px;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;z-index:999;font-family:'Inter',sans-serif}
+.logo-toast.show{opacity:1;transform:translateY(0)}
+.logo-note{margin:0 20px;padding:12px 16px;background:var(--cream);border-left:3px solid var(--teal);font-size:12px;line-height:1.6;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <div class="site-header-brand">Camille Renard</div>
+  <div class="site-header-meta">Brand Style Guide · 2025</div>
+</div>
+
+<div class="tabs-bar">
+  <button class="tab-btn active" onclick="switchTab('colours',this)">Colours</button>
+  <button class="tab-btn" onclick="switchTab('typography',this)">Typography</button>
+  <button class="tab-btn" onclick="switchTab('buttons',this)">Buttons</button>
+  <button class="tab-btn" onclick="switchTab('voice',this)">Voice & Tone</button>
+  <button class="tab-btn" onclick="switchTab('examples',this)">Usage Examples</button>
+  <button class="tab-btn" onclick="switchTab('squarespace',this)">Squarespace</button>
+  <button class="tab-btn" onclick="switchTab('formats',this)">PDF & Sheets</button>
+  <button class="tab-btn" onclick="switchTab('donts',this)">What to Avoid</button>
+  <button class="tab-btn" onclick="switchTab('imagery',this)">Imagery & Visuals</button>
+  <button class="tab-btn" onclick="switchTab('prompts',this)">Prompt Library</button>
+  <button class="tab-btn" onclick="switchTab('logo',this)">Logo Kit</button>
+</div>
+
+<!-- ═══════════════════════════════ COLOURS ═══════════════════════════════ -->
+<div id="tab-colours" class="tab-panel active">
+  <div class="export-bar">
+    <button class="export-btn primary-export" onclick="copyMd('colours')">Copy as Markdown</button>
+    <button class="export-btn" onclick="downloadMd('colours')">Download .md</button>
+    <span class="copy-toast" id="toast-colours">✓ Copied to clipboard</span>
+  </div>
+
+  <div class="s-label">Colour Palette</div>
+  <div class="palette-row">
+    <div class="swatch sw-light" style="background:#F6F0EA">
+      <div class="sw-name">Warm Cream</div><div class="sw-hex">#F6F0EA</div>
+    </div>
+    <div class="swatch sw-light" style="background:#FFFFFF;border-left:0.5px solid #DDD6CE;border-right:0.5px solid #DDD6CE">
+      <div class="sw-name">White</div><div class="sw-hex">#FFFFFF</div>
+    </div>
+    <div class="swatch sw-dark" style="background:#1A3A5C">
+      <div class="sw-name">Deep Navy</div><div class="sw-hex">#1A3A5C</div>
+    </div>
+    <div class="swatch sw-dark" style="background:#2A7A6A">
+      <div class="sw-name">Teal</div><div class="sw-hex">#2A7A6A</div>
+    </div>
+    <div class="swatch sw-dark" style="background:#2A2A2A">
+      <div class="sw-name">Charcoal</div><div class="sw-hex">#2A2A2A</div>
+    </div>
+  </div>
+
+  <div class="s-label">Colour Usage Rules</div>
+  <table class="usage-table">
+    <thead>
+      <tr>
+        <th>Colour</th><th>Hex</th><th>Use for</th><th>Never use for</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="dot" style="background:#F6F0EA;border:0.5px solid #ccc"></span>Warm Cream</td>
+        <td><code style="font-family:monospace;font-size:11px">#F6F0EA</code></td>
+        <td>Primary page background, hero sections, content areas, alternating section bg</td>
+        <td>Text, buttons, borders</td>
+      </tr>
+      <tr>
+        <td><span class="dot" style="background:#FFFFFF;border:0.5px solid #ccc"></span>White</td>
+        <td><code style="font-family:monospace;font-size:11px">#FFFFFF</code></td>
+        <td>Cards, navigation bar, alternating sections that contrast with cream</td>
+        <td>Large background spans (use cream instead)</td>
+      </tr>
+      <tr>
+        <td><span class="dot" style="background:#1A3A5C"></span>Deep Navy</td>
+        <td><code style="font-family:monospace;font-size:11px">#1A3A5C</code></td>
+        <td>Text links, outlined tags, subtle branded highlights, tertiary button text/underline</td>
+        <td>Filled button backgrounds, large areas, decorative shapes, headings</td>
+      </tr>
+      <tr>
+        <td><span class="dot" style="background:#2A7A6A"></span>Teal</td>
+        <td><code style="font-family:monospace;font-size:11px">#2A7A6A</code></td>
+        <td>Primary CTA buttons, active nav indicator, key interactive elements only</td>
+        <td>Body text, headings, background areas, decorative use</td>
+      </tr>
+      <tr>
+        <td><span class="dot" style="background:#2A2A2A"></span>Charcoal</td>
+        <td><code style="font-family:monospace;font-size:11px">#2A2A2A</code></td>
+        <td>All body text, all headings, navigation links, footer text, secondary button borders</td>
+        <td>Nothing — this is the single text colour. Never swap for pure black.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="s-label">Supporting Brand Colour (Offline / Documents)</div>
+  <div class="card">
+    <h4>Slate — #3A4A5C</h4>
+    <p>Not used on the website. Reserved for presentations, social graphics, PDFs, and document headers where a third brand colour adds richness. Provides visual differentiation when needed outside the website context.</p>
+  </div>
+
+  <div class="s-label">Accessibility</div>
+  <table class="usage-table">
+    <thead><tr><th>Combination</th><th>Contrast Ratio</th><th>WCAG Level</th></tr></thead>
+    <tbody>
+      <tr><td>#2A2A2A on #F6F0EA</td><td>12.7 : 1</td><td>AAA ✓</td></tr>
+      <tr><td>#2A2A2A on #FFFFFF</td><td>14.4 : 1</td><td>AAA ✓</td></tr>
+      <tr><td>#1A3A5C on #F6F0EA</td><td>8.5 : 1</td><td>AAA ✓</td></tr>
+      <tr><td>#1A3A5C on #FFFFFF</td><td>9.6 : 1</td><td>AAA ✓</td></tr>
+      <tr><td>#FFFFFF on #2A7A6A (button)</td><td>3.5 : 1</td><td>AA ✓ (large text)</td></tr>
+      <tr><td>#2A2A2A on #2A7A6A (button)</td><td>4.8 : 1</td><td>AA ✓</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════════════════════ TYPOGRAPHY ═══════════════════════════════ -->
+<div id="tab-typography" class="tab-panel">
+  <div class="export-bar">
+    <button class="export-btn primary-export" onclick="copyMd('typography')">Copy as Markdown</button>
+    <button class="export-btn" onclick="downloadMd('typography')">Download .md</button>
+    <span class="copy-toast" id="toast-typography">✓ Copied to clipboard</span>
+  </div>
+
+  <div class="s-label">Typefaces</div>
+  <div class="grid-2 section-gap">
+    <div class="card">
+      <h4>Headings — Libre Baskerville</h4>
+      <p>Used for H1 and H2 only. Regular weight (400). Carries institutional credibility and European editorial gravitas. Available free via Google Fonts. Italic available for pull quotes.</p>
+    </div>
+    <div class="card">
+      <h4>Body & UI — Inter</h4>
+      <p>Used for H3, H4, body, captions, buttons, navigation, labels. Regular (400) and SemiBold (600) weights only. Never use Bold (700) in body context.</p>
+    </div>
+  </div>
+
+  <div class="s-label">Type Scale</div>
+
+  <div class="specimen">
+    <div class="specimen-meta">
+      <span class="specimen-label">H1 — Hero / Page Title</span>
+      <span class="specimen-spec">Libre Baskerville · Regular 400 · Base ×2.75 (2.75rem) · lh 1.05 · ls -0.02em</span>
+    </div>
+    <div class="specimen-preview"><div class="t-h1">Clarity before action.</div></div>
+  </div>
+
+  <div class="specimen">
+    <div class="specimen-meta">
+      <span class="specimen-label">H2 — Section Heading</span>
+      <span class="specimen-spec">Libre Baskerville · Regular 400 · Base ×2.0 (2rem) · lh 1.1 · ls -0.01em</span>
+    </div>
+    <div class="specimen-preview"><div class="t-h2">What needs to be in place before a multi-market SEO strategy can work.</div></div>
+  </div>
+
+  <div class="specimen">
+    <div class="specimen-meta">
+      <span class="specimen-label">H3 — Sub-Section Heading</span>
+      <span class="specimen-spec">Inter · SemiBold 600 · Base ×1.25 (1.25rem) · lh 1.3 · ls 0</span>
+    </div>
+    <div class="specimen-preview"><div class="t-h3">Organic Growth Strategy Strategy</div></div>
+  </div>
+
+  <div class="specimen">
+    <div class="specimen-meta">
+      <span class="specimen-label">H4 — Component / Card Heading</span>
+      <span class="specimen-spec">Inter · SemiBold 600 · Base ×1.0 (1rem) · lh 1.4 · ls 0</span>
+    </div>
+    <div class="specimen-preview"><div class="t-h4">Strategy Sprint — 2 weeks</div></div>
+  </div>
+
+  <div class="specimen">
+    <div class="specimen-meta">
+      <span class="specimen-label">Lead / Intro Paragraph</span>
+      <span class="specimen-spec">Inter · Regular 400 · Base ×1.25 (1.25rem) · lh 1.55 · ls 0</span>
+    </div>
+    <div class="specimen-preview"><div class="t-lead">Ten years of organic growth strategy practice. Built for companies who need a strategic partner, not a tactic vendor.</div></div>
+  </div>
+
+  <div class="specimen">
+    <div class="specimen-meta">
+      <span class="specimen-label">Body — Primary Reading Text</span>
+      <span class="specimen-spec">Inter · Regular 400 · Base ×1.0625 (1.0625rem) · lh 1.65 · ls 0</span>
+    </div>
+    <div class="specimen-preview"><div class="t-body">Most organic growth strategy strategies fail before they start. Not because of technical gaps, but because the fundamentals — market intent, localised signals, and structural architecture — weren't established first. This is the gap we close.</div></div>
+  </div>
+
+  <div class="specimen">
+    <div class="specimen-meta">
+      <span class="specimen-label">Caption / Small Text</span>
+      <span class="specimen-spec">Inter · Regular 400 · Base ×0.8125 (0.8125rem) · lh 1.5 · color: #6B6560</span>
+    </div>
+    <div class="specimen-preview"><div class="t-small">10 years of independent practice · Clients across France, Canada, and Europe · Teaching at EM Bordeaux</div></div>
+  </div>
+
+  <div class="specimen">
+    <div class="specimen-meta">
+      <span class="specimen-label">Eyebrow / Overline Label</span>
+      <span class="specimen-spec">Inter · SemiBold 600 · Base ×0.6875 (0.6875rem) · lh 1.4 · ls 0.14em · UPPERCASE</span>
+    </div>
+    <div class="specimen-preview"><div class="t-eyebrow">Organic Growth Strategy Consulting</div></div>
+  </div>
+
+  <div class="info-box" style="margin-top:24px">
+    <strong>Rule:</strong> Libre Baskerville for H1 and H2 only. Inter for everything else. Italic Libre Baskerville may be used for pull quotes or editorial emphasis. The base size in Squarespace is set to 16px — all rem values above are relative to that base.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ BUTTONS ═══════════════════════════════ -->
+<div id="tab-buttons" class="tab-panel">
+  <div class="export-bar">
+    <button class="export-btn primary-export" onclick="copyMd('buttons')">Copy as Markdown</button>
+    <button class="export-btn" onclick="downloadMd('buttons')">Download .md</button>
+    <span class="copy-toast" id="toast-buttons">✓ Copied to clipboard</span>
+  </div>
+
+  <div class="s-label">Button Hierarchy</div>
+
+  <!-- PRIMARY -->
+  <div class="format-block section-gap">
+    <div class="format-header">
+      <div class="format-header-title">Primary Button</div>
+      <div class="format-header-badge">CTA · Book a Call · Main Action</div>
+    </div>
+    <div class="format-body">
+      <div style="margin-bottom:20px;padding:24px;background:var(--cream);border-radius:4px;display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+        <button class="btn-primary">Book a Discovery Call</button>
+        <button class="btn-primary">Get Started</button>
+        <button class="btn-primary" style="background:#8C6128">Hover State ↑</button>
+      </div>
+      <table class="sqsp-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Font</td><td>Inter</td></tr>
+          <tr><td>Style</td><td>Normal</td></tr>
+          <tr><td>Weight</td><td>SemiBold (600)</td></tr>
+          <tr><td>Size</td><td>0.6875rem (11px at base 16px)</td></tr>
+          <tr><td>Letter Spacing</td><td>0.12em</td></tr>
+          <tr><td>Text Transform</td><td>UPPERCASE</td></tr>
+          <tr><td>Line Height</td><td>1</td></tr>
+          <tr><td>Background</td><td>#2A7A6A (Teal)</td></tr>
+          <tr><td>Text Colour</td><td>#FFFFFF (White)</td></tr>
+          <tr><td>Hover Background</td><td>#8C6128 (15% darker — use CSS override)</td></tr>
+          <tr><td>Padding</td><td>14px 28px</td></tr>
+          <tr><td>Border Radius</td><td>3px (square/sharp)</td></tr>
+          <tr><td>Border</td><td>None</td></tr>
+        </tbody>
+      </table>
+      <div class="info-box">Use once per section, maximum. This is the conversion button. One per page viewport. Labels must be action verbs: "Book a Call", "Explore the Sprint", "Get in Touch" — never "Click Here" or "Learn More".</div>
+    </div>
+  </div>
+
+  <!-- SECONDARY -->
+  <div class="format-block section-gap">
+    <div class="format-header" style="background:#4A4540">
+      <div class="format-header-title">Secondary Button</div>
+      <div class="format-header-badge">Outlined · Supporting Action</div>
+    </div>
+    <div class="format-body">
+      <div style="margin-bottom:20px;padding:24px;background:var(--cream);border-radius:4px;display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+        <button class="btn-secondary">See Services</button>
+        <button class="btn-secondary">View Case Study</button>
+        <button class="btn-secondary" style="border-color:#555;color:#555">Hover State ↑</button>
+      </div>
+      <table class="sqsp-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Font</td><td>Inter</td></tr>
+          <tr><td>Style</td><td>Normal</td></tr>
+          <tr><td>Weight</td><td>SemiBold (600)</td></tr>
+          <tr><td>Size</td><td>0.6875rem (11px at base 16px)</td></tr>
+          <tr><td>Letter Spacing</td><td>0.12em</td></tr>
+          <tr><td>Text Transform</td><td>UPPERCASE</td></tr>
+          <tr><td>Line Height</td><td>1</td></tr>
+          <tr><td>Background</td><td>Transparent</td></tr>
+          <tr><td>Text Colour</td><td>#2A2A2A (Charcoal)</td></tr>
+          <tr><td>Hover Text</td><td>#555555 (soften slightly)</td></tr>
+          <tr><td>Border</td><td>1.5px solid #2A2A2A</td></tr>
+          <tr><td>Hover Border</td><td>1.5px solid #555555</td></tr>
+          <tr><td>Padding</td><td>13px 27px (1px less to compensate for border)</td></tr>
+          <tr><td>Border Radius</td><td>3px</td></tr>
+        </tbody>
+      </table>
+      <div class="info-box">Pair alongside a primary button when two actions are available (e.g., "Book a Call" + "See Services"). Never use two primary buttons side by side.</div>
+    </div>
+  </div>
+
+  <!-- TERTIARY -->
+  <div class="format-block section-gap">
+    <div class="format-header" style="background:#5C3A3A">
+      <div class="format-header-title">Tertiary Button / Text Link Action</div>
+      <div class="format-header-badge">Underlined · Low-weight action</div>
+    </div>
+    <div class="format-body">
+      <div style="margin-bottom:20px;padding:24px;background:var(--cream);border-radius:4px;display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+        <button class="btn-tertiary">Explore the Sprint →</button>
+        <button class="btn-tertiary">Read the Newsletter →</button>
+        <button class="btn-tertiary" style="color:#5C1E2A;border-bottom-color:#5C1E2A">Hover State ↑</button>
+      </div>
+      <table class="sqsp-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Font</td><td>Inter</td></tr>
+          <tr><td>Style</td><td>Normal</td></tr>
+          <tr><td>Weight</td><td>SemiBold (600)</td></tr>
+          <tr><td>Size</td><td>0.6875rem (11px at base 16px)</td></tr>
+          <tr><td>Letter Spacing</td><td>0.12em</td></tr>
+          <tr><td>Text Transform</td><td>UPPERCASE</td></tr>
+          <tr><td>Line Height</td><td>1</td></tr>
+          <tr><td>Background</td><td>None</td></tr>
+          <tr><td>Text Colour</td><td>#1A3A5C (Deep Navy)</td></tr>
+          <tr><td>Hover Text</td><td>#5C1E2A (20% darker)</td></tr>
+          <tr><td>Border</td><td>Bottom only — 1px solid #1A3A5C</td></tr>
+          <tr><td>Padding</td><td>0 (no padding — inline with text)</td></tr>
+          <tr><td>Border Radius</td><td>0</td></tr>
+        </tbody>
+      </table>
+      <div class="info-box">Used inside card bodies, article footers, or list items where a full button would feel heavy. Often paired with a right arrow → to indicate navigation. Do not use inside body paragraphs — use a standard underlined link instead.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ VOICE ═══════════════════════════════ -->
+<div id="tab-voice" class="tab-panel">
+  <div class="export-bar">
+    <button class="export-btn primary-export" onclick="copyMd('voice')">Copy as Markdown</button>
+    <button class="export-btn" onclick="downloadMd('voice')">Download .md</button>
+    <span class="copy-toast" id="toast-voice">✓ Copied to clipboard</span>
+  </div>
+
+  <div class="s-label">Brand Personality & Identity</div>
+  <div class="grid-2 section-gap">
+    <div class="card"><h4>Brand Feel</h4><p>Premium · Grounded · Sharp · Warm · Elevated</p></div>
+    <div class="card"><h4>Identity Words</h4><p>European · Strategic · Detail-oriented</p></div>
+    <div class="card"><h4>Primary Audience</h4><p>Founders and marketing leads at mid-to-large companies operating internationally</p></div>
+    <div class="card"><h4>Core Positioning</h4><p>Strategic peer — not a contractor. The brand leads with clarity, not urgency.</p></div>
+  </div>
+
+  <div class="s-label">Voice Characteristics</div>
+  <div class="grid-2 section-gap">
+    <div class="voice-col is card">
+      <h4>The brand is</h4>
+      <ul class="voice-list">
+        <li>Direct and precise — no filler words</li>
+        <li>Warm without being casual</li>
+        <li>Confident without being loud</li>
+        <li>European in sensibility — restrained, considered</li>
+        <li>Strategically minded — outcomes over tactics</li>
+        <li>Honest about complexity, never over-simplifying</li>
+        <li>Specific — names markets, problems, results</li>
+      </ul>
+    </div>
+    <div class="voice-col not card">
+      <h4>The brand is not</h4>
+      <ul class="voice-list">
+        <li>Hyperbolic ("game-changing," "revolutionary")</li>
+        <li>Over-familiar or aggressively casual</li>
+        <li>Keyword-stuffed or SEO-baity in tone</li>
+        <li>Playful or whimsical in professional contexts</li>
+        <li>Vague ("I help businesses grow online")</li>
+        <li>Urgent or pressure-driven in CTAs</li>
+        <li>Agency-like — this is a personal brand</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="s-label">Copy Examples</div>
+  <table class="usage-table">
+    <thead><tr><th>Context</th><th>Wrong tone</th><th>Right tone</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Hero headline</td>
+        <td style="color:var(--deep-navy)">🚀 Supercharge your global SEO!</td>
+        <td style="color:var(--slate)">Clarity before action.</td>
+      </tr>
+      <tr>
+        <td>CTA button</td>
+        <td style="color:var(--deep-navy)">Click Here to Get Started Today!</td>
+        <td style="color:var(--slate)">Book a Discovery Call</td>
+      </tr>
+      <tr>
+        <td>Service description</td>
+        <td style="color:var(--deep-navy)">We help you crush the competition in international markets.</td>
+        <td style="color:var(--slate)">A focused 2-week engagement that maps your international architecture and surfaces the gaps blocking visibility in target markets.</td>
+      </tr>
+      <tr>
+        <td>About intro</td>
+        <td style="color:var(--deep-navy)">Hi! I'm Camille, your organic growth strategy bestie!</td>
+        <td style="color:var(--slate)">Ten years of independent practice. Built around one question: what needs to be in place before this can actually work?</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════════════════════ EXAMPLES ═══════════════════════════════ -->
+<div id="tab-examples" class="tab-panel">
+  <div class="export-bar">
+    <button class="export-btn primary-export" onclick="copyMd('examples')">Copy as Markdown</button>
+    <button class="export-btn" onclick="downloadMd('examples')">Download .md</button>
+    <span class="copy-toast" id="toast-examples">✓ Copied to clipboard</span>
+  </div>
+
+  <div class="s-label">Navigation</div>
+  <div class="mock-nav" style="margin-bottom:8px">
+    <div class="mock-nav-brand">Camille Renard</div>
+    <div class="mock-nav-links">
+      <span>SEO Services</span>
+      <span>About</span>
+      <span>Insights</span>
+      <span>Newsletter</span>
+      <span>Resources</span>
+    </div>
+    <div class="mock-nav-cta">Book a Call</div>
+  </div>
+  <div class="info-box" style="margin-bottom:32px">5 flat links + 1 CTA button. No dropdowns. "Book a Call" in Teal (#2A7A6A) always visible. Site title in Libre Baskerville Regular.</div>
+
+  <div class="s-label">Hero Section</div>
+  <div class="mock-hero" style="margin-bottom:8px">
+    <div class="eyebrow">Organic Growth Strategy Consultant</div>
+    <h2>Clarity before action.</h2>
+    <p>Ten years of organic growth strategy practice. Built for founders and marketing leads who need a strategic partner, not a tactic vendor.</p>
+    <button class="btn-primary" style="margin-right:12px">Book a Discovery Call</button>
+    <button class="btn-secondary">See Services</button>
+  </div>
+  <div class="info-box" style="margin-bottom:32px">Cream background. Eyebrow in Inter 600 uppercase. H1 in Libre Baskerville. Primary + Secondary button pair. Max paragraph width 480px.</div>
+
+  <div class="s-label">Content Cards</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:8px">
+    <div style="background:var(--white);border:0.5px solid var(--border);border-radius:4px;padding:24px">
+      <div class="tag">Strategy</div>
+      <div class="t-h3" style="margin:12px 0 10px">Organic Growth Strategy Strategy Sprint</div>
+      <div class="t-small" style="color:var(--muted);margin-bottom:16px">A focused 2-week engagement that maps your international architecture and surfaces gaps blocking visibility in target markets.</div>
+      <button class="btn-tertiary">Explore the Sprint →</button>
+    </div>
+    <div style="background:var(--white);border:0.5px solid var(--border);border-radius:4px;padding:24px">
+      <div class="tag">Content Strategy</div>
+      <div class="t-h3" style="margin:12px 0 10px">Content Strategy for International Growth</div>
+      <div class="t-small" style="color:var(--muted);margin-bottom:16px">From architecture to editorial planning — a complete content framework designed for multi-market visibility.</div>
+      <button class="btn-tertiary">Explore Content Strategy →</button>
+    </div>
+  </div>
+  <div class="info-box">Cards on white backgrounds. Deep Navy outlined tag. H3 in Inter SemiBold. Caption text in #6B6560. Tertiary button with arrow at bottom.</div>
+</div>
+
+<!-- ═══════════════════════════════ SQUARESPACE ═══════════════════════════════ -->
+<div id="tab-squarespace" class="tab-panel">
+  <div class="export-bar">
+    <button class="export-btn primary-export" onclick="copyMd('squarespace')">Copy as Markdown</button>
+    <button class="export-btn" onclick="downloadMd('squarespace')">Download .md</button>
+    <span class="copy-toast" id="toast-squarespace">✓ Copied to clipboard</span>
+  </div>
+
+  <div class="info-box">All settings below are native Squarespace 7.1 — no custom CSS injection required. Path notation: <span class="path">🎨 → Site Styles → …</span></div>
+
+  <div class="s-label" style="margin-top:24px">1. Colour Palette</div>
+  <div class="card section-gap">
+    <h4>Path</h4>
+    <p style="margin-bottom:12px"><span class="path">🎨 Paintbrush → Site Styles → Colors → Edit Palette → Custom Colors</span></p>
+    <p style="margin-bottom:16px;font-size:13px">Squarespace uses 5 palette slots ordered lightest to darkest. Click each swatch, paste the hex into the text field at the bottom of the colour picker.</p>
+    <table class="sqsp-table">
+      <thead><tr><th>Slot</th><th>Position</th><th>Hex</th><th>Name</th></tr></thead>
+      <tbody>
+        <tr><td>1 — Lightest</td><td>Far left</td><td><code>#F6F0EA</code></td><td>Warm Cream</td></tr>
+        <tr><td>2</td><td>Second</td><td><code>#FFFFFF</code></td><td>White</td></tr>
+        <tr><td>3 — Mid</td><td>Centre</td><td><code>#2A7A6A</code></td><td>Teal</td></tr>
+        <tr><td>4</td><td>Fourth</td><td><code>#1A3A5C</code></td><td>Deep Navy</td></tr>
+        <tr><td>5 — Darkest</td><td>Far right</td><td><code>#2A2A2A</code></td><td>Charcoal</td></tr>
+      </tbody>
+    </table>
+    <div class="info-box" style="margin-top:12px;margin-bottom:0">After saving the palette, Squarespace generates 10 colour themes automatically. Assign themes to individual page sections via Edit Section → Colors. For custom element colours (body text, button text), click into the active theme and override individual slots — these accept any hex, not just the 5 palette colours.</div>
+  </div>
+
+  <div class="s-label">2. Typography — Style Assignments</div>
+  <div class="card section-gap">
+    <h4>Path</h4>
+    <p style="margin-bottom:12px"><span class="path">🎨 Paintbrush → Site Styles → Fonts → Custom → Assign Styles</span></p>
+    <table class="sqsp-table">
+      <thead><tr><th>Style Assignment</th><th>Font</th><th>Style</th><th>Weight</th><th>Size (rem)</th><th>Line Height</th><th>Letter Spacing</th><th>Transform</th></tr></thead>
+      <tbody>
+        <tr><td>Heading 1</td><td>Libre Baskerville</td><td>Normal</td><td>400</td><td>2.75rem</td><td>1.05</td><td>-0.02em</td><td>None</td></tr>
+        <tr><td>Heading 2</td><td>Libre Baskerville</td><td>Normal</td><td>400</td><td>2.0rem</td><td>1.1</td><td>-0.01em</td><td>None</td></tr>
+        <tr><td>Heading 3</td><td>Inter</td><td>Normal</td><td>600</td><td>1.25rem</td><td>1.3</td><td>0</td><td>None</td></tr>
+        <tr><td>Heading 4</td><td>Inter</td><td>Normal</td><td>600</td><td>1.0rem</td><td>1.4</td><td>0</td><td>None</td></tr>
+        <tr><td>Paragraph 1 (Lead)</td><td>Inter</td><td>Normal</td><td>400</td><td>1.25rem</td><td>1.55</td><td>0</td><td>None</td></tr>
+        <tr><td>Paragraph 2 (Body)</td><td>Inter</td><td>Normal</td><td>400</td><td>1.0625rem</td><td>1.65</td><td>0</td><td>None</td></tr>
+        <tr><td>Paragraph 3 (Small)</td><td>Inter</td><td>Normal</td><td>400</td><td>0.8125rem</td><td>1.5</td><td>0</td><td>None</td></tr>
+        <tr><td>Navigation Links</td><td>Inter</td><td>Normal</td><td>400</td><td>0.875rem</td><td>1</td><td>0</td><td>None</td></tr>
+        <tr><td>Site Title</td><td>Libre Baskerville</td><td>Normal</td><td>400</td><td>1.0rem</td><td>1</td><td>0.01em</td><td>None</td></tr>
+        <tr><td>Button (Primary)</td><td>Inter</td><td>Normal</td><td>600</td><td>0.6875rem</td><td>1</td><td>0.12em</td><td>UPPERCASE</td></tr>
+        <tr><td>Button (Secondary)</td><td>Inter</td><td>Normal</td><td>600</td><td>0.6875rem</td><td>1</td><td>0.12em</td><td>UPPERCASE</td></tr>
+        <tr><td>Blog Post Title</td><td>Libre Baskerville</td><td>Normal</td><td>400</td><td>1.75rem</td><td>1.1</td><td>-0.01em</td><td>None</td></tr>
+      </tbody>
+    </table>
+    <div class="info-box" style="margin-top:0;margin-bottom:0">Base font size: <strong>16px</strong>. All rem values above are relative to this base. Set the base under <span class="path">Site Styles → Fonts → Base Size</span>.</div>
+  </div>
+
+  <div class="s-label">3. Buttons</div>
+  <div class="card section-gap">
+    <h4>Path</h4>
+    <p style="margin-bottom:12px"><span class="path">🎨 Paintbrush → Site Styles → Buttons</span> (shape/padding) + <span class="path">Colors → active theme → Button section</span> (colours)</p>
+    <table class="sqsp-table">
+      <thead><tr><th>Property</th><th>Primary</th><th>Secondary</th></tr></thead>
+      <tbody>
+        <tr><td>Shape</td><td colspan="2">Sharp / Square — Border Radius: 3px</td></tr>
+        <tr><td>Style</td><td>Fill (solid)</td><td>Outline</td></tr>
+        <tr><td>Background</td><td><code>#2A7A6A</code></td><td>Transparent</td></tr>
+        <tr><td>Text Colour</td><td><code>#FFFFFF</code></td><td><code>#2A2A2A</code></td></tr>
+        <tr><td>Border</td><td>None</td><td>1.5px <code>#2A2A2A</code></td></tr>
+        <tr><td>Horizontal Padding</td><td>28px</td><td>27px</td></tr>
+        <tr><td>Vertical Padding</td><td>14px</td><td>13px</td></tr>
+        <tr><td>Font</td><td colspan="2">Inter · 600 · 0.6875rem · ls 0.12em · UPPERCASE</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="s-label">4. Navigation</div>
+  <div class="card section-gap">
+    <h4>Recommended Structure — Flat, No Dropdowns</h4>
+    <table class="sqsp-table" style="margin-top:12px">
+      <thead><tr><th>Position</th><th>Label</th><th>Type</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>SEO Services</td><td>Single page</td><td>Hub page listing all services — no dropdown</td></tr>
+        <tr><td>2</td><td>About</td><td>Single page</td><td>Bio, credentials, speaking, press</td></tr>
+        <tr><td>3</td><td>Insights</td><td>Blog index</td><td>Renamed from "Blog" — signals thought leadership</td></tr>
+        <tr><td>4</td><td>Newsletter</td><td>Single page</td><td>Clear Signal — signup + archive</td></tr>
+        <tr><td>5</td><td>Resources</td><td>Single page</td><td>Digital products, events, teaching, Advent Calendar</td></tr>
+        <tr><td>CTA</td><td>Book a Call</td><td>Button</td><td>Header CTA button — Teal fill, always visible</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:13px;margin-top:12px;color:var(--muted)">To remove dropdowns: Pages panel → click the folder → drag child pages out → delete the empty folder.</p>
+  </div>
+
+  <div class="s-label">5. Key Squarespace Limitations</div>
+  <div class="grid-2">
+    <div class="card"><h4>Colour themes</h4><p>Default colour themes for system pages (404, checkout) can only be changed in the Squarespace mobile app, not the desktop editor.</p></div>
+    <div class="card"><h4>Hover states</h4><p>Native Squarespace does not support button hover colour customisation without CSS. If hover states matter, one small CSS override is required.</p></div>
+    <div class="card"><h4>Tertiary buttons</h4><p>Squarespace has no native tertiary button style. Achieve the underlined text-link style using a text link with manual formatting, or a button styled via the Custom CSS editor.</p></div>
+    <div class="card"><h4>Font upload</h4><p>Custom fonts (.woff2, .woff) can now be uploaded natively under Site Styles → Fonts → Upload Font — no CSS injection needed as of late 2025.</p></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ FORMATS ═══════════════════════════════ -->
+<div id="tab-formats" class="tab-panel">
+  <div class="export-bar">
+    <button class="export-btn primary-export" onclick="copyMd('formats')">Copy as Markdown</button>
+    <button class="export-btn" onclick="downloadMd('formats')">Download .md</button>
+    <span class="copy-toast" id="toast-formats">✓ Copied to clipboard</span>
+  </div>
+
+  <!-- PDF -->
+  <div class="format-block section-gap">
+    <div class="format-header">
+      <div class="format-header-title">PDF Documents</div>
+      <div class="format-header-badge">Proposals · Reports · Deliverables</div>
+    </div>
+    <div class="format-body">
+      <div class="format-rule"><div class="format-rule-key">Page size</div><div class="format-rule-val">A4 portrait (210 × 297mm). Letter for US clients if needed.</div></div>
+      <div class="format-rule"><div class="format-rule-key">Margins</div><div class="format-rule-val">25mm top/bottom, 22mm left/right. Generous white space is a brand signal.</div></div>
+      <div class="format-rule"><div class="format-rule-key">Cover page</div><div class="format-rule-val">Background: #2A2A2A (Charcoal). Title in Libre Baskerville Regular, white. Subtitle in Inter Regular, rgba(255,255,255,0.55). Client name or document type in Inter 600 uppercase, #2A7A6A (Teal) — positioned as an eyebrow above the title.</div></div>
+      <div class="format-rule"><div class="format-rule-key">Header (inner pages)</div><div class="format-rule-val">Thin 0.5pt rule in #DDD6CE across top. Document title in Inter 400, 8pt, #6B6560 (muted). Page number flush right, same style.</div></div>
+      <div class="format-rule"><div class="format-rule-key">Body background</div><div class="format-rule-val">#FFFFFF (white) for main content pages. Use #F6F0EA (cream) sparingly for sidebar panels or callout boxes.</div></div>
+      <div class="format-rule"><div class="format-rule-key">Headings</div><div class="format-rule-val">H1: Libre Baskerville Regular, 22pt, #2A2A2A. H2: Libre Baskerville Regular, 16pt, #2A2A2A. H3: Inter SemiBold 600, 12pt, #2A2A2A.</div></div>
+      <div class="format-rule"><div class="format-rule-key">Body text</div><div class="format-rule-val">Inter Regular 400, 10.5pt, #2A2A2A, line height 1.6. Max line length approx. 70 characters for comfort.</div></div>
+      <div class="format-rule"><div class="format-rule-key">Accent use</div><div class="format-rule-val">#1A3A5C (Deep Navy) for section rule lines, important callout borders, or highlighted data points. #3A4A5C (Slate) for section headers or cover accent blocks — use when a third colour is needed for richness.</div></div>
+      <div class="format-rule"><div class="format-rule-key">Tables</div><div class="format-rule-val">Header row: background #2A2A2A, text white, Inter 600 9pt. Alternating rows: white / #F6F0EA. Cell text: Inter 400, 9.5pt, #2A2A2A. Border: 0.5pt #DDD6CE.</div></div>
+      <div class="format-rule"><div class="format-rule-key">Callout boxes</div><div class="format-rule-val">Background #F6F0EA, left border 3pt solid #2A7A6A. Content in Inter 400, 10pt.</div></div>
+      <div class="format-rule"><div class="format-rule-key">Footer</div><div class="format-rule-val">camille-renard.com — Camille Renard, in Inter 400, 8pt, #6B6560. Thin top rule in #DDD6CE.</div></div>
+      <div class="format-rule"><div class="format-rule-key">No-goes</div><div class="format-rule-val">No gradients. No drop shadows on content elements. No stock photography. No decorative dividers or ornaments. No clip art.</div></div>
+    </div>
+  </div>
+
+  <!-- GOOGLE SHEETS -->
+  <div class="format-block">
+    <div class="format-header" style="background:#2E4A3E">
+      <div class="format-header-title">Google Sheets</div>
+      <div class="format-header-badge">Trackers · Reports · Client Deliverables</div>
+    </div>
+    <div class="format-body">
+      <div class="format-rule"><div class="format-rule-key">Header row</div><div class="format-rule-val">Background: #2A2A2A. Text: white. Font: Inter SemiBold (Bold in Sheets). Size: 10pt. Text transform: UPPERCASE (type manually — Sheets has no transform setting). Freeze row 1.</div></div>
+      <div class="format-rule"><div class="format-rule-key">Sub-header row</div><div class="format-rule-val">Background: #F6F0EA (Warm Cream). Text: #2A2A2A. Font: Inter 600. Size: 10pt. Use for grouping or category rows.</div></div>
+      <div class="format-rule"><div class="format-rule-key">Body rows</div><div class="format-rule-val">Alternating: white (#FFFFFF) / light cream (#FAF7F3). Text: #2A2A2A. Font: Inter Regular. Size: 10pt. Line height: set row height to 28px for breathing room.</div></div>
+      <div class="format-rule"><div class="format-rule-key">Accent / highlight</div><div class="format-rule-val">Important rows or flagged items: light deep-navy tint (#E5EBF2) background, #1A3A5C text. Use sparingly — max 10% of rows.</div></div>
+      <div class="format-rule"><div class="format-rule-key">Section labels</div><div class="format-rule-val">Full-width rows used as section separators: background #3A4A5C (Slate), text white, Inter 600, 9pt UPPERCASE. Merge across all columns.</div></div>
+      <div class="format-rule"><div class="format-rule-key">Borders</div><div class="format-rule-val">Outer border: 1pt solid #2A2A2A. Inner horizontal borders: 0.5pt solid #DDD6CE. No inner vertical borders — rely on column spacing instead.</div></div>
+      <div class="format-rule"><div class="format-rule-key">Status indicators</div><div class="format-rule-val">Done: #E5E9F0 bg + #2A4A6A text. In progress: #E0F5F0 bg + #7A4A00 text. Blocked: #E5EBF2 bg + #1A3A5C text. Use custom cell formatting, not conditional formatting colours, for brand consistency.</div></div>
+      <div class="format-rule"><div class="format-rule-key">Charts (if used)</div><div class="format-rule-val">Background: white. Gridlines: #DDD6CE. Primary data series: #1A3A5C (Deep Navy). Secondary: #2A7A6A (Teal). Tertiary: #3A4A5C (Slate). Font: Arial (Google Sheets native — Inter not supported in charts).</div></div>
+      <div class="format-rule"><div class="format-rule-key">Tab colours</div><div class="format-rule-val">Use Deep Navy (#1A3A5C) for primary/active sheets, Charcoal (#2A2A2A) for reference/archive sheets, and Teal (#2A7A6A) for summary/overview sheets.</div></div>
+      <div class="format-rule"><div class="format-rule-key">No-goes</div><div class="format-rule-val">No rainbow conditional formatting. No zebra-stripe themes from Sheets presets. No mixed font families. Keep colour usage to this palette only.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ DON'TS ═══════════════════════════════ -->
+<div id="tab-donts" class="tab-panel">
+  <div class="export-bar">
+    <button class="export-btn primary-export" onclick="copyMd('donts')">Copy as Markdown</button>
+    <button class="export-btn" onclick="downloadMd('donts')">Download .md</button>
+    <span class="copy-toast" id="toast-donts">✓ Copied to clipboard</span>
+  </div>
+
+  <div class="s-label">Visual Don'ts</div>
+  <div class="dont-grid">
+    <div class="dont-card">
+      <div class="dont-preview" style="background:#4A90D9">
+        <span style="font-family:'Libre Baskerville',serif;font-size:20px;color:white">Organic Growth Strategy</span>
+      </div>
+      <div class="dont-lbl">✕ No blue — in any shade</div>
+    </div>
+    <div class="dont-card">
+      <div class="dont-preview" style="background:var(--white)">
+        <span style="font-family:'Inter',sans-serif;font-size:15px;color:#2A7A6A;line-height:1.5">Most organic growth strategy strategies fail before they start. Not because of gaps…</span>
+      </div>
+      <div class="dont-lbl">✕ No teal for body text — CTA/buttons only</div>
+    </div>
+    <div class="dont-card">
+      <div class="dont-preview" style="background:linear-gradient(135deg,#1A3A5C,#2A7A6A)">
+        <span style="font-family:'Libre Baskerville',serif;font-size:20px;color:white">Clarity before action.</span>
+      </div>
+      <div class="dont-lbl">✕ No gradients — solid colours only</div>
+    </div>
+    <div class="dont-card">
+      <div class="dont-preview">
+        <span style="font-family:'Inter',sans-serif;font-size:15px;color:#2A2A2A">Unlocking <span style="color:#1A3A5C">global</span> growth — your <span style="color:#2A7A6A">journey</span> starts <span style="color:#3A4A5C">here</span>!</span>
+      </div>
+      <div class="dont-lbl">✕ No accent colour mixing within sentences</div>
+    </div>
+    <div class="dont-card">
+      <div class="dont-preview">
+        <span style="font-family:'Comic Sans MS',cursive;font-size:22px;color:#2A2A2A">Camille Renard</span>
+      </div>
+      <div class="dont-lbl">✕ No decorative or novelty typefaces</div>
+    </div>
+    <div class="dont-card">
+      <div class="dont-preview">
+        <span style="font-family:'Inter',sans-serif;font-size:13px;color:#888">🚀 Ready to GROW your organic growth strategy? Let's crush your goals TOGETHER! 🌍</span>
+      </div>
+      <div class="dont-lbl">✕ No emojis, no urgency language, no hype</div>
+    </div>
+    <div class="dont-card">
+      <div class="dont-preview" style="background:var(--white)">
+        <span style="font-family:'Libre Baskerville',serif;font-size:28px;font-weight:700;color:#2A2A2A">Bold Heading Here</span>
+      </div>
+      <div class="dont-lbl">✕ No bold (700) in Libre Baskerville headings</div>
+    </div>
+    <div class="dont-card">
+      <div class="dont-preview" style="background:var(--white);display:flex;gap:8px;flex-wrap:wrap">
+        <button style="background:#1A3A5C;color:white;border:none;padding:10px 18px;font-size:12px;border-radius:3px;font-family:Inter,sans-serif">Primary</button>
+        <button style="background:#2A7A6A;color:white;border:none;padding:10px 18px;font-size:12px;border-radius:3px;font-family:Inter,sans-serif">Also Primary?</button>
+      </div>
+      <div class="dont-lbl">✕ No two primary buttons side by side</div>
+    </div>
+    <div class="dont-card">
+      <div class="dont-preview" style="background:var(--white)">
+        <span style="font-family:'Inter',sans-serif;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#2A2A2A">Click Here</span>
+      </div>
+      <div class="dont-lbl">✕ No "Click Here" or "Learn More" as button labels</div>
+    </div>
+  </div>
+
+  <div class="s-label" style="margin-top:8px">Copy Don'ts</div>
+  <table class="usage-table">
+    <thead><tr><th>Avoid</th><th>Why</th><th>Use instead</th></tr></thead>
+    <tbody>
+      <tr><td>"Game-changing," "revolutionary," "world-class"</td><td>Hyperbolic — undercuts credibility</td><td>Specific, verifiable claims</td></tr>
+      <tr><td>"We help you crush the competition"</td><td>Aggressive — wrong register for the brand</td><td>"A framework for sustainable international visibility"</td></tr>
+      <tr><td>"Hi! I'm your SEO bestie!"</td><td>Over-casual for B2B founders audience</td><td>"Ten years of independent practice."</td></tr>
+      <tr><td>Vague CTAs: "Get started today!"</td><td>No specificity or commitment signal</td><td>"Book a Discovery Call"</td></tr>
+      <tr><td>Passive constructions: "SEO solutions are provided"</td><td>Agency-speak — removes personality</td><td>First person, active: "I map your architecture"</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════════════════════ IMAGERY & VISUALS ═══════════════════════════════ -->
+<div id="tab-imagery" class="tab-panel">
+  <div class="export-bar">
+    <button class="export-btn primary-export" onclick="copyMd('imagery')">Copy as Markdown</button>
+    <button class="export-btn" onclick="downloadMd('imagery')">Download .md</button>
+    <span class="copy-toast" id="toast-imagery">✓ Copied to clipboard</span>
+  </div>
+
+  <div class="s-label">Visual Philosophy</div>
+  <div class="info-box">Imagery on camille-renard.com is <strong>editorial, not decorative</strong>. It earns its place by reinforcing a feeling — grounded, considered, European — or it doesn't appear at all. Typography and white space carry the brand; photography supports it. When in doubt, remove the image.</div>
+
+  <div class="card section-gap">
+    <div class="img-principle">
+      <div class="img-principle-icon">↔</div>
+      <div class="img-principle-body">
+        <h4>Hierarchy: type first, image second</h4>
+        <p>This is a typography-led brand. Images are used sparingly: one hero image max per page, newsletter cover headers, and social media where visual context adds signal. Internal pages, blog posts, and product pages are predominantly text.</p>
+      </div>
+    </div>
+    <div class="img-principle">
+      <div class="img-principle-icon">☀</div>
+      <div class="img-principle-body">
+        <h4>Light: soft, natural, directional</h4>
+        <p>Natural window light. Morning or golden-hour warmth. Soft shadows, never harsh. No studio flash. No artificial-looking overexposed whites. Warm tones that pull from the Teal/Cream palette — not cool or clinical.</p>
+      </div>
+    </div>
+    <div class="img-principle">
+      <div class="img-principle-icon">◻</div>
+      <div class="img-principle-body">
+        <h4>Composition: restrained, room to breathe</h4>
+        <p>Negative space is intentional. Never cluttered. Subjects placed with intention — not centred by default. European still-life sensibility: a few carefully chosen objects, arranged with precision. No symmetry for symmetry's sake.</p>
+      </div>
+    </div>
+    <div class="img-principle">
+      <div class="img-principle-icon">▤</div>
+      <div class="img-principle-body">
+        <h4>Palette alignment</h4>
+        <p>Images should feel at home in the brand palette: warm creams, off-whites, muted greens, natural wood, terracotta, stone. Images with saturated blues, purples, or neon tones are off-brand. No cold-toned photography.</p>
+      </div>
+    </div>
+    <div class="img-principle">
+      <div class="img-principle-icon">∅</div>
+      <div class="img-principle-body">
+        <h4>People: only if it's Camille</h4>
+        <p>No generic stock people. No AI-generated people. If human presence is needed, it must be the consultant herself — in a professional, candid, unposed setting. Hands over faces are acceptable as an abstraction.</p>
+      </div>
+    </div>
+    <div class="img-principle">
+      <div class="img-principle-icon">✦</div>
+      <div class="img-principle-body">
+        <h4>AI imagery: high bar, specific purpose</h4>
+        <p>AI-generated images are permitted only when they are photorealistic and indistinguishable from photography, serve a specific decorative or atmospheric purpose, and align with the palette and composition principles above. Never use AI imagery for hero sections where credibility is highest. Preferred for: newsletter banners, social headers, background texture elements.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-label">Preferred Subject Matter</div>
+  <div class="grid-3 section-gap">
+    <div class="card"><h4>Workspace objects</h4><p>Open notebooks, fountain pens, ceramic mugs, stacked books with muted covers. Suggests thinking, craft, and deliberate work.</p></div>
+    <div class="card"><h4>European interiors</h4><p>Stone, linen, aged wood, arched windows. Signals the geographic sensibility of the brand without being location-specific.</p></div>
+    <div class="card"><h4>Natural textures</h4><p>Linen fabric, terracotta, travertine, paper grain. Used as background texture or detail close-up — not as focal scenes.</p></div>
+    <div class="card"><h4>Botanicals</h4><p>Single stems in small vases, eucalyptus, dried flowers. Warm-toned — ranunculus, roses, dried wheat — not tropical or brightly coloured.</p></div>
+    <div class="card"><h4>Abstract light</h4><p>Window light casting shadows, sunlight through linen, soft bokeh backgrounds. Mood-setting, never the subject itself.</p></div>
+    <div class="card"><h4>Maps and geography</h4><p>Vintage maps, atlases, globes — used sparingly as a nod to international work. Antique, not digital.</p></div>
+  </div>
+
+  <div class="s-label">Imagery Verdicts — What Works vs What Doesn't</div>
+  <div class="verdict-grid section-gap">
+    <div class="verdict-card">
+      <div class="verdict-header yes">✓ Use</div>
+      <div class="verdict-body">Open notebook on a walnut desk, lily of the valley in a glass vase, espresso in a white cup, closed MacBook in background — soft morning light through a linen curtain.</div>
+    </div>
+    <div class="verdict-card">
+      <div class="verdict-header no">✕ Avoid</div>
+      <div class="verdict-body">Abundance of pink ranunculus, stone millstones, navy blue vases — too lifestyle-coded and palette-inconsistent.</div>
+    </div>
+    <div class="verdict-card">
+      <div class="verdict-header yes">✓ Use</div>
+      <div class="verdict-body">Close-up of fountain pen on open journal page, dappled leaf shadow across paper, terracotta bowl of pebbles to the side.</div>
+    </div>
+    <div class="verdict-card">
+      <div class="verdict-header no">✕ Avoid</div>
+      <div class="verdict-body">All-teal-toned rustic still lifes with figs and brass vases — beautiful in isolation but reads as food/lifestyle brand, not strategic consultant.</div>
+    </div>
+    <div class="verdict-card">
+      <div class="verdict-header yes">✓ Use</div>
+      <div class="verdict-body">Travertine or linen as a background texture with minimal objects placed with precision — architectural, not domestic.</div>
+    </div>
+    <div class="verdict-card">
+      <div class="verdict-header no">✕ Avoid</div>
+      <div class="verdict-body">AI-rendered scenes with telltale perfect lighting, travertine disc prop, or colour schemes that feel designed rather than found.</div>
+    </div>
+  </div>
+
+  <div class="s-label">Image Dimensions by Placement</div>
+  <table class="usage-table section-gap">
+    <thead><tr><th>Placement</th><th>Dimensions</th><th>Aspect Ratio</th><th>Format</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Website hero (full-width)</td><td>2400 × 1200px min</td><td>2:1</td><td>WebP / JPG</td><td>Image stays in background; type overlaid — ensure sufficient contrast zone</td></tr>
+      <tr><td>Blog post / Insights cover</td><td>1200 × 630px</td><td>1.91:1</td><td>WebP / JPG</td><td>Also doubles as OG image for social sharing</td></tr>
+      <tr><td>Newsletter header (Clear Signal)</td><td>1200 × 500px</td><td>12:5</td><td>JPG</td><td>Warm cream background preferred; minimal image, type-forward</td></tr>
+      <tr><td>LinkedIn post image</td><td>1200 × 627px</td><td>1.91:1</td><td>JPG / PNG</td><td>Text overlay common — leave clear zone at centre-left</td></tr>
+      <tr><td>LinkedIn carousel slide</td><td>1080 × 1080px</td><td>1:1</td><td>PNG</td><td>Type-led. Image as background texture only if used at all.</td></tr>
+      <tr><td>LinkedIn banner</td><td>1584 × 396px</td><td>4:1</td><td>JPG / PNG</td><td>Keep critical content away from left edge (covered by profile photo)</td></tr>
+      <tr><td>Instagram post</td><td>1080 × 1080px</td><td>1:1</td><td>JPG / PNG</td><td>Square. Consistent visual rhythm across grid.</td></tr>
+      <tr><td>Instagram story / Reel cover</td><td>1080 × 1920px</td><td>9:16</td><td>JPG / PNG</td><td>Safe zone: centre 1080 × 1420px for key content</td></tr>
+      <tr><td>Product cover (Gumroad / PDF)</td><td>1600 × 2560px</td><td>5:8 (portrait)</td><td>PNG / JPG</td><td>Charcoal or Cream background; wordmark top, product title centre</td></tr>
+    </tbody>
+  </table>
+
+  <div class="s-label">Social Media Visual System</div>
+  <div class="grid-2 section-gap">
+    <div class="card">
+      <h4>LinkedIn — Thought leadership focus</h4>
+      <p>75% text-led posts (no image). 25% with supporting visual — either a typographic pull-quote card or a restrained still-life image. Carousels: Cream or White backgrounds, Libre Baskerville for main statements, Inter for body. Deep Navy or Teal as accent on slide number or CTA slide.</p>
+    </div>
+    <div class="card">
+      <h4>Instagram — If/when active</h4>
+      <p>Grid should feel cohesive. Alternate between typographic cards (Cream bg + Charcoal type) and still-life photography. Avoid mixing warm and cool-toned images in adjacent posts. No Reels with heavy editing or trend-chasing formats.</p>
+    </div>
+    <div class="card">
+      <h4>Carousel structure (LinkedIn)</h4>
+      <p>Slide 1: Hook — H2-scale statement in Libre Baskerville. Slides 2–N: supporting points in Inter, one idea per slide. Last slide: CTA + camille-renard.com. Max 8 slides. No progress bars or decorative corner flourishes.</p>
+    </div>
+    <div class="card">
+      <h4>Pull-quote cards</h4>
+      <p>Background: Warm Cream (#F6F0EA). Quote in Libre Baskerville Italic, large. Attribution in Inter 400, small, #6B6560. Optional thin Deep Navy rule above attribution. No quotation mark graphics — the italic type signals quotation.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PROMPT LIBRARY ═══════════════════════════════ -->
+<div id="tab-prompts" class="tab-panel">
+  <div class="export-bar">
+    <button class="export-btn primary-export" onclick="copyMd('prompts')">Copy as Markdown</button>
+    <button class="export-btn" onclick="downloadMd('prompts')">Download .md</button>
+    <span class="copy-toast" id="toast-prompts">✓ Copied to clipboard</span>
+  </div>
+
+  <div class="info-box">These prompts are calibrated to the Camille Renard brand. Variables in <span style="color:var(--deep-navy);font-weight:600">[brackets]</span> should be filled before use. Prompts are written for Gemini 2.0 Flash (image generation) and Claude (copy/design tasks) unless noted otherwise.</div>
+
+  <!-- STILL LIFE -->
+  <div class="prompt-category">
+    <div class="prompt-category-header">
+      <div class="prompt-category-label">Still Life & Workspace Photography</div>
+      <div class="prompt-category-tag">Image Generation</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-meta">
+        <div class="prompt-card-title">Hero / Banner — Neutral workspace</div>
+        <div class="prompt-card-use">Website hero · Newsletter header · LinkedIn banner</div>
+      </div>
+      <div class="prompt-card-body">
+        <div class="prompt-text">Photorealistic still life. A [walnut / oak / pale stone] desk surface near a tall window. Soft natural morning light, diffused through linen or frosted glass. Objects: an open notebook with cream pages and a dark pen resting in the gutter, a small glass vase with a single [ranunculus / lily of the valley / eucalyptus sprig], a closed laptop pushed to the background, slightly out of focus. No food. No mugs. Warm neutral tones — cream, off-white, muted sage, natural wood. No cold or blue tones. No AI-looking perfectly centred composition. Shot as if by a European editorial photographer. 2400 × 1200px, photorealistic, shallow depth of field.</div>
+        <div class="prompt-note">Swap bracketed options to vary across seasons. For newsletter headers, remove the laptop and emphasise the notebook.</div>
+        <button class="copy-prompt-btn" onclick="copyPromptBtn(this)">Copy prompt</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-meta">
+        <div class="prompt-card-title">Texture close-up — Background / decorative</div>
+        <div class="prompt-card-use">Section background · Social card bg · PDF cover texture</div>
+      </div>
+      <div class="prompt-card-body">
+        <div class="prompt-text">Extreme close-up macro photograph of [linen fabric / textured paper grain / stone surface / aged wood grain]. Warm, neutral light. Colours: cream, warm white, faint teal, muted grey. No sharp shadows. Completely abstract — no identifiable objects. Subtle texture that reads as a background, not a subject. Photorealistic. 1:1 or 2:1 aspect ratio.</div>
+        <div class="prompt-note">These work well as very-low-opacity overlays or as full-bleed section backgrounds under type. Ensure text contrast is maintained — test with Charcoal type on top before using.</div>
+        <button class="copy-prompt-btn" onclick="copyPromptBtn(this)">Copy prompt</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-meta">
+        <div class="prompt-card-title">Seasonal variation — Autumn/winter workspace</div>
+        <div class="prompt-card-use">Blog cover · Newsletter · Social post image</div>
+      </div>
+      <div class="prompt-card-body">
+        <div class="prompt-text">Photorealistic editorial photograph. A worn oak desk near a rain-streaked window, autumn garden blurred behind the glass. Objects arranged with restraint: a stack of 2–3 books with muted cloth covers (no legible titles), a ceramic speckled mug with black coffee, a closed Moleskine journal, a single dried hydrangea stem in a terracotta vessel. Warm teal and charcoal tones. No pink. No abundance — minimalist arrangement. Natural window light, overcast sky, diffused. Shot in the style of a French or Scandinavian editorial. 1.91:1 ratio.</div>
+        <button class="copy-prompt-btn" onclick="copyPromptBtn(this)">Copy prompt</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-meta">
+        <div class="prompt-card-title">Map / Geography nod</div>
+        <div class="prompt-card-use">Organic Growth Strategy content · About page · Blog covers</div>
+      </div>
+      <div class="prompt-card-body">
+        <div class="prompt-text">Photorealistic close-up of an antique or aged paper map, partially unfolded on a pale wooden desk. Warm light from the side. Colours: sepia, off-white, faded navy, aged paper. A mechanical pencil or brass compass rests on the map, casually placed not posed. No digital maps. No GPS imagery. No globes with bright plastic colours. Shallow depth of field, edges soft. European editorial aesthetic. 1.91:1 ratio.</div>
+        <div class="prompt-note">Use when writing about organic growth strategy topics, multi-market strategy, or Market Expansion Framework methodology. Grounds the abstract work in physical geography.</div>
+        <button class="copy-prompt-btn" onclick="copyPromptBtn(this)">Copy prompt</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHIC CARDS -->
+  <div class="prompt-category">
+    <div class="prompt-category-header">
+      <div class="prompt-category-label">Typographic Social Cards</div>
+      <div class="prompt-category-tag">Claude / Design tool</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-meta">
+        <div class="prompt-card-title">LinkedIn pull-quote card</div>
+        <div class="prompt-card-use">LinkedIn post · Newsletter callout</div>
+      </div>
+      <div class="prompt-card-body">
+        <div class="prompt-text">Design a 1200 × 627px pull-quote card for LinkedIn. Background: #F6F0EA (Warm Cream). Quote text: "[QUOTE TEXT]" in Libre Baskerville Italic, approximately 32–40px, colour #2A2A2A. Attribution below: "— Camille Renard, camille-renard.com" in Inter Regular 13px, colour #6B6560. A thin 1px horizontal rule in #1A3A5C (Deep Navy) separating the quote from the attribution. Generous padding on all sides (min 60px). No decorative quotation mark graphics. No borders. Clean, editorial, European.</div>
+        <div class="prompt-note">Keep quotes under 25 words for visual balance. Remove attribution line if the quote is from a client or external source.</div>
+        <button class="copy-prompt-btn" onclick="copyPromptBtn(this)">Copy prompt</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-meta">
+        <div class="prompt-card-title">LinkedIn carousel — slide template</div>
+        <div class="prompt-card-use">LinkedIn carousel · Educational series</div>
+      </div>
+      <div class="prompt-card-body">
+        <div class="prompt-text">Design a 1080 × 1080px carousel slide. Background: #FFFFFF (White) or #F6F0EA (Cream — alternate between slides). Slide number: Inter 600, 10px, uppercase, #6B6560, top right. Eyebrow label: Inter 600, 10px, uppercase, letter-spacing 0.14em, #2A7A6A (Teal), below slide number. Main statement: Inter SemiBold 600, 24–28px, #2A2A2A, max 2 lines. Supporting text: Inter Regular 400, 14px, #6B6560, max 3 lines. Bottom of slide: camille-renard.com in Inter 400 10px #6B6560. No decorative shapes. No icons unless functional. Slide [N] of [TOTAL]: [SLIDE CONTENT].</div>
+        <button class="copy-prompt-btn" onclick="copyPromptBtn(this)">Copy prompt</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-meta">
+        <div class="prompt-card-title">Newsletter cover header — Clear Signal</div>
+        <div class="prompt-card-use">Clear Signal newsletter · Email header image</div>
+      </div>
+      <div class="prompt-card-body">
+        <div class="prompt-text">Design a 1200 × 500px newsletter header image for Clear Signal, the organic growth strategy newsletter by Camille Renard. Background: #F6F0EA (Warm Cream) or a very subtle photographic texture (linen, paper grain) at low opacity over cream. Left section: wordmark "Clear Signal" in Libre Baskerville Regular, approximately 36px, #2A2A2A. Below it: "Issue [N] · [MONTH YEAR]" in Inter Regular 12px, #6B6560. Right section or centre: optional single editorial image (still life, texture) occupying no more than 40% of the frame. Right-aligned CTA: none — this is a header, not a button. Minimal. Type-forward. No gradients.</div>
+        <button class="copy-prompt-btn" onclick="copyPromptBtn(this)">Copy prompt</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCT COVERS -->
+  <div class="prompt-category">
+    <div class="prompt-category-header">
+      <div class="prompt-category-label">Digital Product Covers</div>
+      <div class="prompt-category-tag">Claude / Design tool</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-meta">
+        <div class="prompt-card-title">Gumroad product cover — dark version</div>
+        <div class="prompt-card-use">Gumroad · PDF deliverable cover · Product thumbnail</div>
+      </div>
+      <div class="prompt-card-body">
+        <div class="prompt-text">Design a 1600 × 2560px portrait product cover. Background: #2A2A2A (Charcoal). Top section: "Camille Renard" in Libre Baskerville Regular, 18px, #FFFFFF, 10% opacity — positioned top-left with 40px padding. Centre section: eyebrow label "[PRODUCT CATEGORY]" in Inter SemiBold 600, 11px, uppercase, letter-spacing 0.14em, #2A7A6A (Teal). Below eyebrow: product title "[PRODUCT NAME]" in Libre Baskerville Regular, 48–56px, #FFFFFF, line-height 1.1. Below title: one-line descriptor in Inter Regular 400, 16px, rgba(255,255,255,0.6). Bottom: camille-renard.com in Inter 400, 11px, #6B6560. No decorative elements. No gradients. No images — typography only.</div>
+        <div class="prompt-note">This matches the dark-cover PDF specification. For lighter products (worksheets, checklists), use the cream version below.</div>
+        <button class="copy-prompt-btn" onclick="copyPromptBtn(this)">Copy prompt</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-meta">
+        <div class="prompt-card-title">Gumroad product cover — light version</div>
+        <div class="prompt-card-use">Checklists · Worksheets · Starter kits</div>
+      </div>
+      <div class="prompt-card-body">
+        <div class="prompt-text">Design a 1600 × 2560px portrait product cover. Background: #F6F0EA (Warm Cream). A thin 0.5px border in #DDD6CE inset 20px from edges (optional). Top section: "Camille Renard" in Libre Baskerville Regular, 16px, #6B6560, top-left. Centre section: eyebrow "[PRODUCT CATEGORY]" in Inter SemiBold 600, 10px, uppercase, letter-spacing 0.14em, #1A3A5C (Deep Navy). Below: product title "[PRODUCT NAME]" in Libre Baskerville Regular, 48px, #2A2A2A. Descriptor: Inter Regular, 15px, #6B6560. Optional: a small decorative element — a single 1px Deep Navy horizontal rule (80px wide) between eyebrow and title. Bottom: camille-renard.com in Inter 400, 10px, #6B6560.</div>
+        <button class="copy-prompt-btn" onclick="copyPromptBtn(this)">Copy prompt</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- COPY PROMPTS -->
+  <div class="prompt-category">
+    <div class="prompt-category-header">
+      <div class="prompt-category-label">Copy & Content Prompts</div>
+      <div class="prompt-category-tag">Claude</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-meta">
+        <div class="prompt-card-title">LinkedIn post — thought leadership</div>
+        <div class="prompt-card-use">LinkedIn organic · Clear Signal newsletter teaser</div>
+      </div>
+      <div class="prompt-card-body">
+        <div class="prompt-text">Write a LinkedIn post for Camille Renard, independent organic growth strategist based in Bordeaux. Topic: [TOPIC]. Audience: founders and marketing leads at mid-to-large companies operating in multiple markets. Voice: direct, precise, warm without being casual. European sensibility — restrained, no hype. Structure: one sharp opening line (no question hooks, no "Have you ever..."). Then 3–5 lines of substance. End with a clear takeaway or a soft CTA — never "What do you think?" Max 1200 characters. No emojis. No bullet points unless the content is genuinely list-format. No hashtag blocks. One hashtag max, integrated naturally if at all.</div>
+        <div class="prompt-note">For newsletter teasers, add: "End with one sentence linking to the full issue: 'Full breakdown in this week's Clear Signal →'"</div>
+        <button class="copy-prompt-btn" onclick="copyPromptBtn(this)">Copy prompt</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-meta">
+        <div class="prompt-card-title">Newsletter issue — Clear Signal</div>
+        <div class="prompt-card-use">Clear Signal newsletter</div>
+      </div>
+      <div class="prompt-card-body">
+        <div class="prompt-text">Write a Clear Signal newsletter issue for Camille Renard. Topic: [TOPIC]. Audience: organic growth strategy practitioners, in-house SEOs, and marketing leads at internationally operating companies. Voice: peer-to-peer, analytically sharp, grounded. Not a beginner tutorial — assumes working knowledge of SEO. Structure: opening observation or hook (2–3 sentences, no preamble). Main analysis section (400–600 words). One or two concrete takeaways or frameworks. Optional: one external link with a one-sentence annotation. Sign-off in first person, brief. Tone: direct, no filler, intellectually honest about uncertainty. No urgency language. No "In today's issue..." openers.</div>
+        <button class="copy-prompt-btn" onclick="copyPromptBtn(this)">Copy prompt</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-meta">
+        <div class="prompt-card-title">Website page copy — service or about section</div>
+        <div class="prompt-card-use">Website · Landing pages · Proposal pages</div>
+      </div>
+      <div class="prompt-card-body">
+        <div class="prompt-text">Write copy for the [PAGE / SECTION] of camille-renard.com. Context: Camille Renard is an independent organic growth strategist with 10 years of experience, based in Bordeaux, France. She works with founders and marketing leads at mid-to-large companies operating internationally. Her positioning: strategic peer, not a contractor. Her methodology: Market Expansion Framework. Her newsletter: Clear Signal. Voice rules: direct, warm, European in sensibility. No hype, no urgency, no agency-speak. First person, active. Specific over vague — name markets, timeframes, outcomes. Max two em dashes in the entire piece. [SECTION CONTENT / BRIEF].</div>
+        <button class="copy-prompt-btn" onclick="copyPromptBtn(this)">Copy prompt</button>
+      </div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-meta">
+        <div class="prompt-card-title">Claude Design system prompt — for UI generation</div>
+        <div class="prompt-card-use">Claude Design · AI-generated interfaces</div>
+      </div>
+      <div class="prompt-card-body">
+        <div class="prompt-text">Design system: Camille Renard personal brand (camille-renard.com). Palette: Warm Cream #F6F0EA (primary bg), White #FFFFFF (cards), Teal #2A7A6A (CTA buttons only), Deep Navy #1A3A5C (accent, links, tags), Charcoal #2A2A2A (all text). Typography: H1–H2 in Libre Baskerville Regular, H3+ and all UI in Inter SemiBold (600), body in Inter Regular (400). Buttons: 3px border-radius, UPPERCASE labels, 0.12em letter-spacing. No gradients. No shadows. No rounded cards. No blue. Generous white space. European editorial feel — restrained, not SaaS. Task: [DESIGN TASK].</div>
+        <div class="prompt-note">Paste this at the start of any Claude Design session to anchor the brand context before your specific request.</div>
+        <button class="copy-prompt-btn" onclick="copyPromptBtn(this)">Copy prompt</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const mdContent = {
+  colours: `# Camille Renard — Brand Style Guide 2025
+## Colour Palette
+
+| Name | Hex | Use for | Never use for |
+|------|-----|---------|---------------|
+| Warm Cream | #F6F0EA | Primary page background, hero sections, content areas | Text, buttons, borders |
+| White | #FFFFFF | Cards, navigation bar, alternating sections | Large background spans |
+| Deep Navy | #1A3A5C | Text links, outlined tags, branded highlights, tertiary button | Filled buttons, large areas, headings |
+| Teal | #2A7A6A | Primary CTA buttons, active nav indicator, interactive elements | Body text, headings, backgrounds |
+| Charcoal | #2A2A2A | All body text, all headings, navigation links, footer | Nothing — sole text colour. Never use pure black. |
+
+### Supporting Brand Colour (Offline / Documents only)
+- Slate: #3A4A5C — presentations, social graphics, PDFs. Not used on the website.
+
+### Accessibility Contrast Ratios
+- #2A2A2A on #F6F0EA → 12.7:1 (WCAG AAA)
+- #2A2A2A on #FFFFFF → 14.4:1 (WCAG AAA)
+- #1A3A5C on #F6F0EA → 8.5:1 (WCAG AAA)
+- #1A3A5C on #FFFFFF → 9.6:1 (WCAG AAA)
+- #FFFFFF on #2A7A6A → 3.5:1 (WCAG AA large text)
+- #2A2A2A on #2A7A6A → 4.8:1 (WCAG AA)`,
+
+  typography: `# Camille Renard — Brand Style Guide 2025
+## Typography
+
+### Typefaces
+- **Headings (H1, H2):** Libre Baskerville — Regular 400. Italic available for pull quotes.
+- **Body & UI (H3+, body, buttons, nav):** Inter — Regular 400 and SemiBold 600 only. Never use Bold (700) in body context.
+
+### Type Scale (Base: 16px)
+
+| Style | Font | Weight | Size (rem) | Line Height | Letter Spacing | Transform |
+|-------|------|--------|------------|-------------|----------------|-----------|
+| H1 — Hero/Page Title | Libre Baskerville | 400 | 2.75rem | 1.05 | -0.02em | None |
+| H2 — Section Heading | Libre Baskerville | 400 | 2.0rem | 1.1 | -0.01em | None |
+| H3 — Sub-section | Inter | 600 | 1.25rem | 1.3 | 0 | None |
+| H4 — Component/Card | Inter | 600 | 1.0rem | 1.4 | 0 | None |
+| Lead / Intro Para | Inter | 400 | 1.25rem | 1.55 | 0 | None |
+| Body | Inter | 400 | 1.0625rem | 1.65 | 0 | None |
+| Caption / Small | Inter | 400 | 0.8125rem | 1.5 | 0 | None |
+| Eyebrow / Overline | Inter | 600 | 0.6875rem | 1.4 | 0.14em | UPPERCASE |
+
+**Rule:** Libre Baskerville for H1 and H2 only. Inter for everything else.`,
+
+  buttons: `# Camille Renard — Brand Style Guide 2025
+## Buttons
+
+All button text: Inter · SemiBold 600 · 0.6875rem · letter-spacing 0.12em · UPPERCASE
+
+### Primary Button
+- Background: #2A7A6A (Teal)
+- Text: #FFFFFF (White)
+- Hover Background: #8C6128
+- Border: None
+- Border Radius: 3px
+- Padding: 14px 28px
+- Use: Main CTA — one per section, max. "Book a Discovery Call", "Get Started", "Explore the Sprint"
+
+### Secondary Button
+- Background: Transparent
+- Text: #2A2A2A (Charcoal)
+- Border: 1.5px solid #2A2A2A
+- Hover Border: 1.5px solid #555555
+- Border Radius: 3px
+- Padding: 13px 27px
+- Use: Supporting action paired alongside a primary button. Never two primary buttons side by side.
+
+### Tertiary Button / Text Link Action
+- Background: None
+- Text: #1A3A5C (Deep Navy)
+- Hover Text: #5C1E2A
+- Border: Bottom only — 1px solid #1A3A5C
+- Border Radius: 0
+- Padding: 0
+- Use: Card footers, article links, inline navigation actions. Often with → arrow. Not for body paragraphs.
+
+### Button Copy Rules
+- Always action verbs: "Book a Call", "Explore the Sprint", "Get in Touch"
+- Never: "Click Here", "Learn More", "Submit"`,
+
+  voice: `# Camille Renard — Brand Style Guide 2025
+## Voice & Tone
+
+### Brand Identity
+- Feel: Premium · Grounded · Sharp · Warm · Elevated
+- Identity Words: European · Strategic · Detail-oriented
+- Audience: Founders and marketing leads at mid-to-large internationally operating companies
+- Positioning: Strategic peer — not a contractor. Leads with clarity, not urgency.
+
+### The brand IS
+- Direct and precise — no filler words
+- Warm without being casual
+- Confident without being loud
+- European in sensibility — restrained, considered
+- Strategically minded — outcomes over tactics
+- Honest about complexity, never over-simplifying
+- Specific — names markets, problems, results
+
+### The brand is NOT
+- Hyperbolic ("game-changing," "revolutionary")
+- Over-familiar or aggressively casual
+- Keyword-stuffed or SEO-baity in tone
+- Playful or whimsical in professional contexts
+- Vague ("I help businesses grow online")
+- Urgent or pressure-driven in CTAs
+- Agency-like — this is a personal brand
+
+### Copy Examples
+| Context | Wrong | Right |
+|---------|-------|-------|
+| Hero headline | 🚀 Supercharge your global SEO! | Clarity before action. |
+| CTA button | Click Here to Get Started Today! | Book a Discovery Call |
+| Service description | We help you crush the competition in international markets. | A focused 2-week engagement that maps your international architecture and surfaces the gaps blocking visibility in target markets. |`,
+
+  examples: `# Camille Renard — Brand Style Guide 2025
+## Usage Examples
+
+### Navigation
+- 5 flat links + 1 CTA button (Teal fill)
+- Labels: SEO Services / About / Insights / Newsletter / Resources / Book a Call (button)
+- No dropdowns. Site title in Libre Baskerville Regular.
+
+### Hero Section
+- Background: #F6F0EA (Warm Cream)
+- Eyebrow: Inter 600, uppercase, #6B6560
+- H1: Libre Baskerville Regular
+- Lead paragraph: max-width 480px
+- Buttons: Primary (Teal) + Secondary (Outlined Charcoal) pair
+
+### Content Cards
+- Background: #FFFFFF (White)
+- Tag: Deep Navy outlined, Inter 600 uppercase 9px
+- Heading: Inter SemiBold (H3)
+- Body text: Inter Regular, #6B6560
+- Action: Tertiary button with → at bottom`,
+
+  squarespace: `# Camille Renard — Brand Style Guide 2025
+## Squarespace 7.1 — Native Settings (No CSS Required)
+
+### 1. Colour Palette
+Path: 🎨 Paintbrush → Site Styles → Colors → Edit Palette → Custom Colors
+
+| Slot | Hex | Name |
+|------|-----|------|
+| 1 — Lightest | #F6F0EA | Warm Cream |
+| 2 | #FFFFFF | White |
+| 3 — Mid | #2A7A6A | Teal |
+| 4 | #1A3A5C | Deep Navy |
+| 5 — Darkest | #2A2A2A | Charcoal |
+
+### 2. Typography — Style Assignments
+Path: 🎨 Paintbrush → Site Styles → Fonts → Custom → Assign Styles
+Base Size: 16px (set under Site Styles → Fonts → Base Size)
+
+| Style | Font | Weight | Size | Line Height | Letter Spacing | Transform |
+|-------|------|--------|------|-------------|----------------|-----------|
+| Heading 1 | Libre Baskerville | 400 | 2.75rem | 1.05 | -0.02em | None |
+| Heading 2 | Libre Baskerville | 400 | 2.0rem | 1.1 | -0.01em | None |
+| Heading 3 | Inter | 600 | 1.25rem | 1.3 | 0 | None |
+| Heading 4 | Inter | 600 | 1.0rem | 1.4 | 0 | None |
+| Paragraph 1 (Lead) | Inter | 400 | 1.25rem | 1.55 | 0 | None |
+| Paragraph 2 (Body) | Inter | 400 | 1.0625rem | 1.65 | 0 | None |
+| Paragraph 3 (Small) | Inter | 400 | 0.8125rem | 1.5 | 0 | None |
+| Navigation Links | Inter | 400 | 0.875rem | 1 | 0 | None |
+| Site Title | Libre Baskerville | 400 | 1.0rem | 1 | 0.01em | None |
+| Button (Primary) | Inter | 600 | 0.6875rem | 1 | 0.12em | UPPERCASE |
+| Button (Secondary) | Inter | 600 | 0.6875rem | 1 | 0.12em | UPPERCASE |
+| Blog Post Title | Libre Baskerville | 400 | 1.75rem | 1.1 | -0.01em | None |
+
+### 3. Buttons
+Path: Site Styles → Buttons (shape) + Colors → active theme → Button section (colours)
+
+- Shape: Sharp, Border Radius 3px
+- Primary: Fill, #2A7A6A bg, #FFFFFF text, 28px/14px padding
+- Secondary: Outline, transparent bg, #2A2A2A text + border, 27px/13px padding
+
+### 4. Navigation Structure
+SEO Services / About / Insights / Newsletter / Resources / Book a Call (button)
+No dropdowns. Remove folders via Pages panel — drag child pages out, delete folder.`,
+
+  formats: `# Camille Renard — Brand Style Guide 2025
+## PDF & Google Sheets
+
+### PDF Documents (Proposals, Reports, Deliverables)
+
+| Property | Specification |
+|----------|--------------|
+| Page size | A4 portrait (210 × 297mm) |
+| Margins | 25mm top/bottom, 22mm left/right |
+| Cover background | #2A2A2A (Charcoal) |
+| Cover title | Libre Baskerville Regular, white |
+| Cover eyebrow | Inter 600 uppercase, #2A7A6A (Teal) |
+| Body background | #FFFFFF; cream (#F6F0EA) for callouts |
+| H1 | Libre Baskerville Regular, 22pt, #2A2A2A |
+| H2 | Libre Baskerville Regular, 16pt, #2A2A2A |
+| H3 | Inter SemiBold, 12pt, #2A2A2A |
+| Body | Inter Regular, 10.5pt, #2A2A2A, lh 1.6 |
+| Table header | #2A2A2A bg, white text, Inter 600, 9pt |
+| Alternating rows | white / #F6F0EA |
+| Callout box | #F6F0EA bg, left border 3pt #2A7A6A |
+| Accent colours | #1A3A5C for rules/highlights; #3A4A5C for section headers |
+| No-goes | No gradients, no shadows, no stock photos, no decorative ornaments |
+
+### Google Sheets (Trackers, Reports, Client Deliverables)
+
+| Property | Specification |
+|----------|--------------|
+| Header row | #2A2A2A bg, white, Inter Bold, 10pt, UPPERCASE, freeze row 1 |
+| Sub-header row | #F6F0EA bg, #2A2A2A text, Inter Bold, 10pt |
+| Body rows | Alternating white / #FAF7F3, Inter Regular, 10pt, row height 28px |
+| Accent rows | #E5EBF2 bg, #1A3A5C text (max 10% of rows) |
+| Section labels | #3A4A5C bg, white text, Inter Bold, 9pt UPPERCASE, merged across columns |
+| Borders | Outer: 1pt #2A2A2A. Inner horizontal: 0.5pt #DDD6CE. No inner verticals. |
+| Status: Done | #E5E9F0 bg + #2A4A6A text |
+| Status: In Progress | #E0F5F0 bg + #7A4A00 text |
+| Status: Blocked | #E5EBF2 bg + #1A3A5C text |
+| Chart series | Primary: #1A3A5C, Secondary: #2A7A6A, Tertiary: #3A4A5C |
+| Tab colours | Deep Navy (active), Charcoal (archive), Teal (overview) |
+| No-goes | No rainbow formatting, no Sheets preset themes, no mixed fonts |`,
+
+  donts: `# Camille Renard — Brand Style Guide 2025
+## What to Avoid
+
+### Visual Don'ts
+- No blue — in any shade
+- No teal (#2A7A6A) for body text — CTA/buttons only
+- No gradients — solid colours only
+- No mixing accent colours within a single sentence or headline
+- No decorative or novelty typefaces
+- No emojis, no urgency language, no hype
+- No bold (700) weight in Libre Baskerville headings
+- No two primary (Teal filled) buttons side by side
+- No vague CTA labels: "Click Here", "Learn More", "Submit"
+
+### Copy Don'ts
+| Avoid | Why | Use instead |
+|-------|-----|-------------|
+| "Game-changing," "revolutionary," "world-class" | Hyperbolic — undercuts credibility | Specific, verifiable claims |
+| "We help you crush the competition" | Aggressive — wrong register | "A framework for sustainable international visibility" |
+| "Hi! I'm your SEO bestie!" | Over-casual for B2B founders | "Ten years of independent practice." |
+| Vague CTAs: "Get started today!" | No specificity | "Book a Discovery Call" |
+| Passive: "SEO solutions are provided" | Agency-speak | First person active: "I map your architecture" |`,
+
+  imagery: `# Camille Renard — Brand Style Guide 2025
+## Imagery & Visuals
+
+### Visual Philosophy
+Imagery is editorial, not decorative. It earns its place by reinforcing the brand feeling — grounded, considered, European — or it doesn't appear at all. Typography and white space carry the brand; photography supports it.
+
+### Core Principles
+- **Type first, image second.** One hero image max per page. Internal pages are predominantly text.
+- **Light:** Soft, natural, directional. Morning or golden-hour warmth. No studio flash. Warm tones.
+- **Composition:** Restrained, room to breathe. European still-life sensibility. Never cluttered.
+- **Palette alignment:** Warm creams, off-whites, muted greens, natural wood, terracotta, stone. No blues, no neon, no cold tones.
+- **People:** Only if it's Camille herself. No stock people. No AI-generated people.
+- **AI imagery:** Permitted only when photorealistic, purposeful, and palette-consistent. Not for hero sections.
+
+### Preferred Subject Matter
+- Workspace objects: notebooks, fountain pens, ceramic mugs, stacked books (muted covers)
+- European interiors: stone, linen, aged wood, arched windows
+- Natural textures: linen, terracotta, travertine, paper grain
+- Botanicals: single stems, eucalyptus, dried flowers in warm tones
+- Abstract light: window shadows, soft bokeh
+- Maps and geography: vintage atlases, antique maps
+
+### Image Dimensions
+| Placement | Dimensions | Ratio |
+|-----------|-----------|-------|
+| Website hero | 2400 × 1200px | 2:1 |
+| Blog / Insights cover | 1200 × 630px | 1.91:1 |
+| Newsletter header | 1200 × 500px | 12:5 |
+| LinkedIn post | 1200 × 627px | 1.91:1 |
+| LinkedIn carousel slide | 1080 × 1080px | 1:1 |
+| LinkedIn banner | 1584 × 396px | 4:1 |
+| Instagram post | 1080 × 1080px | 1:1 |
+| Instagram story | 1080 × 1920px | 9:16 |
+| Product cover | 1600 × 2560px | 5:8 |
+
+### Social Media Visual System
+- **LinkedIn:** 75% text-led, 25% visual. Carousels: Cream/White bg, Libre Baskerville statements, max 8 slides.
+- **Pull-quote cards:** Cream bg, Libre Baskerville Italic, thin Deep Navy rule above attribution. No quotation mark graphics.
+- **Carousel last slide:** CTA + camille-renard.com. No progress bars or decorative flourishes.`,
+
+  prompts: `# Camille Renard — Brand Style Guide 2025
+## Prompt Library
+
+---
+
+### STILL LIFE & WORKSPACE — Image Generation
+
+**Hero / Banner — Neutral workspace**
+Use: Website hero · Newsletter header · LinkedIn banner
+
+Photorealistic still life. A [walnut / oak / pale stone] desk surface near a tall window. Soft natural morning light, diffused through linen or frosted glass. Objects: an open notebook with cream pages and a dark pen resting in the gutter, a small glass vase with a single [ranunculus / lily of the valley / eucalyptus sprig], a closed laptop pushed to the background, slightly out of focus. No food. No mugs. Warm neutral tones — cream, off-white, muted sage, natural wood. No cold or blue tones. No AI-looking perfectly centred composition. Shot as if by a European editorial photographer. 2400 × 1200px, photorealistic, shallow depth of field.
+
+---
+
+**Texture close-up — Background / decorative**
+Use: Section background · Social card bg · PDF cover texture
+
+Extreme close-up macro photograph of [linen fabric / textured paper grain / stone surface / aged wood grain]. Warm, neutral light. Colours: cream, warm white, faint teal, muted grey. No sharp shadows. Completely abstract — no identifiable objects. Subtle texture that reads as a background, not a subject. Photorealistic. 1:1 or 2:1 aspect ratio.
+
+---
+
+**Seasonal — Autumn/winter workspace**
+Use: Blog cover · Newsletter · Social post image
+
+Photorealistic editorial photograph. A worn oak desk near a rain-streaked window, autumn garden blurred behind the glass. Objects arranged with restraint: a stack of 2–3 books with muted cloth covers (no legible titles), a ceramic speckled mug with black coffee, a closed Moleskine journal, a single dried hydrangea stem in a terracotta vessel. Warm teal and charcoal tones. No pink. No abundance — minimalist arrangement. Natural window light, overcast sky, diffused. Shot in the style of a French or Scandinavian editorial. 1.91:1 ratio.
+
+---
+
+**Map / Geography nod**
+Use: Organic Growth Strategy content · About page · Blog covers
+
+Photorealistic close-up of an antique or aged paper map, partially unfolded on a pale wooden desk. Warm light from the side. Colours: sepia, off-white, faded navy, aged paper. A mechanical pencil or brass compass rests on the map, casually placed not posed. No digital maps. No GPS imagery. Shallow depth of field, edges soft. European editorial aesthetic. 1.91:1 ratio.
+
+---
+
+### TYPOGRAPHIC SOCIAL CARDS — Claude / Design tool
+
+**LinkedIn pull-quote card**
+Use: LinkedIn post · Newsletter callout
+
+Design a 1200 × 627px pull-quote card for LinkedIn. Background: #F6F0EA (Warm Cream). Quote text: "[QUOTE TEXT]" in Libre Baskerville Italic, approximately 32–40px, colour #2A2A2A. Attribution below: "— Camille Renard, camille-renard.com" in Inter Regular 13px, colour #6B6560. A thin 1px horizontal rule in #1A3A5C (Deep Navy) separating the quote from the attribution. Generous padding on all sides (min 60px). No decorative quotation mark graphics. No borders. Clean, editorial, European.
+
+---
+
+**LinkedIn carousel slide template**
+Use: LinkedIn carousel · Educational series
+
+Design a 1080 × 1080px carousel slide. Background: #FFFFFF or #F6F0EA (alternate). Slide number: Inter 600, 10px, uppercase, #6B6560, top right. Eyebrow: Inter 600, 10px, uppercase, 0.14em letter-spacing, #2A7A6A, below number. Main statement: Inter SemiBold 600, 24–28px, #2A2A2A, max 2 lines. Supporting text: Inter Regular 400, 14px, #6B6560, max 3 lines. Bottom: camille-renard.com in Inter 400 10px #6B6560. No decorative shapes. Slide [N] of [TOTAL]: [SLIDE CONTENT].
+
+---
+
+**Newsletter header — Clear Signal**
+Use: Clear Signal newsletter · Email header image
+
+Design a 1200 × 500px newsletter header. Background: #F6F0EA or subtle paper texture at low opacity over cream. Left: "Clear Signal" in Libre Baskerville Regular ~36px, #2A2A2A. Below: "Issue [N] · [MONTH YEAR]" in Inter Regular 12px, #6B6560. Optional right-side editorial image, max 40% of frame. No CTA. Minimal. Type-forward. No gradients.
+
+---
+
+### DIGITAL PRODUCT COVERS — Claude / Design tool
+
+**Gumroad cover — dark version**
+Use: Gumroad · PDF deliverable · Product thumbnail
+
+Design a 1600 × 2560px portrait cover. Background: #2A2A2A. Top-left: "Camille Renard" in Libre Baskerville Regular, 18px, #FFFFFF 10% opacity. Centre: eyebrow "[CATEGORY]" in Inter 600, 11px, uppercase, 0.14em, #2A7A6A. Title "[PRODUCT NAME]" in Libre Baskerville Regular, 48–56px, #FFFFFF, line-height 1.1. Descriptor: Inter Regular 400, 16px, rgba(255,255,255,0.6). Bottom: camille-renard.com, Inter 400, 11px, #6B6560. No decorative elements. No gradients. Typography only.
+
+---
+
+**Gumroad cover — light version**
+Use: Checklists · Worksheets · Starter kits
+
+Design a 1600 × 2560px portrait cover. Background: #F6F0EA. Optional thin 0.5px border in #DDD6CE inset 20px. Top-left: "Camille Renard" in Libre Baskerville Regular, 16px, #6B6560. Centre: eyebrow "[CATEGORY]" in Inter 600, 10px, uppercase, 0.14em, #1A3A5C. Optional thin 1px Deep Navy rule (80px wide) between eyebrow and title. Title "[PRODUCT NAME]" in Libre Baskerville Regular, 48px, #2A2A2A. Descriptor: Inter Regular, 15px, #6B6560. Bottom: camille-renard.com, Inter 400, 10px, #6B6560.
+
+---
+
+### COPY & CONTENT — Claude
+
+**LinkedIn post — thought leadership**
+
+Write a LinkedIn post for Camille Renard, independent organic growth strategist based in Bordeaux. Topic: [TOPIC]. Audience: founders and marketing leads at mid-to-large companies operating in multiple markets. Voice: direct, precise, warm without being casual. European sensibility — restrained, no hype. Structure: one sharp opening line (no question hooks, no "Have you ever..."). Then 3–5 lines of substance. End with a clear takeaway or a soft CTA — never "What do you think?" Max 1200 characters. No emojis. No bullet points unless genuinely list-format. No hashtag blocks. One hashtag max, integrated naturally if at all.
+
+---
+
+**Newsletter issue — Clear Signal**
+
+Write a Clear Signal newsletter issue for Camille Renard. Topic: [TOPIC]. Audience: organic growth strategy practitioners, in-house SEOs, and marketing leads at internationally operating companies. Voice: peer-to-peer, analytically sharp, grounded. Not a beginner tutorial. Structure: opening observation (2–3 sentences, no preamble). Main analysis (400–600 words). One or two concrete takeaways. Optional: one external link with one-sentence annotation. Sign-off in first person, brief. No urgency language. No "In today's issue..." openers.
+
+---
+
+**Website page copy**
+
+Write copy for the [PAGE / SECTION] of camille-renard.com. Camille Renard: independent organic growth strategist, 10 years experience, Bordeaux, France. Audience: founders and marketing leads at internationally operating companies. Positioning: strategic peer, not a contractor. Methodology: Market Expansion Framework. Newsletter: Clear Signal. Voice: direct, warm, European, restrained. First person, active. Specific over vague — name markets, timeframes, outcomes. Max two em dashes in the entire piece. [SECTION CONTENT / BRIEF].
+
+---
+
+**Claude Design system prompt**
+
+Design system: Camille Renard personal brand. Palette: Warm Cream #F6F0EA (primary bg), White #FFFFFF (cards), Teal #2A7A6A (CTA buttons only), Deep Navy #1A3A5C (accent, links, tags), Charcoal #2A2A2A (all text). Typography: H1–H2 Libre Baskerville Regular, H3+ and UI Inter SemiBold 600, body Inter Regular 400. Buttons: 3px border-radius, UPPERCASE, 0.12em letter-spacing. No gradients. No shadows. No rounded cards. No blue. Generous white space. European editorial feel — restrained, not SaaS. Task: [DESIGN TASK].`
+};
+
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function copyMd(tab) {
+  const text = mdContent[tab] || '';
+  navigator.clipboard.writeText(text).then(() => {
+    const toast = document.getElementById('toast-' + tab);
+    if(toast){ toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'), 2500); }
+  });
+}
+
+function copyPromptBtn(btn) {
+  const promptText = btn.closest('.prompt-card-body').querySelector('.prompt-text').innerText;
+  navigator.clipboard.writeText(promptText).then(() => {
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy prompt'; btn.classList.remove('copied'); }, 2500);
+  });
+}
+
+function downloadMd(tab) {
+  const text = mdContent[tab] || '';
+  const blob = new Blob([text], {type:'text/markdown'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'camille-renard-style-guide-' + tab + '.md';
+  a.click();
+}
+
+// ── LOGO KIT ─────────────────────────────────────────────────────────────────
+
+// All SVGs use text-anchor="middle" and centred coordinates so exports are balanced
+const LOGOS = {
+  // Wordmark — viewBox 600×80, text centred at x=300
+  'wm-dark-bg': {
+    vb:'0 0 600 80', w:600, h:80, filename:'camille-renard-wordmark-charcoal',
+    svg: (fill='#2A2A2A') => `<text x="300" y="60" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="56" font-weight="400" fill="${fill}" letter-spacing="-0.5">Camille Renard</text>`
+  },
+  // Wordmark + descriptor — viewBox 700×100
+  'wmd-dark': {
+    vb:'0 0 700 100', w:700, h:100, filename:'camille-renard-wordmark-descriptor-charcoal',
+    svg: (fill='#2A2A2A', sub='#6B6560') => `<text x="350" y="52" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="52" font-weight="400" fill="${fill}" letter-spacing="-0.5">Camille Renard</text><text x="350" y="82" text-anchor="middle" font-family="'Inter',Arial,sans-serif" font-size="13" font-weight="500" fill="${sub}" letter-spacing="3">INTERNATIONAL SEO CONSULTANT</text>`
+  },
+  // Wordmark + rule — viewBox 600×96, rule centred
+  'wmr-dark': {
+    vb:'0 0 600 96', w:600, h:96, filename:'camille-renard-wordmark-rule-charcoal',
+    svg: (fill='#2A2A2A', rule='#1A3A5C') => `<line x1="228" y1="12" x2="372" y2="12" stroke="${rule}" stroke-width="1.2"/><text x="300" y="76" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="56" font-weight="400" fill="${fill}" letter-spacing="-0.5">Camille Renard</text>`
+  },
+  // Monogram — viewBox 160×160, letters centred
+  'mono-dark': {
+    vb:'0 0 160 160', w:160, h:160, filename:'camille-renard-monogram-charcoal',
+    svg: (fill='#2A2A2A') => `<text x="80" y="118" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="100" font-weight="400" fill="${fill}" letter-spacing="-4">AB</text>`
+  }
+};
+
+function buildSVG(key, variant) {
+  const def = LOGOS[key];
+  if (!def) return '';
+  let inner = '';
+  let bg = '';
+  if (variant === 'charcoal') {
+    inner = def.svg('#2A2A2A', '#6B6560');
+  } else if (variant === 'white') {
+    inner = def.svg('#FFFFFF', 'rgba(255,255,255,0.45)');
+  } else if (variant === 'white-on-dark') {
+    bg = `<rect width="${def.w}" height="${def.h}" fill="#2A2A2A"/>`;
+    inner = def.svg('#FFFFFF', 'rgba(255,255,255,0.45)');
+  } else if (variant === 'deep-navy-rule') {
+    // for rule variant with teal rule on dark
+    inner = def.svg('#FFFFFF', '#2A7A6A');
+    bg = `<rect width="${def.w}" height="${def.h}" fill="#2A2A2A"/>`;
+  }
+  return `<svg viewBox="${def.vb}" xmlns="http://www.w3.org/2000/svg" width="${def.w}" height="${def.h}">${bg}${inner}</svg>`;
+}
+
+function dlSVG(key, variant, label) {
+  const def = LOGOS[key];
+  const svgStr = buildSVG(key, variant);
+  const blob = new Blob([svgStr], {type:'image/svg+xml'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = def.filename + (variant === 'white' ? '-white' : variant === 'white-on-dark' ? '-white-on-dark' : '') + '.svg';
+  a.click();
+  showLogoToast('SVG downloaded');
+}
+
+function dlPNG(key, variant, exportW) {
+  const def = LOGOS[key];
+  const scale = exportW / def.w;
+  const exportH = Math.round(def.h * scale);
+  const svgStr = buildSVG(key, variant)
+    .replace(`width="${def.w}"`, `width="${exportW}"`)
+    .replace(`height="${def.h}"`, `height="${exportH}"`);
+  const blob = new Blob([svgStr], {type:'image/svg+xml'});
+  const url = URL.createObjectURL(blob);
+  const canvas = document.createElement('canvas');
+  canvas.width = exportW * 2; canvas.height = exportH * 2;
+  const ctx = canvas.getContext('2d');
+  const img = new Image();
+  const retinaSvg = buildSVG(key, variant)
+    .replace(`width="${def.w}"`, `width="${exportW*2}"`)
+    .replace(`height="${def.h}"`, `height="${exportH*2}"`);
+  const retinaSvgBlob = new Blob([retinaSvg], {type:'image/svg+xml'});
+  const retinaUrl = URL.createObjectURL(retinaSvgBlob);
+  img.onload = () => {
+    ctx.drawImage(img, 0, 0);
+    URL.revokeObjectURL(retinaUrl);
+    const a = document.createElement('a');
+    a.href = canvas.toDataURL('image/png');
+    a.download = def.filename + (variant==='white'?'-white':variant==='white-on-dark'?'-white-on-dark':'') + '-' + exportW + 'px.png';
+    a.click();
+    showLogoToast('PNG ' + exportW + 'px downloaded');
+  };
+  img.src = retinaUrl;
+}
+
+function showLogoToast(msg) {
+  const t = document.getElementById('logo-toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+</script>
+
+<!-- ═══════════════════════════════ LOGO KIT ═══════════════════════════════ -->
+<div id="tab-logo" class="tab-panel">
+  <div class="info-box">All logos use <strong>Libre Baskerville Regular</strong> for wordmarks and <strong>Inter Medium</strong> for descriptors. SVGs are the primary format — fully scalable and font-independent on web. For print or third-party use, open in Figma or Illustrator and outline the text. PNG exports are @2× retina-ready.</div>
+
+  <!-- VARIATION 1: WORDMARK -->
+  <div class="s-label">Variation 1 — Wordmark</div>
+  <div class="logo-card">
+    <div class="logo-card-header">
+      <div class="logo-card-title">Camille Renard — Wordmark</div>
+      <div class="logo-card-badge badge-light">Primary logotype · Use in nav, PDF headers, socials</div>
+    </div>
+    <div class="preview-row">
+      <div class="preview-cell on-cream">
+        <svg viewBox="0 0 600 80" xmlns="http://www.w3.org/2000/svg" height="44">
+          <text x="300" y="60" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="56" font-weight="400" fill="#2A2A2A" letter-spacing="-0.5">Camille Renard</text>
+        </svg>
+        <div class="preview-bg-label">On Cream</div>
+      </div>
+      <div class="preview-cell on-white">
+        <svg viewBox="0 0 600 80" xmlns="http://www.w3.org/2000/svg" height="44">
+          <text x="300" y="60" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="56" font-weight="400" fill="#2A2A2A" letter-spacing="-0.5">Camille Renard</text>
+        </svg>
+        <div class="preview-bg-label">On White</div>
+      </div>
+      <div class="preview-cell on-dark">
+        <svg viewBox="0 0 600 80" xmlns="http://www.w3.org/2000/svg" height="44">
+          <text x="300" y="60" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="56" font-weight="400" fill="#FFFFFF" letter-spacing="-0.5">Camille Renard</text>
+        </svg>
+        <div class="preview-bg-label">On Charcoal</div>
+      </div>
+    </div>
+    <div class="size-scale">
+      <div class="size-item">
+        <svg viewBox="0 0 600 80" xmlns="http://www.w3.org/2000/svg" height="18">
+          <text x="300" y="60" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="56" font-weight="400" fill="#2A2A2A" letter-spacing="-0.5">Camille Renard</text>
+        </svg>
+        <div class="size-label">Small</div>
+      </div>
+      <div class="size-item">
+        <svg viewBox="0 0 600 80" xmlns="http://www.w3.org/2000/svg" height="30">
+          <text x="300" y="60" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="56" font-weight="400" fill="#2A2A2A" letter-spacing="-0.5">Camille Renard</text>
+        </svg>
+        <div class="size-label">Medium</div>
+      </div>
+      <div class="size-item">
+        <svg viewBox="0 0 600 80" xmlns="http://www.w3.org/2000/svg" height="44">
+          <text x="300" y="60" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="56" font-weight="400" fill="#2A2A2A" letter-spacing="-0.5">Camille Renard</text>
+        </svg>
+        <div class="size-label">Large</div>
+      </div>
+    </div>
+    <div class="logo-dl-bar">
+      <button class="dl-btn dl-btn-primary" onclick="dlSVG('wm-dark-bg','charcoal')">↓ SVG Charcoal</button>
+      <button class="dl-btn dl-btn-primary" onclick="dlSVG('wm-dark-bg','white')">↓ SVG White</button>
+      <div class="dl-sep"></div>
+      <button class="dl-btn dl-btn-secondary" onclick="dlPNG('wm-dark-bg','charcoal',640)">PNG 640px</button>
+      <button class="dl-btn dl-btn-secondary" onclick="dlPNG('wm-dark-bg','charcoal',1200)">PNG 1200px</button>
+      <button class="dl-btn dl-btn-secondary" onclick="dlPNG('wm-dark-bg','white-on-dark',1200)">PNG 1200px — White on Dark</button>
+    </div>
+  </div>
+
+  <!-- VARIATION 2: WORDMARK + DESCRIPTOR -->
+  <div class="s-label">Variation 2 — Wordmark + Descriptor</div>
+  <div class="logo-card">
+    <div class="logo-card-header">
+      <div class="logo-card-title">Camille Renard — Organic Growth Strategy Consultant</div>
+      <div class="logo-card-badge badge-deep-navy">With descriptor · Email footer · Proposals · LinkedIn</div>
+    </div>
+    <div class="preview-row">
+      <div class="preview-cell on-cream">
+        <svg viewBox="0 0 700 100" xmlns="http://www.w3.org/2000/svg" height="58">
+          <text x="350" y="52" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="52" font-weight="400" fill="#2A2A2A" letter-spacing="-0.5">Camille Renard</text>
+          <text x="350" y="82" text-anchor="middle" font-family="'Inter',Arial,sans-serif" font-size="13" font-weight="500" fill="#6B6560" letter-spacing="3">INTERNATIONAL SEO CONSULTANT</text>
+        </svg>
+        <div class="preview-bg-label">On Cream</div>
+      </div>
+      <div class="preview-cell on-white">
+        <svg viewBox="0 0 700 100" xmlns="http://www.w3.org/2000/svg" height="58">
+          <text x="350" y="52" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="52" font-weight="400" fill="#2A2A2A" letter-spacing="-0.5">Camille Renard</text>
+          <text x="350" y="82" text-anchor="middle" font-family="'Inter',Arial,sans-serif" font-size="13" font-weight="500" fill="#6B6560" letter-spacing="3">INTERNATIONAL SEO CONSULTANT</text>
+        </svg>
+        <div class="preview-bg-label">On White</div>
+      </div>
+      <div class="preview-cell on-dark">
+        <svg viewBox="0 0 700 100" xmlns="http://www.w3.org/2000/svg" height="58">
+          <text x="350" y="52" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="52" font-weight="400" fill="#FFFFFF" letter-spacing="-0.5">Camille Renard</text>
+          <text x="350" y="82" text-anchor="middle" font-family="'Inter',Arial,sans-serif" font-size="13" font-weight="500" fill="rgba(255,255,255,0.4)" letter-spacing="3">INTERNATIONAL SEO CONSULTANT</text>
+        </svg>
+        <div class="preview-bg-label">On Charcoal</div>
+      </div>
+    </div>
+    <div class="logo-dl-bar">
+      <button class="dl-btn dl-btn-primary" onclick="dlSVG('wmd-dark','charcoal')">↓ SVG Charcoal</button>
+      <button class="dl-btn dl-btn-primary" onclick="dlSVG('wmd-dark','white')">↓ SVG White</button>
+      <div class="dl-sep"></div>
+      <button class="dl-btn dl-btn-secondary" onclick="dlPNG('wmd-dark','charcoal',700)">PNG 700px</button>
+      <button class="dl-btn dl-btn-secondary" onclick="dlPNG('wmd-dark','charcoal',1400)">PNG 1400px</button>
+      <button class="dl-btn dl-btn-secondary" onclick="dlPNG('wmd-dark','white-on-dark',1400)">PNG 1400px — White on Dark</button>
+    </div>
+  </div>
+
+  <!-- VARIATION 3: WORDMARK + RULE -->
+  <div class="s-label">Variation 3 — Wordmark + Rule</div>
+  <div class="logo-card">
+    <div class="logo-card-header">
+      <div class="logo-card-title">Camille Renard — Wordmark with accent rule</div>
+      <div class="logo-card-badge badge-deep-navy">With rule · Proposal covers · PDF title pages</div>
+    </div>
+    <div class="preview-row">
+      <div class="preview-cell on-cream">
+        <svg viewBox="0 0 600 96" xmlns="http://www.w3.org/2000/svg" height="56">
+          <line x1="228" y1="12" x2="372" y2="12" stroke="#1A3A5C" stroke-width="1.2"/>
+          <text x="300" y="76" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="56" font-weight="400" fill="#2A2A2A" letter-spacing="-0.5">Camille Renard</text>
+        </svg>
+        <div class="preview-bg-label">On Cream — Deep Navy rule</div>
+      </div>
+      <div class="preview-cell on-white">
+        <svg viewBox="0 0 600 96" xmlns="http://www.w3.org/2000/svg" height="56">
+          <line x1="228" y1="12" x2="372" y2="12" stroke="#1A3A5C" stroke-width="1.2"/>
+          <text x="300" y="76" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="56" font-weight="400" fill="#2A2A2A" letter-spacing="-0.5">Camille Renard</text>
+        </svg>
+        <div class="preview-bg-label">On White — Deep Navy rule</div>
+      </div>
+      <div class="preview-cell on-dark">
+        <svg viewBox="0 0 600 96" xmlns="http://www.w3.org/2000/svg" height="56">
+          <line x1="228" y1="12" x2="372" y2="12" stroke="#2A7A6A" stroke-width="1.2"/>
+          <text x="300" y="76" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="56" font-weight="400" fill="#FFFFFF" letter-spacing="-0.5">Camille Renard</text>
+        </svg>
+        <div class="preview-bg-label">On Charcoal — Teal rule</div>
+      </div>
+    </div>
+    <div class="logo-note">Rule is centred above the name. Deep Navy #1A3A5C on light backgrounds, Teal #2A7A6A on Charcoal. 144px wide × 1.2px.</div>
+    <div class="logo-dl-bar">
+      <button class="dl-btn dl-btn-primary" onclick="dlSVG('wmr-dark','charcoal')">↓ SVG Charcoal + Deep Navy rule</button>
+      <button class="dl-btn dl-btn-primary" onclick="dlSVG('wmr-dark','deep-navy-rule')">↓ SVG White + Teal rule</button>
+      <div class="dl-sep"></div>
+      <button class="dl-btn dl-btn-secondary" onclick="dlPNG('wmr-dark','charcoal',600)">PNG 600px</button>
+      <button class="dl-btn dl-btn-secondary" onclick="dlPNG('wmr-dark','charcoal',1200)">PNG 1200px</button>
+    </div>
+  </div>
+
+  <!-- VARIATION 4: MONOGRAM -->
+  <div class="s-label">Variation 4 — Monogram</div>
+  <div class="logo-card">
+    <div class="logo-card-header">
+      <div class="logo-card-title">AB — Monogram, letterform only</div>
+      <div class="logo-card-badge badge-dark">Favicon · Profile picture · Small placements</div>
+    </div>
+    <div class="preview-row">
+      <div class="preview-cell on-cream">
+        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" width="96" height="96">
+          <text x="80" y="118" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="100" font-weight="400" fill="#2A2A2A" letter-spacing="-4">AB</text>
+        </svg>
+        <div class="preview-bg-label">On Cream</div>
+      </div>
+      <div class="preview-cell on-white">
+        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" width="96" height="96">
+          <text x="80" y="118" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="100" font-weight="400" fill="#2A2A2A" letter-spacing="-4">AB</text>
+        </svg>
+        <div class="preview-bg-label">On White</div>
+      </div>
+      <div class="preview-cell on-dark">
+        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" width="96" height="96">
+          <text x="80" y="118" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="100" font-weight="400" fill="#FFFFFF" letter-spacing="-4">AB</text>
+        </svg>
+        <div class="preview-bg-label">On Charcoal</div>
+      </div>
+    </div>
+    <div class="size-scale">
+      <div class="size-item">
+        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><text x="80" y="118" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="100" font-weight="400" fill="#2A2A2A" letter-spacing="-4">AB</text></svg>
+        <div class="size-label">16px favicon</div>
+      </div>
+      <div class="size-item">
+        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" width="32" height="32"><text x="80" y="118" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="100" font-weight="400" fill="#2A2A2A" letter-spacing="-4">AB</text></svg>
+        <div class="size-label">32px</div>
+      </div>
+      <div class="size-item">
+        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" width="64" height="64"><text x="80" y="118" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="100" font-weight="400" fill="#2A2A2A" letter-spacing="-4">AB</text></svg>
+        <div class="size-label">64px</div>
+      </div>
+      <div class="size-item">
+        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" width="96" height="96"><text x="80" y="118" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="100" font-weight="400" fill="#2A2A2A" letter-spacing="-4">AB</text></svg>
+        <div class="size-label">96px</div>
+      </div>
+      <div class="size-item">
+        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" width="160" height="160"><text x="80" y="118" text-anchor="middle" font-family="'Libre Baskerville',Georgia,serif" font-size="100" font-weight="400" fill="#2A2A2A" letter-spacing="-4">AB</text></svg>
+        <div class="size-label">160px</div>
+      </div>
+    </div>
+    <div class="logo-dl-bar">
+      <button class="dl-btn dl-btn-primary" onclick="dlSVG('mono-dark','charcoal')">↓ SVG Charcoal</button>
+      <button class="dl-btn dl-btn-primary" onclick="dlSVG('mono-dark','white')">↓ SVG White</button>
+      <div class="dl-sep"></div>
+      <button class="dl-btn dl-btn-secondary" onclick="dlPNG('mono-dark','charcoal',32)">PNG 32px</button>
+      <button class="dl-btn dl-btn-secondary" onclick="dlPNG('mono-dark','charcoal',160)">PNG 160px</button>
+      <button class="dl-btn dl-btn-secondary" onclick="dlPNG('mono-dark','charcoal',512)">PNG 512px (profile)</button>
+      <button class="dl-btn dl-btn-secondary" onclick="dlPNG('mono-dark','white-on-dark',512)">PNG 512px — White on Dark</button>
+    </div>
+  </div>
+
+  <!-- USAGE TABLE -->
+  <div class="s-label">Usage by placement</div>
+  <div class="grid-2">
+    <table class="usage-table">
+      <thead><tr><th>Placement</th><th>Variation</th><th>Colour</th></tr></thead>
+      <tbody>
+        <tr><td>Website navigation</td><td>Wordmark</td><td>Charcoal</td></tr>
+        <tr><td>Email footer</td><td>Wordmark + descriptor</td><td>Charcoal</td></tr>
+        <tr><td>LinkedIn profile picture</td><td>Monogram AB</td><td>White on Charcoal bg</td></tr>
+        <tr><td>Proposal / PDF cover</td><td>Wordmark + rule</td><td>White (on charcoal cover)</td></tr>
+        <tr><td>PDF inner page header</td><td>Wordmark</td><td>Charcoal</td></tr>
+        <tr><td>Favicon</td><td>Monogram AB</td><td>Charcoal, 32px PNG</td></tr>
+        <tr><td>Social carousel footer</td><td>Wordmark</td><td>Charcoal or Muted, small</td></tr>
+        <tr><td>Newsletter header</td><td>Wordmark + descriptor</td><td>Charcoal on Cream bg</td></tr>
+      </tbody>
+    </table>
+    <div style="background:var(--white);border:0.5px solid var(--border);border-radius:4px;padding:20px 24px">
+      <div style="font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px">Never do</div>
+      <ul style="list-style:none;font-size:12.5px;line-height:1.6">
+        <li style="padding:6px 0;border-bottom:0.5px solid var(--border)"><span style="color:var(--deep-navy);margin-right:8px">✕</span>Stretch or distort any lockup</li>
+        <li style="padding:6px 0;border-bottom:0.5px solid var(--border)"><span style="color:var(--deep-navy);margin-right:8px">✕</span>Use Teal as the wordmark fill colour</li>
+        <li style="padding:6px 0;border-bottom:0.5px solid var(--border)"><span style="color:var(--deep-navy);margin-right:8px">✕</span>Add drop shadows or outlines</li>
+        <li style="padding:6px 0;border-bottom:0.5px solid var(--border)"><span style="color:var(--deep-navy);margin-right:8px">✕</span>Place on busy photographic backgrounds</li>
+        <li style="padding:6px 0;border-bottom:0.5px solid var(--border)"><span style="color:var(--deep-navy);margin-right:8px">✕</span>Use Libre Baskerville Bold (700)</li>
+        <li style="padding:6px 0;border-bottom:0.5px solid var(--border)"><span style="color:var(--deep-navy);margin-right:8px">✕</span>Mix two variations in the same lockup</li>
+        <li style="padding:6px 0"><span style="color:var(--deep-navy);margin-right:8px">✕</span>Use monogram below 16px — use wordmark instead</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="logo-toast" id="logo-toast">Downloaded</div>
+
+
+</body>
+</html>

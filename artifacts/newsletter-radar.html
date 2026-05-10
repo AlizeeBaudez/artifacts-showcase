@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Newsletter Radar — Léa Fontaine</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0d;
+    --paper: #f5f0e8;
+    --cream: #ede8dc;
+    --accent: #c8421a;
+    --gold: #b89a4e;
+    --muted: #7a7570;
+    --light: #d4cfc5;
+    --green: #3a6b45;
+    --blue: #1a3a5c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Instrument Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.6;
+  }
+
+  header {
+    padding: 60px 60px 40px;
+    border-bottom: 2px solid var(--ink);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 20px;
+  }
+
+  .masthead {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 6vw, 80px);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -2px;
+  }
+
+  .masthead em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .header-meta {
+    text-align: right;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.8;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .header-meta strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .tagline {
+    padding: 12px 60px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .ticker {
+    display: flex;
+    gap: 40px;
+    overflow: hidden;
+  }
+
+  .sources-strip {
+    padding: 14px 60px;
+    border-bottom: 1px solid var(--light);
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .source-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border: 1px solid var(--light);
+    border-radius: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: var(--cream);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .source-tag:hover, .source-tag.active {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .source-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-right: 8px;
+  }
+
+  /* Main grid */
+  main {
+    padding: 0 60px 80px;
+  }
+
+  .section-divider {
+    padding: 32px 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .section-divider h2 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--light);
+  }
+
+  /* Topic cards */
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2px;
+  }
+
+  .topic-card {
+    background: var(--cream);
+    padding: 28px 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    border: 2px solid transparent;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .topic-card:hover {
+    background: var(--ink);
+    color: var(--paper);
+    z-index: 2;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  }
+
+  .topic-card.active {
+    background: var(--accent);
+    color: var(--paper);
+    border-color: var(--accent);
+    z-index: 3;
+  }
+
+  .topic-card:hover .topic-number,
+  .topic-card.active .topic-number {
+    color: rgba(255,255,255,0.4);
+  }
+
+  .topic-card:hover .topic-source,
+  .topic-card.active .topic-source {
+    color: rgba(255,255,255,0.6);
+  }
+
+  .topic-card:hover .urgency-dot,
+  .topic-card.active .urgency-dot {
+    background: var(--paper);
+  }
+
+  /* Span widths */
+  .span-5 { grid-column: span 5; }
+  .span-4 { grid-column: span 4; }
+  .span-3 { grid-column: span 3; }
+  .span-6 { grid-column: span 6; }
+  .span-7 { grid-column: span 7; }
+
+  .topic-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 900;
+    color: var(--light);
+    line-height: 1;
+    margin-bottom: 12px;
+    transition: color 0.2s;
+  }
+
+  .topic-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(16px, 2vw, 22px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .topic-summary {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+
+  .topic-card:hover .topic-summary,
+  .topic-card.active .topic-summary {
+    color: rgba(255,255,255,0.75);
+  }
+
+  .topic-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .topic-source {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+
+  .urgency-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    transition: background 0.2s;
+  }
+
+  .urgency-high { background: var(--accent); }
+  .urgency-medium { background: var(--gold); }
+  .urgency-low { background: var(--green); }
+
+  /* Detail panel */
+  .detail-panel {
+    margin-top: 2px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 48px 60px;
+    display: none;
+    animation: slideDown 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .detail-panel.open {
+    display: block;
+  }
+
+  .detail-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(200,66,26,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .detail-inner {
+    max-width: 900px;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 60px;
+  }
+
+  .detail-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--paper);
+    font-family: 'DM Mono', monospace;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+
+  .detail-close:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .detail-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 120px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.08);
+    line-height: 1;
+    position: absolute;
+    top: 24px;
+    left: 60px;
+  }
+
+  .detail-header {
+    margin-bottom: 24px;
+    padding-top: 40px;
+  }
+
+  .detail-cat {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .detail-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .detail-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .detail-body p + p {
+    margin-top: 16px;
+  }
+
+  .detail-body strong {
+    color: var(--paper);
+    font-weight: 600;
+  }
+
+  .sidebar-articles {
+    border-left: 1px solid rgba(255,255,255,0.1);
+    padding-left: 40px;
+  }
+
+  .sidebar-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 20px;
+  }
+
+  .article-item {
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+
+  .article-item:hover { opacity: 0.7; }
+
+  .article-item:last-child { border-bottom: none; }
+
+  .article-source {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .article-title {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+
+  .article-takeaway {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.5;
+  }
+
+  .read-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+    transition: gap 0.15s;
+  }
+
+  .read-link:hover { gap: 14px; }
+
+  /* Relevance for Léa */
+  .relevance-box {
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: rgba(200,66,26,0.12);
+    border-left: 3px solid var(--accent);
+  }
+
+  .relevance-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .relevance-text {
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* Heatmap row */
+  .heatmap-row {
+    display: flex;
+    gap: 2px;
+    margin-top: 2px;
+    padding: 20px 0;
+    border-top: 1px solid var(--light);
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .heat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-right: 12px;
+    min-width: 80px;
+  }
+
+  .heat-cell {
+    width: 32px;
+    height: 32px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.15s;
+    position: relative;
+  }
+
+  .heat-cell:hover { transform: scale(1.3); z-index: 10; }
+
+  .heat-cell[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 10px;
+    padding: 4px 8px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 20;
+  }
+
+  .heat-1 { background: #f0ece0; color: var(--muted); }
+  .heat-2 { background: #e8c99a; color: var(--ink); }
+  .heat-3 { background: #d4955a; color: var(--paper); }
+  .heat-4 { background: var(--accent); color: var(--paper); }
+  .heat-5 { background: #8b2810; color: var(--paper); }
+
+  footer {
+    padding: 24px 60px;
+    border-top: 2px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 900px) {
+    header, main, .tagline, .sources-strip, footer { padding-left: 24px; padding-right: 24px; }
+    .span-5, .span-4, .span-3, .span-6, .span-7 { grid-column: span 12; }
+    .detail-inner { grid-template-columns: 1fr; }
+    .sidebar-articles { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px; }
+    .detail-panel { padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="masthead">Newsletter<br><em>Radar</em></div>
+  </div>
+  <div class="header-meta">
+    <strong>Week of Nov 21–24, 2026</strong><br>
+    Sources scanned · 6<br>
+    Topics identified · 10<br>
+    Articles surfaced · 18<br>
+    Generated for · Léa F.
+  </div>
+</header>
+
+<div class="tagline">
+  <span>Intelligence digest — SEO · AI Search · GEO · Freelance Strategy</span>
+  <span>SearchPulse · OrganicEdge · Marco Villani · Sitevision · Solo Founders · Founder Collective</span>
+</div>
+
+<div class="sources-strip">
+  <span class="source-label">Filter by source →</span>
+  <span class="source-tag active" data-source="all">All topics</span>
+  <span class="source-tag" data-source="searchpulse">SearchPulse</span>
+  <span class="source-tag" data-source="organicedge">OrganicEdge</span>
+  <span class="source-tag" data-source="sitevision">Sitevision</span>
+  <span class="source-tag" data-source="marco">Marco Villani</span>
+  <span class="source-tag" data-source="freelance">Freelance</span>
+</div>
+
+<main>
+  <div class="section-divider">
+    <h2>10 Essential Topics This Week</h2>
+  </div>
+
+  <div class="topics-grid" id="topicsGrid">
+
+    <div class="topic-card span-5" data-topic="1" data-source="searchpulse organicedge" style="animation-delay:0.05s">
+      <div class="topic-number">01</div>
+      <div class="topic-title">Blind Trust in LLMs Will Get You Burned</div>
+      <div class="topic-summary">The confidence-without-verification problem is now SEO's most dangerous workflow. A real story: ChatGPT silently corrupted a YoY traffic analysis — only caught because of 15 years of intuition.</div>
+      <div class="topic-footer">
+        <span class="topic-source">OrganicEdge</span>
+        <span class="urgency-dot urgency-high"></span>
+      </div>
+    </div>
+
+    <div class="topic-card span-4" data-topic="2" data-source="searchpulse sitevision" style="animation-delay:0.1s">
+      <div class="topic-number">02</div>
+      <div class="topic-title">Google AI Mode Expands to 53 New Languages</div>
+      <div class="topic-summary">AI Mode now works in just under 100 languages — a massive signal for your international SEO clients. Non-English markets are now inside the AI search funnel.</div>
+      <div class="topic-footer">
+        <span class="topic-source">SearchPulse</span>
+        <span class="urgency-dot urgency-high"></span>
+      </div>
+    </div>
+
+    <div class="topic-card span-3" data-topic="3" data-source="searchpulse" style="animation-delay:0.15s">
+      <div class="topic-number">03</div>
+      <div class="topic-title">Links in AI Overviews Are Becoming More Visible</div>
+      <div class="topic-summary">Google is adding hover pop-ups and more prominent link icons in AI responses. Publishers can breathe — slightly.</div>
+      <div class="topic-footer">
+        <span class="topic-source">SearchPulse / Sitevision</span>
+        <span class="urgency-dot urgency-medium"></span>
+      </div>
+    </div>
+
+    <div class="topic-card span-4" data-topic="4" data-source="searchpulse sitevision" style="animation-delay:0.2s">
+      <div class="topic-number">04</div>
+      <div class="topic-title">Organic Rankings & AI Citations Are Linked</div>
+      <div class="topic-summary">Camille Arnaud's analysis: sites hit by Google's Oct 2026 algorithm update also lost AI search citations. If you lose Google, you lose ChatGPT and Perplexity too.</div>
+      <div class="topic-footer">
+        <span class="topic-source">SearchPulse</span>
+        <span class="urgency-dot urgency-high"></span>
+      </div>
+    </div>
+
+    <div class="topic-card span-5" data-topic="5" data-source="searchpulse" style="animation-delay:0.25s">
+      <div class="topic-number">05</div>
+      <div class="topic-title">How AI Reads: The Science of Attention</div>
+      <div class="topic-summary">Thomas Wenger analyzed 1.4M results: 44.2% of citations come from the first 30% of text. AI is a busy editor — frontload your key arguments and definitions. Citation winners use more definitive language.</div>
+      <div class="topic-footer">
+        <span class="topic-source">SearchPulse / Growth Signal</span>
+        <span class="urgency-dot urgency-high"></span>
+      </div>
+    </div>
+
+    <div class="topic-card span-3" data-topic="6" data-source="searchpulse" style="animation-delay:0.3s">
+      <div class="topic-number">06</div>
+      <div class="topic-title">ChatGPT Searches in English Even When You Don't</div>
+      <div class="topic-summary">43% of query fan-outs for non-English prompts are performed in English. Critical for your multilingual client strategies.</div>
+      <div class="topic-footer">
+        <span class="topic-source">SearchPulse / Qlair AI</span>
+        <span class="urgency-dot urgency-high"></span>
+      </div>
+    </div>
+
+    <div class="topic-card span-3" data-topic="7" data-source="marco" style="animation-delay:0.35s">
+      <div class="topic-number">07</div>
+      <div class="topic-title">Common Crawl: The Hidden Authority Signal Behind AI Citations</div>
+      <div class="topic-summary">80%+ of GPT-3 tokens came from Common Crawl. Domains with higher HC Rank get crawled more often, and thus appear more in AI training data — a potential new GEO factor.</div>
+      <div class="topic-footer">
+        <span class="topic-source">Marco Villani</span>
+        <span class="urgency-dot urgency-medium"></span>
+      </div>
+    </div>
+
+    <div class="topic-card span-6" data-topic="8" data-source="organicedge" style="animation-delay:0.4s">
+      <div class="topic-number">08</div>
+      <div class="topic-title">SEO Stalls Kill Budgets — The Execution Problem</div>
+      <div class="topic-summary">The biggest threat to SEO isn't Google — it's inaction. Tickets rot in backlogs, approvals drag, and the SEO owner takes the heat. A sharp argument for why consultants must be execution-obsessed, not just strategy-obsessed.</div>
+      <div class="topic-footer">
+        <span class="topic-source">OrganicEdge</span>
+        <span class="urgency-dot urgency-medium"></span>
+      </div>
+    </div>
+
+    <div class="topic-card span-3" data-topic="9" data-source="sitevision searchpulse" style="animation-delay:0.45s">
+      <div class="topic-number">09</div>
+      <div class="topic-title">Google WebMCP & The Agentic Web Shift</div>
+      <div class="topic-summary">Google announced WebMCP protocol for AI agents to interact with websites. Combined with AI Mode's expansion, this marks a new infrastructure layer for search.</div>
+      <div class="topic-footer">
+        <span class="topic-source">Sitevision / SearchPulse</span>
+        <span class="urgency-dot urgency-medium"></span>
+      </div>
+    </div>
+
+    <div class="topic-card span-6" data-topic="10" data-source="freelance" style="animation-delay:0.5s">
+      <div class="topic-number">10</div>
+      <div class="topic-title">Building a Steady Freelance Client Base: The Income Stability Framework</div>
+      <div class="topic-summary">Solo Founders newsletter on the rollercoaster income problem — and two gigs that changed the picture. Practical for your fractional retainer positioning and pipeline building as you grow your independent practice.</div>
+      <div class="topic-footer">
+        <span class="topic-source">Solo Founders</span>
+        <span class="urgency-dot urgency-low"></span>
+      </div>
+    </div>
+
+    <div class="topic-card span-3" data-topic="0" data-source="searchpulse" style="animation-delay:0.55s">
+      <div class="topic-number">✦</div>
+      <div class="topic-title">Bonus: Indexing Is Now a Quality Signal</div>
+      <div class="topic-summary">Pieter Vanhout: "Discovered, currently not indexed" means Google sees no quality threshold met. Resubmitting won't help — the content is the problem.</div>
+      <div class="topic-footer">
+        <span class="topic-source">SearchPulse</span>
+        <span class="urgency-dot urgency-low"></span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Detail panel -->
+  <div class="detail-panel" id="detailPanel">
+    <button class="detail-close" id="detailClose">✕</button>
+    <div class="detail-num" id="detailNum"></div>
+    <div class="detail-inner">
+      <div class="detail-main">
+        <div class="detail-header">
+          <div class="detail-cat" id="detailCat"></div>
+          <div class="detail-title" id="detailTitle"></div>
+        </div>
+        <div class="detail-body" id="detailBody"></div>
+        <div class="relevance-box" id="relevanceBox">
+          <div class="relevance-label">Why it matters for you</div>
+          <div class="relevance-text" id="relevanceText"></div>
+        </div>
+        <a href="#" class="read-link" id="readLink" target="_blank">Read original article →</a>
+      </div>
+      <div class="sidebar-articles" id="sidebarArticles">
+        <div class="sidebar-label">Related articles this week</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Signal heatmap -->
+  <div class="section-divider">
+    <h2>Signal Intensity Heatmap</h2>
+  </div>
+
+  <div class="heatmap-row">
+    <span class="heat-label">AI Citations</span>
+    <div class="heat-cell heat-5" title="How AI reads text">AI Reads</div>
+    <div class="heat-cell heat-5" title="Organic = AI citations">Camille</div>
+    <div class="heat-cell heat-4" title="Common Crawl authority">CC Rank</div>
+    <div class="heat-cell heat-3" title="Links in AI Overviews">AI Links</div>
+    <div class="heat-cell heat-2" title="WebMCP protocol">WebMCP</div>
+  </div>
+
+  <div class="heatmap-row">
+    <span class="heat-label">Intl. SEO</span>
+    <div class="heat-cell heat-5" title="AI Mode in 53 languages">AI Mode</div>
+    <div class="heat-cell heat-5" title="ChatGPT queries in English">EN Queries</div>
+    <div class="heat-cell heat-3" title="Platform-specific citation patterns">Platform</div>
+    <div class="heat-cell heat-2" title="Discover Core Update Nov 2026">Discover</div>
+    <div class="heat-cell heat-1" title="Markdown crawl issues">Markdown</div>
+  </div>
+
+  <div class="heatmap-row">
+    <span class="heat-label">SEO Ops</span>
+    <div class="heat-cell heat-5" title="Blind trust in LLMs">LLM Risk</div>
+    <div class="heat-cell heat-4" title="SEO stalls & execution gaps">Execution</div>
+    <div class="heat-cell heat-3" title="Indexing as quality signal">Indexing</div>
+    <div class="heat-cell heat-3" title="GSC AI-powered config rolling out">GSC AI</div>
+    <div class="heat-cell heat-2" title="Why SEO tickets get ignored">Dev Gap</div>
+  </div>
+
+  <div class="heatmap-row">
+    <span class="heat-label">Freelance</span>
+    <div class="heat-cell heat-3" title="Steady client base strategy">Pipeline</div>
+    <div class="heat-cell heat-3" title="Income stability — two new gigs">Retainers</div>
+    <div class="heat-cell heat-2" title="Content with purpose, not virality">Content</div>
+    <div class="heat-cell heat-1" title="AI tools for solo consultants">AI Tools</div>
+    <div class="heat-cell heat-1" title="SEO skills for 2027">Skills</div>
+  </div>
+
+</main>
+
+<footer>
+  <span>Newsletter Radar · Generated Nov 24, 2026</span>
+  <span>Click any topic card to expand full analysis ↑</span>
+</footer>
+
+<script>
+const topics = {
+  1: {
+    cat: "LLM Risk / SEO Methodology",
+    title: "Blind Trust in LLMs Will Get You Burned",
+    body: `<p>Sam Delacroix's newsletter this week cuts right to the bone: the single biggest risk in modern SEO isn't a Google update — it's treating LLM outputs as finished work. The pattern he identifies: copy/paste execution with zero review, no source-checking, and no internal BS detector from fundamentals.</p>
+<p>His real-world story is sobering. He fed a traffic drop analysis to ChatGPT, got a beautiful spreadsheet back — and nearly shipped a client report based on corrupted data. ChatGPT had duplicated data from one year into another. The only thing that caught it? <strong>15+ years of experience making the numbers smell wrong.</strong></p>
+<p>The framework he proposes is sharp: use LLMs for drafts, not decisions. Force outputs to show their work. Demand citations and verify them against primary sources. For high-stakes work — legal, financial, reputational — humans stay in the loop, full stop.</p>`,
+    relevance: "You're in a position to use this as a differentiator with clients. As an SEO consultant who teaches methodology, your value proposition is precisely the verification layer that junior teams and AI-reliant agencies skip. Consider a LinkedIn post on this.",
+    link: "https://www.organicedge.co/p/blind-trust",
+    articles: [
+      { source: "OrganicEdge", title: "Blind Trust in LLMs Will Get You Burned", takeaway: "The 'Don't Be Stupid' framework for LLM verification" },
+      { source: "SearchPulse", title: "Why Going Viral Isn't the Flex Your Boss Thinks It Is", takeaway: "PURPOSES framework: strategy over virality" },
+      { source: "OrganicEdge", title: "It's Time To Invite Your SEO To The Adults Table", takeaway: "SEO as strategic business function, not checkbox work" }
+    ]
+  },
+  2: {
+    cat: "International SEO / AI Search Expansion",
+    title: "Google AI Mode Expands to 53 New Languages",
+    body: `<p>Nick Fox from Google announced that AI Mode now works in just under 100 languages. The expansion is sweeping — Filipino, Afrikaans, Catalan, Basque, and dozens more. AI-powered search is no longer an English-first phenomenon.</p>
+<p>This matters structurally for any client operating in non-English markets. The old playbook assumed AI Overviews were a US/UK concern. That assumption is now obsolete. <strong>Every international SEO strategy needs to account for AI Mode behavior in the target language.</strong></p>
+<p>Combined with the Qlair AI finding that ChatGPT performs 43% of non-English queries in English anyway (see Topic 6), there's a complex picture emerging: you may need to optimize for how AI systems translate and reframe user queries before they hit your content.</p>`,
+    relevance: "This is directly relevant to your international SEO specialization. Nordvik (Switzerland/Germany), Solara Finance clients, Veyron's FR market — all need updated thinking on AI Mode behavior in their target languages. Strong newsletter material for Organic Signals.",
+    link: "https://www.seroundtable.com/google-expands-ai-mode-to-53-new-languages-40958.html",
+    articles: [
+      { source: "SearchPulse", title: "Google AI Mode Works In 53 New Languages", takeaway: "Nearly 100 languages now in AI Mode" },
+      { source: "Qlair AI / SearchPulse", title: "ChatGPT Searches in English, Even When You Don't", takeaway: "43% of non-English query fan-outs performed in English" },
+      { source: "Sitevision", title: "AI Search Demystified (Microsoft Advertising Guide)", takeaway: "Practical blueprint by Aleyda Solis, Camille Arnaud, Denis Mercier" }
+    ]
+  },
+  3: {
+    cat: "Google Updates / Publisher Visibility",
+    title: "Links in AI Overviews Are Becoming More Visible",
+    body: `<p>Google VP of Product announced that AI Overviews and AI Mode will now display hover link pop-ups on desktop and more prominent link icons on both desktop and mobile. User tests showed the new UI to be "more engaging."</p>
+<p>This is a small but meaningful concession to publishers who have been losing traffic to zero-click AI responses. The change signals Google's awareness that citation visibility matters for the ecosystem. It won't dramatically shift click-through rates, but it's a directional indicator.</p>
+<p><strong>Watch this space</strong>: as AI Mode matures, the link surface area is likely to expand. Building content that gets cited is now a traceable, optimizable goal — especially with Bing Webmaster Tools now surfacing AI citation data.</p>`,
+    relevance: "Useful context for client conversations about the evolving SEO value proposition. The message to clients: getting into AI results is valuable even before the click-through numbers catch up.",
+    link: "https://www.searchenginejournal.com/google-says-links-will-be-more-visible-in-ai-overviews/567719/",
+    articles: [
+      { source: "SearchPulse / SEJ", title: "Google Says Links Will Be More Visible In AI Overviews", takeaway: "Hover pop-ups and prominent icons coming to AI Mode" },
+      { source: "Sitevision", title: "Bing Webmaster Tools AI Performance Insights", takeaway: "First dashboard for AI citation tracking from Microsoft" },
+      { source: "Sitevision", title: "Google's November 2026 Discover Core Update", takeaway: "Local relevance, anti-clickbait, expertise prioritized" }
+    ]
+  },
+  4: {
+    cat: "Algorithm Correlation / GEO Strategy",
+    title: "Organic Rankings & AI Citations Are Directly Linked",
+    body: `<p>Camille Arnaud analyzed 11 sites affected by Google's October 2026 algorithm update and found a striking pattern: <strong>losing organic visibility consistently preceded losing AI search citations</strong> across ChatGPT, Perplexity, and AI Overviews.</p>
+<p>This confirms what many suspected: GEO and SEO are not separate disciplines. AI models appear to use organic search signals — particularly the authority and quality signals Google uses for ranking — as a proxy for which content to surface in AI answers.</p>
+<p>The implication is significant: you cannot build an AI citation strategy on a weak organic foundation. The sites that disappeared from Google in October also became invisible in AI search. Recovery in one channel likely drives recovery in the other.</p>`,
+    relevance: "This is a powerful argument for the integrated SEO strategy approach you sell. Clients who are considering shifting budget from traditional SEO to 'GEO tactics' need to understand this dependency. GEO without strong SEO fundamentals is building on sand.",
+    link: "https://camillearnaud.substack.com/p/are-citations-in-ai-search-affected",
+    articles: [
+      { source: "Camille Arnaud / Substack", title: "Are Citations in AI Search Affected by Google Organic Visibility Changes?", takeaway: "Sites hit by Oct 2026 update lost AI citations too" },
+      { source: "Sitebulb / SearchPulse", title: "Why Your SEO Strategy Still Matters for AI Search", takeaway: "AI adds complexity but doesn't replace SEO foundations" },
+      { source: "SearchPulse", title: "Indexing Is Now a Quality Signal, Not a Technical Step", takeaway: "Pieter Vanhout on what 'not indexed' really means" }
+    ]
+  },
+  5: {
+    cat: "Content Strategy / GEO Optimization",
+    title: "How AI Reads: The Science of Attention",
+    body: `<p>Thomas Wenger's analysis of 1.4 million search results reveals how AI systems prioritize content: <strong>44.2% of all citations come from the first 30% of text</strong>. AI reads like a busy editor scanning for quick answers, not a patient student working through an argument.</p>
+<p>Additional findings from the same body of research: citation winners are almost 2x more likely to use definitive language. Vague, hedged, or over-qualified content gets passed over. Clear, confident assertions that directly address user intent perform better.</p>
+<p>This aligns with the AlsoAsked PAA correlation study showing that pages answering more People Also Ask questions rank higher. Comprehensive topical coverage and direct answers are the content pattern AI rewards.</p>`,
+    relevance: "This is immediately actionable for your content strategy work. When auditing client content for GEO readiness, front-load the main argument. Your course content could also incorporate this — it's one of the cleaner empirical findings in GEO right now.",
+    link: "https://www.growthsignal.com/p/the-science-of-how-ai-pays-attention",
+    articles: [
+      { source: "Growth Signal / SearchPulse", title: "The Science of How AI Pays Attention", takeaway: "44.2% of citations from first 30% of text; definitive language wins" },
+      { source: "AlsoAsked", title: "How Answering PAA Questions Correlates with Organic Rankings", takeaway: "Top-5 pages that cover more questions tend to rank higher" },
+      { source: "Women in Tech SEO / SearchPulse", title: "Why Going Viral Isn't the Flex Your Boss Thinks It Is", takeaway: "PURPOSES framework for purposeful, multi-platform content" }
+    ]
+  },
+  6: {
+    cat: "International SEO / AI Search Behavior",
+    title: "ChatGPT Searches in English Even When You Don't",
+    body: `<p>Marta Kovač from Qlair AI analyzed over 11 million ChatGPT searches to understand query fan-out behavior — how ChatGPT internally reformulates your question before searching. The finding is striking: <strong>43% of query fan-outs for non-English prompts are performed in English</strong>.</p>
+<p>This creates an invisible layer in international SEO. A German user asking a question in German may trigger English-language searches internally before ChatGPT assembles a response. German software companies were found to effectively disappear in German searches because their German-language content wasn't connecting to the English-language authority signals ChatGPT relies on.</p>
+<p>The practical implication: for markets where you want AI visibility, you may need English-language content or English-accessible authority signals alongside local-language optimization.</p>`,
+    relevance: "This is a significant finding for your international SEO practice — particularly for clients like Nordvik (CH/DE market) or any brand targeting non-English markets. It could become the basis for a strong Organic Signals edition or a unique angle in your Nordvik proposal.",
+    link: "https://qlairai.com/blog/chatgpt-searches-in-english-even-when-you-dont",
+    articles: [
+      { source: "Qlair AI / SearchPulse", title: "ChatGPT Searches in English, Even When You Don't", takeaway: "43% of non-English query fan-outs go through English" },
+      { source: "SearchPulse", title: "Google AI Mode Works in 53 New Languages", takeaway: "AI Mode expansion makes international AI SEO urgent" },
+      { source: "Vexio / Marco Villani", title: "184k Prompts LLM Study — Platform-Specific Patterns", takeaway: "Wikipedia dominates ChatGPT; YouTube dominates Perplexity" }
+    ]
+  },
+  7: {
+    cat: "GEO Research / Training Data",
+    title: "Common Crawl: The Hidden Authority Signal Behind AI Citations",
+    body: `<p>Marco Villani's newsletter explores a potentially significant finding about how AI citation authority is built at a deeper level. Common Crawl — the nonprofit that crawls the web and provides training data — was used by 64% of AI models analyzed between 2019 and 2023, and <strong>over 80% of GPT-3's training tokens came from Common Crawl data</strong>.</p>
+<p>Common Crawl publishes WebGraph data including two key metrics: Harmonic Centrality (how close a domain is to all others in the web graph) and PageRank. Domains with higher HC Rank get crawled more frequently, and thus appear more in AI training data — potentially giving them a citation advantage that predates any real-time performance signals.</p>
+<p>The controversy: OpenAI contributed $250,000 to Common Crawl, as did Anthropic. There are questions about Common Crawl bypassing paywalls and ignoring content removal requests.</p>`,
+    relevance: "Emerging research — worth watching but not yet actionable at scale. If you're running GEO audits, checking a domain's Common Crawl ranking (free tool: webgraph.metehan.ai) adds a data point. Interesting angle for course content on the mechanics of AI training.",
+    link: "https://metehaneai.substack.com/p/free-tool-common-crawl-llm-training",
+    articles: [
+      { source: "Marco Villani Newsletter", title: "L'autorité cachée: Comment Common Crawl influence les citations AI", takeaway: "HC Rank & PageRank as potential AI citation factors" },
+      { source: "Marco Villani Newsletter (Oct 2026)", title: "6 Prédictions sur l'Avenir de la Recherche en 2027", takeaway: "Earlier predictions — now validating against live signals" },
+      { source: "SearchPulse", title: "AI Search Has a Spam Problem", takeaway: "AI models are naive readers — spam exploits this" }
+    ]
+  },
+  8: {
+    cat: "SEO Strategy / Consulting Practice",
+    title: "SEO Stalls Kill Budgets — The Execution Gap",
+    body: `<p>Sam Delacroix's earlier edition this week makes a case that will resonate with any consultant: <strong>SEO programs don't fail — they stall</strong>. The biggest threat isn't Google, it's inaction. Content waits in drafts for approval. Dev tickets rot behind shinier projects. Internal links never get added because it's "not urgent."</p>
+<p>The compound cost is brutal: every week of delay isn't just one missed week, it's delayed visibility, delayed traffic, delayed conversions, and delayed learnings. When results don't arrive, leadership blames the person — the agency, the consultant — even when the root cause is implementation delays.</p>
+<p>The prescription: SEOs must be execution-obsessed. Write tickets engineers want to read. Provide drafts so content doesn't sit in limbo. Define acceptance criteria. Force your way into rooms you aren't invited to, because that's where decisions get made and work gets blocked.</p>`,
+    relevance: "This maps directly to your consulting positioning. Your Sprint model (3,000€ for a clearly scoped deliverable) is partly a solution to this exact problem — clients get implementation-ready strategy, not theoretical recommendations. Consider this in your proposal language for Nordvik.",
+    link: "https://www.organicedge.co/p/babysitter",
+    articles: [
+      { source: "OrganicEdge", title: "Wanted: Babysitter (Must Know SEO), $300/hr", takeaway: "SEOs must remove friction, not just make recommendations" },
+      { source: "OrganicEdge (Nov 4)", title: "It's Time To Invite Your SEO To The Adults Table", takeaway: "SEO as cross-functional execution challenge" },
+      { source: "Product-Led SEO / SearchPulse", title: "Why Your SEO Tickets Get Ignored", takeaway: "Eli Schwartz on bridging SEOs and dev teams" }
+    ]
+  },
+  9: {
+    cat: "Technical Infrastructure / Agentic Web",
+    title: "Google WebMCP & The Agentic Web Shift",
+    body: `<p>Google announced WebMCP (Web Model Context Protocol) — a proposed new web standard that lets site owners expose structured "tools" to LLMs, enabling AI agents to perform complex website actions more effectively. This follows October's Universal Commerce Protocol (UCP) announcement for AI e-commerce.</p>
+<p>The Chrome for Developers blog framed it directly: "As the agentic web evolves, we want to help websites play an active role in how AI agents interact with them." Bots will be able to use these tools to search for products, fill out forms, and navigate websites without the current friction.</p>
+<p>Meanwhile, Cloudflare launched a Markdown for AI Agents feature — letting AI systems request content in Markdown instead of HTML, reducing token usage by ~80%. Google and Bing pushed back, calling Markdown "messy" and warning of increased crawl load.</p>`,
+    relevance: "Forward-looking infrastructure signal. Not immediately actionable, but useful context for client education and for your teaching. The Webflow partnership angle is worth noting — as Webflow sites grow, understanding how they'll integrate with WebMCP matters.",
+    link: "https://www.advancedwebranking.com/blog/ucp-acp-protocols-analysis",
+    articles: [
+      { source: "Sitevision", title: "Google Announces WebMCP Protocol", takeaway: "Sites can now expose 'tools' to AI agents for direct interaction" },
+      { source: "Sitevision", title: "Cloudflare Launches Markdown for AI Agents", takeaway: "80% token reduction — but Google/Bing say it adds noise" },
+      { source: "SearchPulse", title: "Microsoft: AI Buttons Used to Poison AI Recommendations", takeaway: "50+ hidden prompts found from 31 companies — prompt injection risk" }
+    ]
+  },
+  10: {
+    cat: "Freelance Strategy / Business Development",
+    title: "Building a Steady Client Base: The Income Stability Framework",
+    body: `<p>Solo Founders newsletter this week focuses on the income rollercoaster most independent consultants face — and how two specific types of client engagements changed the picture. The core argument: feast-or-famine cycles are a structural problem, not a personal failing, and they're solvable with the right portfolio design.</p>
+<p>The key insight: not all clients are created equal from a stability standpoint. Anchor clients (longer-term retainers with predictable scope) provide the base; project clients provide the upside. The ratio and mix of these determines income smoothness.</p>
+<p>A companion edition explored a related money-saving angle — the "thousands you could be saving" piece that speaks to the financial vulnerability of solopreneurs and the importance of back-office setup (taxes, VAT, insurance) as a business foundation.</p>`,
+    relevance: "Directly relevant as you build out your client load. Your fractional accompaniment offering (1,500€/month) is your anchor client product. The Sprint projects are your project upside. The question is whether your current pipeline has the right ratio — worth reviewing your active prospects through this lens.",
+    link: "https://solofounders.substack.com/",
+    articles: [
+      { source: "Solo Founders", title: "If Your Income Feels Like a Rollercoaster, Read This", takeaway: "Anchor clients + project clients = income stability" },
+      { source: "Solo Founders", title: "This Could Save You Thousands (no exaggeration)", takeaway: "Back-office financial foundations for solopreneurs" },
+      { source: "Founder Collective / Amélie", title: "Mon premier mois à +112.000€", takeaway: "Solo consultant revenue model — sans équipe, sans pub" }
+    ]
+  },
+  0: {
+    cat: "Technical SEO / Indexability",
+    title: "Bonus: Indexing Is Now a Quality Signal",
+    body: `<p>Pieter Vanhout's analysis on LinkedIn makes a clean, important point: if your pages sit in "Discovered, currently not indexed" or "Crawled, currently not indexed" status in GSC, <strong>Google is not having a technical problem with your page — it's making a quality judgment</strong>.</p>
+<p>Resubmitting the URL won't fix it. Neither will tweaking robots.txt or adding the page to your sitemap. The content itself has failed to meet Google's quality threshold. This reframes the diagnostic process: instead of debugging crawl issues, you need to audit content quality and uniqueness.</p>
+<p>The message: does this page add unique value that doesn't already exist in Google's index? If not, no technical fix will save it.</p>`,
+    relevance: "Useful for client audits and for course content. When students or clients see 'not indexed' in GSC, this is the framing they need — start with content quality, not technical configurations.",
+    link: "https://www.linkedin.com/feed/update/urn:li:activity:7431260425779941376/",
+    articles: [
+      { source: "LinkedIn / SearchPulse", title: "Indexing Is Now a Quality Signal, Not a Technical Step", takeaway: "Resubmitting won't work if content quality is the issue" },
+      { source: "Sitevision", title: "Google's AI-Powered Search Console Config Rolling Out", takeaway: "Ask AI questions about your GSC Performance reports" },
+      { source: "SearchPulse", title: "Google Warns Not to Serve 'Not Available' With JavaScript", takeaway: "JS-loaded 'not available' text can prevent indexing entirely" }
+    ]
+  }
+};
+
+function buildSidebar(articles) {
+  return articles.map(a => `
+    <div class="article-item">
+      <div class="article-source">${a.source}</div>
+      <div class="article-title">${a.title}</div>
+      <div class="article-takeaway">${a.takeaway}</div>
+    </div>
+  `).join('');
+}
+
+let openTopic = null;
+
+document.querySelectorAll('.topic-card').forEach(card => {
+  card.addEventListener('click', function() {
+    const topicId = parseInt(this.dataset.topic);
+    const panel = document.getElementById('detailPanel');
+
+    if (openTopic === topicId) {
+      panel.classList.remove('open');
+      this.classList.remove('active');
+      openTopic = null;
+      return;
+    }
+
+    document.querySelectorAll('.topic-card').forEach(c => c.classList.remove('active'));
+    this.classList.add('active');
+    openTopic = topicId;
+
+    const topic = topics[topicId];
+    if (!topic) return;
+
+    document.getElementById('detailNum').textContent = this.querySelector('.topic-number').textContent;
+    document.getElementById('detailCat').textContent = topic.cat;
+    document.getElementById('detailTitle').textContent = topic.title;
+    document.getElementById('detailBody').innerHTML = topic.body;
+    document.getElementById('relevanceText').textContent = topic.relevance;
+    document.getElementById('readLink').href = topic.link;
+    document.getElementById('sidebarArticles').innerHTML =
+      '<div class="sidebar-label">Related articles this week</div>' + buildSidebar(topic.articles);
+
+    panel.classList.add('open');
+
+    // Scroll panel into view
+    setTimeout(() => {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
+  });
+});
+
+document.getElementById('detailClose').addEventListener('click', () => {
+  document.getElementById('detailPanel').classList.remove('open');
+  document.querySelectorAll('.topic-card').forEach(c => c.classList.remove('active'));
+  openTopic = null;
+});
+
+// Source filtering
+document.querySelectorAll('.source-tag').forEach(tag => {
+  tag.addEventListener('click', function() {
+    document.querySelectorAll('.source-tag').forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
+    const filter = this.dataset.source;
+
+    document.querySelectorAll('.topic-card').forEach(card => {
+      if (filter === 'all' || card.dataset.source.includes(filter)) {
+        card.style.opacity = '1';
+        card.style.pointerEvents = 'auto';
+      } else {
+        card.style.opacity = '0.2';
+        card.style.pointerEvents = 'none';
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

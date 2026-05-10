@@ -1,5 +1,94 @@
 {
   "title": "Artifacts",
   "subtitle": "Things I built with Claude",
-  "artifacts": []
+  "artifacts": [
+    {
+      "id": "linkedin-performance-analysis-q1",
+      "title": "LinkedIn Performance Analysis — Q1",
+      "description": "A quarterly analytics dashboard breaking down post impressions, engagement rates, format performance, and posting frequency patterns across 22 posts.",
+      "tags": ["analytics", "social media", "data viz"],
+      "file": "artifacts/linkedin-performance-analysis-q1.html",
+      "date": "2026-05"
+    },
+    {
+      "id": "health-story",
+      "title": "Three Years of Health Data",
+      "description": "A personal data story tracing three years of health metrics across three distinct life phases — baseline, a major health event, and recovery. Built with Chart.js.",
+      "tags": ["data viz", "health", "analytics"],
+      "file": "artifacts/health-story.html",
+      "date": "2026-05"
+    },
+    {
+      "id": "newsletter-radar",
+      "title": "Newsletter Radar",
+      "description": "A personal reading tracker for newsletters — organised by category, frequency, and engagement level. A snapshot of a curated information diet.",
+      "tags": ["tools", "content", "strategy"],
+      "file": "artifacts/newsletter-radar.html",
+      "date": "2026-05"
+    },
+    {
+      "id": "feel-good-wall",
+      "title": "Wall of Love",
+      "description": "A curated collection of kind words from clients and collaborators — a visual archive of meaningful feedback.",
+      "tags": ["design", "branding"],
+      "file": "artifacts/feel-good-wall.html",
+      "date": "2026-05"
+    },
+    {
+      "id": "brand-style-guide",
+      "title": "Brand Style Guide",
+      "description": "A complete brand identity reference — color palette, typography scale, tone of voice, and component examples. Built as a single interactive HTML document.",
+      "tags": ["branding", "design"],
+      "file": "artifacts/brand-style-guide.html",
+      "date": "2026-05"
+    },
+    {
+      "id": "anniversary-landing-page",
+      "title": "10-Year Anniversary Landing Page",
+      "description": "A single-page website marking a freelance consultancy's 10th year — services, positioning, client proof, and a call to action. Fully designed in HTML/CSS.",
+      "tags": ["design", "branding", "strategy"],
+      "file": "artifacts/anniversary-landing-page.html",
+      "date": "2026-05"
+    },
+    {
+      "id": "content-session-skill-flow",
+      "title": "Content Session — Skill Flow",
+      "description": "An interactive flowchart mapping the decision logic behind an AI-assisted content creation session — from briefing to final output.",
+      "tags": ["tools", "content", "strategy"],
+      "file": "artifacts/content-session-skill-flow.html",
+      "date": "2026-05"
+    },
+    {
+      "id": "quarterly-planning-worksheet",
+      "title": "Quarterly Planning Worksheet",
+      "description": "A structured quarterly review and planning document — goals, priorities, constraints, and weekly focus areas laid out in a single interactive HTML sheet.",
+      "tags": ["planning", "strategy"],
+      "file": "artifacts/quarterly-planning-worksheet.html",
+      "date": "2026-05"
+    },
+    {
+      "id": "monthly-desk-reference",
+      "title": "Monthly Desk Reference",
+      "description": "A one-page monthly reference sheet combining calendar, priorities, recurring tasks, and focus areas — designed to sit open in a browser tab all month.",
+      "tags": ["planning", "tools"],
+      "file": "artifacts/monthly-desk-reference.html",
+      "date": "2026-05"
+    },
+    {
+      "id": "weekly-planner",
+      "title": "Weekly Planner",
+      "description": "A structured weekly planning layout with time blocks, priorities, and end-of-week reflection prompts. Designed for deep work scheduling.",
+      "tags": ["planning", "tools"],
+      "file": "artifacts/weekly-planner.html",
+      "date": "2026-05"
+    },
+    {
+      "id": "daily-plan",
+      "title": "Daily Plan",
+      "description": "A single-day planning sheet with time-blocked schedule, top three priorities, and a quick end-of-day review section.",
+      "tags": ["planning", "tools"],
+      "file": "artifacts/daily-plan.html",
+      "date": "2026-05"
+    }
+  ]
 }
