@@ -1,5 +1,8 @@
 # Source files with real data — never push these
 Existing artifacts - copies/
 
+# Dependencies
+node_modules/
+
 # macOS
 .DS_Store

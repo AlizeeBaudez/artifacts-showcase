@@ -128,6 +128,23 @@
     }
 
     /* ── Card ── */
+    .card-thumb {
+      height: 172px;
+      overflow: hidden;
+      background: var(--cream);
+      border-bottom: 0.5px solid var(--border);
+      flex-shrink: 0;
+    }
+    .card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .card:hover .card-thumb img { transform: scale(1.02); }
+
     .card {
       background: var(--white);
       border: 0.5px solid var(--border);
@@ -427,6 +444,10 @@
 
     gridEl.innerHTML = list.map(a => `
       <button class="card" data-file="${esc(a.file)}" data-title="${esc(a.title)}">
+        <div class="card-thumb">
+          <img src="artifacts/screenshots/${esc(a.id)}.webp" alt="${esc(a.title)}" loading="lazy"
+               onerror="this.parentElement.style.display='none'">
+        </div>
         <div class="card-header">
           <span class="card-date">${formatDate(a.date)}</span>
           ${a.tags && a.tags[0] ? `<span class="card-category">${esc(a.tags[0])}</span>` : ''}

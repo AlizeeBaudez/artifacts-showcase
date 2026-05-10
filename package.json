@@ -1,0 +1,13 @@
+{
+  "name": "artifacts-showcase",
+  "version": "1.0.0",
+  "description": "Artifacts showcase — things built with Claude",
+  "private": true,
+  "scripts": {
+    "screenshot":     "node scripts/screenshot.js",
+    "screenshot-all": "node scripts/screenshot.js --all"
+  },
+  "devDependencies": {
+    "puppeteer": "^22.8.0"
+  }
+}
