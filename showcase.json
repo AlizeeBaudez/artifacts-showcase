@@ -89,6 +89,14 @@
       "tags": ["planning", "tools"],
       "file": "artifacts/daily-plan.html",
       "date": "2026-05"
+    },
+    {
+      "id": "todo-bingo",
+      "title": "To-Do Bingo",
+      "description": "A playful tool that turns a to-do list into a bingo card. Tasks fill a smart-sized grid, get crossed off with an animated marker scribble, and completing a row triggers a confetti BINGO. Includes four visual themes, wellness-task fillers, and PDF export.",
+      "tags": ["tools", "planning", "design"],
+      "file": "https://alizeebaudez.com/todo-bingo/",
+      "date": "2026-06"
     }
   ]
 }
